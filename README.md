@@ -4,8 +4,8 @@ It's written NuxtJS and supports full SSR.
 
 ## Setup
 ```
-git clone https://github.com/ngn13/my-website.git
-cd my-website && npm i
+git clone https://github.com/ngn13/ngn13.fun.git
+cd ngn13.fun && npm i
 echo "password" > pass
 npm run build
 npm run start
