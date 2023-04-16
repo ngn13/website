@@ -1,0 +1,315 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+
+:root {
+  --white: white;
+  --dark-one: #141414;
+  --dark-two: #18191a;
+  --dark-three: #282828;
+  --dark-four: #242526;
+  --dark-fife: #3a3b3c;
+  --border-rad: 30px;
+  --def-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background: #141414;
+  font-family: "Ubuntu", sans-serif;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  border-radius: 10px;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #181818;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #282828;
+}
+
+@keyframes colorAnimation {
+  100%,
+  0% {
+    color: rgb(255, 0, 0);
+  }
+  8% {
+    color: rgb(255, 127, 0);
+  }
+  16% {
+    color: rgb(255, 255, 0);
+  }
+  25% {
+    color: rgb(127, 255, 0);
+  }
+  33% {
+    color: rgb(0, 255, 0);
+  }
+  41% {
+    color: rgb(0, 255, 127);
+  }
+  50% {
+    color: rgb(0, 255, 255);
+  }
+  58% {
+    color: rgb(0, 127, 255);
+  }
+  66% {
+    color: rgb(0, 0, 255);
+  }
+  75% {
+    color: rgb(127, 0, 255);
+  }
+  83% {
+    color: rgb(255, 0, 255);
+  }
+  91% {
+    color: rgb(255, 0, 127);
+  }
+}
+
+@keyframes borderAnimation {
+  100%,
+  0% {
+    border-bottom-color: rgb(255, 0, 0);
+  }
+  8% {
+    border-bottom-color: rgb(255, 127, 0);
+  }
+  16% {
+    border-bottom-color: rgb(255, 255, 0);
+  }
+  25% {
+    border-bottom-color: rgb(127, 255, 0);
+  }
+  33% {
+    border-bottom-color: rgb(0, 255, 0);
+  }
+  41% {
+    border-bottom-color: rgb(0, 255, 127);
+  }
+  50% {
+    border-bottom-color: rgb(0, 255, 255);
+  }
+  58% {
+    border-bottom-color: rgb(0, 127, 255);
+  }
+  66% {
+    border-bottom-color: rgb(0, 0, 255);
+  }
+  75% {
+    border-bottom-color: rgb(127, 0, 255);
+  }
+  83% {
+    border-bottom-color: rgb(255, 0, 255);
+  }
+  91% {
+    border-bottom-color: rgb(255, 0, 127);
+  }
+}
+
+@keyframes fullBorderAnimation {
+  100%,
+  0% {
+    border-color: rgb(255, 0, 0);
+  }
+  8% {
+    border-color: rgb(255, 127, 0);
+  }
+  16% {
+    border-color: rgb(255, 255, 0);
+  }
+  25% {
+    border-color: rgb(127, 255, 0);
+  }
+  33% {
+    border-color: rgb(0, 255, 0);
+  }
+  41% {
+    border-color: rgb(0, 255, 127);
+  }
+  50% {
+    border-color: rgb(0, 255, 255);
+  }
+  58% {
+    border-color: rgb(0, 127, 255);
+  }
+  66% {
+    border-color: rgb(0, 0, 255);
+  }
+  75% {
+    border-color: rgb(127, 0, 255);
+  }
+  83% {
+    border-color: rgb(255, 0, 255);
+  }
+  91% {
+    border-color: rgb(255, 0, 127);
+  }
+}
+
+@keyframes gayShadowAnimation {
+  100%,
+  0% {
+    box-shadow: rgba(255, 0, 0, 0.07) 0px 1px 2px,
+      rgba(255, 0, 0, 0.07) 0px 2px 4px, rgba(255, 0, 0, 0.07) 0px 4px 8px,
+      rgba(255, 0, 0, 0.07) 0px 8px 16px, rgba(255, 0, 0, 0.07) 0px 16px 32px,
+      rgba(255, 0, 0, 0.07) 0px 32px 64px;
+  }
+  8% {
+    box-shadow: rgba(255, 127, 0, 0.07) 0px 1px 2px,
+      rgba(255, 127, 0, 0.07) 0px 2px 4px, rgba(255, 127, 0, 0.07) 0px 4px 8px,
+      rgba(255, 127, 0, 0.07) 0px 8px 16px,
+      rgba(255, 127, 0, 0.07) 0px 16px 32px,
+      rgba(255, 127, 0, 0.07) 0px 32px 64px;
+  }
+  16% {
+    box-shadow: rgba(255, 255, 0, 0.07) 0px 1px 2px,
+      rgba(255, 255, 0, 0.07) 0px 2px 4px, rgba(255, 255, 0, 0.07) 0px 4px 8px,
+      rgba(255, 255, 0, 0.07) 0px 8px 16px,
+      rgba(255, 255, 0, 0.07) 0px 16px 32px,
+      rgba(255, 255, 0, 0.07) 0px 32px 64px;
+  }
+  25% {
+    box-shadow: rgba(127, 255, 0, 0.07) 0px 1px 2px,
+      rgba(127, 255, 0, 0.07) 0px 2px 4px, rgba(127, 255, 0, 0.07) 0px 4px 8px,
+      rgba(127, 255, 0, 0.07) 0px 8px 16px,
+      rgba(127, 255, 0, 0.07) 0px 16px 32px,
+      rgba(127, 255, 0, 0.07) 0px 32px 64px;
+  }
+  33% {
+    box-shadow: rgba(0, 255, 0, 0.07) 0px 1px 2px,
+      rgba(0, 255, 0, 0.07) 0px 2px 4px, rgba(0, 255, 0, 0.07) 0px 4px 8px,
+      rgba(0, 255, 0, 0.07) 0px 8px 16px, rgba(0, 255, 0, 0.07) 0px 16px 32px,
+      rgba(0, 255, 0, 0.07) 0px 32px 64px;
+  }
+  41% {
+    box-shadow: rgba(0, 255, 127, 0.07) 0px 1px 2px,
+      rgba(0, 255, 127, 0.07) 0px 2px 4px, rgba(0, 255, 127, 0.07) 0px 4px 8px,
+      rgba(0, 255, 127, 0.07) 0px 8px 16px,
+      rgba(0, 255, 127, 0.07) 0px 16px 32px,
+      rgba(0, 255, 127, 0.07) 0px 32px 64px;
+  }
+  50% {
+    box-shadow: rgba(0, 255, 255, 0.07) 0px 1px 2px,
+      rgba(0, 255, 255, 0.07) 0px 2px 4px, rgba(0, 255, 255, 0.07) 0px 4px 8px,
+      rgba(0, 255, 255, 0.07) 0px 8px 16px,
+      rgba(0, 255, 255, 0.07) 0px 16px 32px,
+      rgba(0, 255, 255, 0.07) 0px 32px 64px;
+  }
+  58% {
+    box-shadow: rgba(0, 127, 255, 0.07) 0px 1px 2px,
+      rgba(0, 127, 255, 0.07) 0px 2px 4px, rgba(0, 127, 255, 0.07) 0px 4px 8px,
+      rgba(0, 127, 255, 0.07) 0px 8px 16px,
+      rgba(0, 127, 255, 0.07) 0px 16px 32px,
+      rgba(0, 127, 255, 0.07) 0px 32px 64px;
+  }
+  66% {
+    box-shadow: rgba(0, 0, 255, 0.07) 0px 1px 2px,
+      rgba(0, 0, 255, 0.07) 0px 2px 4px, rgba(0, 0, 255, 0.07) 0px 4px 8px,
+      rgba(0, 0, 255, 0.07) 0px 8px 16px, rgba(0, 0, 255, 0.07) 0px 16px 32px,
+      rgba(0, 0, 255, 0.07) 0px 32px 64px;
+  }
+  75% {
+    box-shadow: rgba(127, 0, 255, 0.07) 0px 1px 2px,
+      rgba(127, 0, 255, 0.07) 0px 2px 4px, rgba(127, 0, 255, 0.07) 0px 4px 8px,
+      rgba(127, 0, 255, 0.07) 0px 8px 16px,
+      rgba(127, 0, 255, 0.07) 0px 16px 32px,
+      rgba(127, 0, 255, 0.07) 0px 32px 64px;
+  }
+  83% {
+    box-shadow: rgba(255, 0, 255, 0.07) 0px 1px 2px,
+      rgba(255, 0, 255, 0.07) 0px 2px 4px, rgba(255, 0, 255, 0.07) 0px 4px 8px,
+      rgba(255, 0, 255, 0.07) 0px 8px 16px,
+      rgba(255, 0, 255, 0.07) 0px 16px 32px,
+      rgba(255, 0, 255, 0.07) 0px 32px 64px;
+  }
+  91% {
+    box-shadow: rgba(255, 0, 127, 0.07) 0px 1px 2px,
+      rgba(255, 0, 127, 0.07) 0px 2px 4px, rgba(255, 0, 127, 0.07) 0px 4px 8px,
+      rgba(255, 0, 127, 0.07) 0px 8px 16px,
+      rgba(255, 0, 127, 0.07) 0px 16px 32px,
+      rgba(255, 0, 127, 0.07) 0px 32px 64px;
+  }
+}
+
+@keyframes underlineAnimation {
+  100%,
+  0% {
+    text-decoration-color: rgb(255, 0, 0);
+  }
+  8% {
+    text-decoration-color: rgb(255, 127, 0);
+  }
+  16% {
+    text-decoration-color: rgb(255, 255, 0);
+  }
+  25% {
+    text-decoration-color: rgb(127, 255, 0);
+  }
+  33% {
+    text-decoration-color: rgb(0, 255, 0);
+  }
+  41% {
+    text-decoration-color: rgb(0, 255, 127);
+  }
+  50% {
+    text-decoration-color: rgb(0, 255, 255);
+  }
+  58% {
+    text-decoration-color: rgb(0, 127, 255);
+  }
+  66% {
+    text-decoration-color: rgb(0, 0, 255);
+  }
+  75% {
+    text-decoration-color: rgb(127, 0, 255);
+  }
+  83% {
+    text-decoration-color: rgb(255, 0, 255);
+  }
+  91% {
+    text-decoration-color: rgb(255, 0, 127);
+  }
+}
+
+@keyframes minecraftAnimation {
+  0%{
+    font-size: 15px;
+  }
+  50%{
+    font-size: 17px;
+  }
+  100%{
+    font-size: 15px;
+  }
+}
+
+@font-face {
+  font-family: "Minecraft";
+  src: url("/Minecraft.ttf") format("opentype");
+}
+
+glitch {
+  animation-name: colorAnimation;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
+  text-shadow: none;
+}
