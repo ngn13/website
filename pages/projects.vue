@@ -69,5 +69,12 @@ export default {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
+    padding-bottom: 30px;
+}
+
+@media only screen and (max-width: 1121px) {
+    .projects {
+        padding: 50px;
+    }
 }
 </style>

@@ -14,8 +14,7 @@ export default {
 div{
     display: flex;
     flex-direction: row;
-    padding: 20px;
-    align-items: center;
+    padding: 15px;
     justify-content: center;
     gap: 30px;
 }

@@ -33,6 +33,9 @@
             </Card>
         </div>
         <Logout v-if="logged"/>
+        <div class="version">
+            <p>v2.1</p>
+        </div>
     </div>
 </template>
 
@@ -72,6 +75,13 @@ export default {
     padding: 50px;
     gap: 30px;
     display: flex;
+}
+.version{
+    color: var(--dark-fife);
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 15px;
 }
 
 

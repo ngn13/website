@@ -68,6 +68,7 @@ export default {
 <style scoped>
 .resources {
     padding: 50px;
+    padding-bottom: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;

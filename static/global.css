@@ -290,23 +290,6 @@ body {
   }
 }
 
-@keyframes minecraftAnimation {
-  0%{
-    font-size: 15px;
-  }
-  50%{
-    font-size: 17px;
-  }
-  100%{
-    font-size: 15px;
-  }
-}
-
-@font-face {
-  font-family: "Minecraft";
-  src: url("/Minecraft.ttf") format("opentype");
-}
-
 glitch {
   animation-name: colorAnimation;
   animation-iteration-count: infinite;

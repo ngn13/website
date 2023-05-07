@@ -26,7 +26,6 @@ main {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
     gap: 20px;
     padding: 40px;
     cursor: pointer;
