@@ -7,7 +7,7 @@
 			<NavbarLink :out="false" url="/">Home</NavbarLink>
 			<NavbarLink :out="false" url="/projects">Projects</NavbarLink>
 			<NavbarLink :out="false" url="/resources">Resources</NavbarLink>
-			<!--<NavbarLink :out="false" url="/stats">Stats</NavbarLink>-->
+			<NavbarLink :out="false" url="/blog">Blog</NavbarLink>
 			<NavbarLink :out="true" url="http://github.com/ngn13/ngn13.fun">Source</NavbarLink>
 		</div>
 	</nav>

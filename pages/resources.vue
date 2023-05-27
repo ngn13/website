@@ -19,6 +19,18 @@ import Input from '../components/Input.vue';
 import NewResource from '../components/NewResource.vue';
 
 export default {
+    head() {
+        return {
+            title: "[ngn] | resources",
+            meta: [
+                {
+                    hid: "description",
+                    name: "description",
+                    content: "discover new resources"
+                }
+            ]
+        }
+    },
     data() {
         return {
             header: "resources",

@@ -6,7 +6,8 @@
 	    </Header>
         <div class="projects">
             <ProjectList v-for="project in projects" :key="project">
-                <Project v-for="p in project" :key="p" :name="p.name" :desc="p.desc" :url="p.url"/>
+                <Project v-if="logged" v-for="p in project" :key="p" :name="`${p.name} (${p.click})`" :desc="p.desc" :url="p.url"/>
+                <Project v-if="!logged" v-for="p in project" :key="p" :name="p.name" :desc="p.desc" :url="p.url"/>
             </ProjectList>
 	    </div>
         <NewProject v-if="logged"/>
@@ -22,12 +23,12 @@ import axios from "axios";
 export default {
     head() {
         return {
-            title: "[ngn]",
+            title: "[ngn] | projects",
             meta: [
                 {
                     hid: "description",
                     name: "description",
-                    content: "ngn's Personal Website | Projects Page"
+                    content: "check out my projects"
                 }
             ]
         }
@@ -49,7 +50,12 @@ export default {
         let project = []
         for(let i = 0; i<all.length; i++){
             if(project.length!==3)
-                project.push(all[i])
+                project.push({
+                    name: all[i]["name"],
+                    desc: all[i]["desc"],
+                    click: all[i]["click"],
+                    url: `/l/${all[i]["name"].toLowerCase().replaceAll(" ", "")}`
+                })
             else{
                 projects.push(project)
                 project = []
@@ -66,10 +72,9 @@ export default {
 
 <style>
 .projects{
-    margin-top: 20px;
+    padding: 50px;
     display: flex;
     flex-direction: column;
-    padding-bottom: 30px;
 }
 
 @media only screen and (max-width: 1121px) {

@@ -16,25 +16,28 @@
                     <br>
                     • electronics
                     <br>
+                    • gaming
+                    <br>
                     • simply: everything about computers!
                 </h2>
             </Card>
             <Card>
-                <h1>👉 Checkout my socials</h1>
-                <h2>Here you can find my socials for following platforms:</h2>
-                <br>
+                <h1>👉 Contact me</h1>
+                <h2>You can contact me on the following platforms:</h2>
+                
                 <a href="https://discord.com/users/568131907368386565"><i class='bx bxl-discord-alt'></i> Discord</a>
                 <br>
                 <a href="https://github.com/ngn13"><i class='bx bxl-github'></i> Github</a>
                 <br>
-                <a href="https://www.reddit.com/user/_ngn"><i class='bx bxl-reddit'></i> Reddit</a>
+                <a href="mailto:ngn13proton@proton.me"><i class='bx bxl-mastodon'></i> Mail</a>
                 <br>
-                <a href="https://fosstodon.org/@ngn"><i class='bx bxl-mastodon'></i> Fosstodon</a>
+                <h2>or private message me on </h2>
+                <a><i>[matrix]</i> @ngn:matrix.ngn13.fun</a>
             </Card>
         </div>
         <Logout v-if="logged"/>
         <div class="version">
-            <p>v2.1</p>
+            <p>v2.2</p>
         </div>
     </div>
 </template>
@@ -53,7 +56,7 @@ export default {
                 {
                     hid: "description",
                     name: "description",
-                    content: "ngn's Personal Website | Home Page"
+                    content: "homepage of my website"
                 }
             ]
         }
@@ -84,6 +87,9 @@ export default {
     font-size: 15px;
 }
 
+i{
+    font-style: normal;
+}
 
 @media only screen and (max-width: 1076px) {
     .info {

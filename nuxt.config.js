@@ -10,11 +10,15 @@ export default {
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
       { hid: "og:title", content: "[ngn]" },
-      { hid: "og:description",  content: "ngn's (very cool) personal website" },
+      { hid: "og:description",  content: "personal website of ngn | read my blogs, check out my projects, discover cool resources" },
       { hid: "og:url",  content: "https://ngn13.fun" },
-      { name: "theme-color", content: "#0c16d1", "data-react-helmet":"true"},
+      { name: "theme-color", content: "#141414", "data-react-helmet":"true"},
     ],
-    link: [{ rel: "stylesheet", href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" }]
+    
+    link: [
+      { rel: "stylesheet", href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" },
+      { rel: "stylesheet", href: "https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css" }
+    ]
   },
   css: ["@/static/global.css"],
   plugins: [],
@@ -27,5 +31,6 @@ export default {
   build: {},
   serverMiddleware: {
     "/api": "~/api",
+    "/l": "~/links",
   },
 };

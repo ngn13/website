@@ -13,7 +13,7 @@ export default {
     props: ["name", "desc", "url"],
     methods: {
         redirect(e) {
-            location.href = this.url
+            location.href=this.url
         }
     },
 }
