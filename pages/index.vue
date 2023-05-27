@@ -29,7 +29,7 @@
                 <br>
                 <a href="https://github.com/ngn13"><i class='bx bxl-github'></i> Github</a>
                 <br>
-                <a href="mailto:ngn13proton@proton.me"><i class='bx bxl-mastodon'></i> Mail</a>
+                <a href="mailto:ngn13proton@proton.me"><i class='bx bxs-envelope'></i> Mail</a>
                 <br>
                 <h2>or private message me on </h2>
                 <a><i>[matrix]</i> @ngn:matrix.ngn13.fun</a>
