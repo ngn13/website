@@ -88,7 +88,3 @@ sw.*
 
 # Vim swap files
 *.swp
-
-# db file
-db.json
-pass

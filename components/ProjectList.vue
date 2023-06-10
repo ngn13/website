@@ -15,6 +15,7 @@ div{
     display: flex;
     flex-direction: row;
     padding: 15px;
+    align-items: center;
     justify-content: center;
     gap: 30px;
 }

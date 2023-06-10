@@ -24,20 +24,22 @@
             <Card>
                 <h1>👉 Contact me</h1>
                 <h2>You can contact me on the following platforms:</h2>
-                
+
                 <a href="https://discord.com/users/568131907368386565"><i class='bx bxl-discord-alt'></i> Discord</a>
                 <br>
                 <a href="https://github.com/ngn13"><i class='bx bxl-github'></i> Github</a>
                 <br>
+                <a href="https://mastodon.social/@ngn"><i class='bx bxl-mastodon'></i> Mastodon</a>
+                <br>
                 <a href="mailto:ngn13proton@proton.me"><i class='bx bxs-envelope'></i> Mail</a>
                 <br>
-                <h2>or private message me on </h2>
+                <h2>or private message me on matrix:</h2>
                 <a><i>[matrix]</i> @ngn:matrix.ngn13.fun</a>
             </Card>
         </div>
         <Logout v-if="logged"/>
         <div class="version">
-            <p>v2.2</p>
+            <p>v2.3</p>
         </div>
     </div>
 </template>

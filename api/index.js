@@ -1,22 +1,36 @@
-const express = require("express");
+const express = require("express")
 const {gimmeToken} = require("./util.js")
-const { MongoClient } = require("mongodb");
+const { MongoClient } = require("mongodb")
 require("dotenv").config()
 
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-const client = new MongoClient(process.env.DATABASE);
-const PASS = process.env.PASS
-let TOKEN = gimmeToken();
-
+// routes
 /*
  * error: 0 -> no error
  * error: 1 -> parameter error
  * error: 2 -> auth error
  * error: 3 -> not found error
 */
+const resources = require("./routes/resources.js")
+const projects = require("./routes/projects.js")
+const blog = require("./routes/blog.js")
+const auth = require("./routes/auth.js")
+
+const app = express()
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
+app.use("/resources", resources)
+app.use("/projects", projects)
+app.use("/blog", blog)
+app.use("/auth", auth)
+
+const db = new MongoClient(process.env.DATABASE);
+const PASS = process.env.PASS
+let TOKEN = gimmeToken();
+
+app.use((req, res, next) => {
+    req.db = db;
+    next();
+})
 
 // PATH: /api/login
 // METHOD: GET
@@ -26,7 +40,7 @@ app.get("/login", (req,res)=>{
 
   if (pass === undefined)
     return res.json({error: 1})
-  
+
   if (pass !== PASS)
     return res.json({error: 2})
 
@@ -41,7 +55,7 @@ app.get("/logout", (req,res)=>{
 
   if (token === undefined)
     return res.json({error: 1})
-  
+
   if (token !== TOKEN)
     return res.json({error: 2})
 
@@ -65,10 +79,10 @@ app.get("/add_project", async (req, res) => {
     url === undefined
   )
     return res.json({error: 1})
-  
+
   if (token !== TOKEN)
     return res.json({error: 2})
-  
+
   await client.connect()
   const db = await client.db("ngn13")
   const col = await db.collection("projects")
@@ -93,10 +107,10 @@ app.get("/add_resource", async (req, res) => {
     url === undefined
   )
     return res.json({error: 1})
-  
+
   if (token !== TOKEN)
     return res.json({error: 2})
-  
+
   await client.connect()
   const db = await client.db("ngn13")
   const col = await db.collection("resources")
@@ -129,6 +143,18 @@ app.get("/get_resources", async (req, res) => {
   res.json({error: 0, resources:array})
 });
 
+// PATH: /api/get_resources
+// METHOD: GET
+// PARAMETERS: NONE
+app.get("/get_resources", async (req, res) => {
+  await client.connect()
+  const db = await client.db("ngn13")
+  const col = await db.collection("resources")
+  const array = await col.find().toArray()
+  await client.close()
+  res.json({error: 0, resources:array})
+});
+
 // PATH: /api/add_post
 // METHOD: POST
 // PARAMETERS: token, title, author, content
@@ -145,16 +171,16 @@ app.post("/add_post", async (req, res) => {
     content === undefined
   )
     return res.json({error: 1})
-  
+
   if (token !== TOKEN)
     return res.json({error: 2})
-  
+
   await client.connect()
   const db = await client.db("ngn13")
   const col = await db.collection("posts")
   await col.insertOne({
-    "title":title, 
-    "author":author, 
+    "title":title,
+    "author":author,
     "date": new Date().toLocaleDateString(),
     "content":content
   })

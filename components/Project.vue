@@ -30,8 +30,8 @@ main {
     padding: 40px;
     cursor: pointer;
     transition: .4s;
-    height: 13%;
-    width: 27%;
+    height: 100px;
+    width: 80%;
 }
 
 main:hover{
@@ -56,7 +56,7 @@ h2{
 
 @media only screen and (max-width: 1121px) {
     main{
-        width: auto;
+        width: 80%;
     }
 }
 </style>
