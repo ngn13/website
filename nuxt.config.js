@@ -17,6 +17,7 @@ export default {
 
     link: [
       { rel: "stylesheet", href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" },
+      { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.css" }
     ]
   },
   css: ["@/static/global.css"],

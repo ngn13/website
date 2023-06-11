@@ -84,8 +84,6 @@ p {
 </style>
 
 <style>
-@import url("https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.css");
-
 .markdown-body{
     font-family: "Ubuntu", sans-serif;
 }
