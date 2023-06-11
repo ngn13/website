@@ -46,7 +46,7 @@ export default {
         if (res.data["error"] === 3)
             return this.$router.push({ path: "/blog" })
         this.post = res.data["post"]
-        this.post["content"] = this.post["content"].replaceAll("\n<br>\n<br>\n", "\n")
+        this.post["content"] = this.post["content"].replaceAll("\n<br>\n<br>\n", "\n\n")
         this.content = DOMPurify.sanitize(
           marked.parse(this.post["content"], { breaks: true }),
           { ADD_TAGS: ["iframe"], ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] }
