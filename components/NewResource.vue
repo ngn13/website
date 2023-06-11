@@ -20,7 +20,7 @@ export default {
             const tags = document.getElementById("tags").value
             const url = document.getElementById("url").value
             const token = localStorage.getItem("token")
-            const res = await axios.get(`/api/add_resource?token=${token}&name=${name}&tags=${tags}&url=${url}`)
+            const res = await axios.get(`/api/resources/add?token=${token}&name=${name}&tags=${tags}&url=${url}`)
             if(res.data["error"]!==0)
                 return alert("Error!")
             alert("Resource added!")

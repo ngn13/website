@@ -15,7 +15,7 @@ export default {
     methods: {
         async click(e) {
             const pass = document.getElementById("pass").value
-            const res = await axios.get(`/api/login?pass=${pass}`)
+            const res = await axios.get(`/api/auth/login?pass=${pass}`)
             if(res.data["error"]===0){
                 localStorage.setItem("token", res.data["token"])
                 return location.href="/"

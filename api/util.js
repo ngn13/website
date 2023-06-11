@@ -8,5 +8,15 @@ function gimmeToken() {
     return result;
 }
 
-module.exports = {gimmeToken}
+function makeID(title){
+  // this is used in blog.js
+  // id is basically the title of the post
+  // but ve remove the whitespace
+  // and make it lowerspace
+  // for example:
+  // Online Privacy Guide -> onlineprivacyguide
+  return title.toLowerCase().replaceAll(" ", "")
+}
+
+module.exports = { gimmeToken, makeID }
 
