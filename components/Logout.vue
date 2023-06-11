@@ -12,7 +12,7 @@ import Button from './Button.vue';
 export default {
     methods: {
         async click(e) {
-            await axios.get(`/api/logout?token=${localStorage.getItem("token")}`)
+            await axios.get(`/api/auth/logout?token=${localStorage.getItem("token")}`)
             localStorage.clear()
             location.reload()
         }

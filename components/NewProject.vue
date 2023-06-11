@@ -20,7 +20,7 @@ export default {
             const desc = document.getElementById("desc").value
             const url = document.getElementById("url").value
             const token = localStorage.getItem("token")
-            const res = await axios.get(`/api/add_project?token=${token}&name=${name}&desc=${desc}&url=${url}`)
+            const res = await axios.get(`/api/projects/add?token=${token}&name=${name}&desc=${desc}&url=${url}`)
             if(res.data["error"]!==0)
                 return alert("Error!")
             alert("Project added!")

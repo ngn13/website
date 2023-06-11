@@ -6,7 +6,7 @@
         </Header>
         <div class="resources">
             <Input :keyup="keyup" placeholder="Search resource" type="text"/>
-            <Resource v-for="resource in resources" :key="resource" :name="resource.name" :tags="resource.tags" :url="resource.url" />
+            <Resource v-for="res in show_resources" :key="res.name" :name="res.name" :tags="res.tags" :url="res.url" />
         </div>
         <NewResource v-if="logged"/>
     </main>
@@ -35,44 +35,59 @@ export default {
         return {
             header: "resources",
             logged: false,
-            resources: [],
-            all: []
+            sum_resources: [],
+            all_resources: [],
+            show_resources: []
         }
     },
     methods: {
         keyup(e) {
-            let val = e.target.value
-            if(e.key==="Backspace" && val===""){
+            let search = e.target.value
+            if(e.key==="Backspace" && search===""){
                 this.header = "resources"
-                this.resources = this.all
+                this.show_resources = this.sum_resources
                 return
             }
             if(e.key==="OS")
                 return
-            this.header = `resources | grep ${val}`
+            this.header = `resources | grep ${search}`
 
             // dirty asf search alg
-            this.resources = []
-            for(let i = 0; i < this.all.length; i++){
-                if(this.all[i].name.toLowerCase().includes(val.toLowerCase()))
-                    this.resources.push(this.all[i])
-            
-                for(let e = 0; e < this.all[i].tags.length; e++){
-                    if(this.all[i].tags[e].toLowerCase().includes(val.toLowerCase())){
-                        if(this.resources.indexOf(this.all[i])===-1)
-                            this.resources.push(this.all[i])
+            this.show_resources = []
+            for(let i = 0; i < this.all_resources.length; i++){
+                if(this.all_resources[i].name
+                      .toLowerCase()
+                      .includes(search.toLowerCase())
+                  ){
+                    this.show_resources.push(this.all_resources[i])
+                    continue
+                  }
+
+                for(let e = 0; e < this.all_resources[i].tags.length; e++){
+                    if(this.all_resources[i].tags[e].toLowerCase()
+                          .includes(search.toLowerCase())
+                    ){
+                          this.show_resources.push(this.all_resources[i])
+                          break
                     }
                 }
             }
-        }
+      }
     },
     mounted: async function(){
-		if(localStorage.getItem("token"))
+    		if(localStorage.getItem("token"))
             this.logged = true
 
-        const res = await axios.get("/api/get_resources")
-        this.resources = res.data["resources"]
-        this.all = res.data["resources"]
+        // request top 10 resources so we can
+        // render the DOM as fast as possible
+        let res = await axios.get("/api/resources/get?sum=1")
+        this.sum_resources = res.data["resources"]
+        this.show_resources = this.sum_resources
+
+        // then we can load all the resources
+        res = await axios.get("/api/resources/get")
+        this.all_resources = res.data["resources"]
+        console.log(res.data["resources"])
 	}
 }
 </script>

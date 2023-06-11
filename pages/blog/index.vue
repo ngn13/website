@@ -6,7 +6,7 @@
         </Header>
         <div class="blogs">
             <Input :keyup="keyup" placeholder="Search post" type="text"/>
-            <PostPreview v-for="post in posts" :key="post" :title="post.title" :desc="post.desc" :info="post.info" :url="post.url">
+            <PostPreview v-for="post in posts" :key="post.title" :title="post.title" :desc="post.desc" :info="post.info" :url="post.url">
                 {{ post.desc }}
             </PostPreview>
         </div>
@@ -44,33 +44,31 @@ export default {
     mounted: async function () {
         if (localStorage.getItem("token"))
             this.logged = true;
-        const res = await axios.get("/api/get_posts");
+        const res = await axios.get("/api/blog/sum");
+        let posts = []
 
-        let array = res.data["posts"]
-        let newarray = []
-
-        for(let i=0;i<array.length;i++){
-            newarray.push({
-                title: array[i].title,
-                desc: array[i].desc,
-                info: array[i].info,
-                url: `/blog/${array[i].title.toLowerCase().replaceAll(" ", "")}`
+        res.data["posts"].forEach(post=>{
+            posts.push({
+                title: post.title,
+                desc: post.desc,
+                info: post.info,
+                url: `/blog/${post.title.toLowerCase().replaceAll(" ", "")}`
             })
-        }
+        })
 
-        this.posts = newarray;
-        this.all = newarray;
+        this.posts = posts
+        this.all = posts
     },
     methods: {
         keyup(e) {
             let val = e.target.value
-            
+
             // search looks at name and info
             this.posts = []
             for(let i = 0; i < this.all.length; i++){
                 if(this.all[i].title.toLowerCase().includes(val.toLowerCase()))
                     this.posts.push(this.all[i])
-                
+
                 else if(this.all[i].info.toLowerCase().includes(val.toLowerCase()))
                     this.posts.push(this.all[i])
             }

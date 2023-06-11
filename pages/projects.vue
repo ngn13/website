@@ -35,16 +35,16 @@ export default {
     },
     data() {
 		return {
-			logged: false,
-            projects: []
+		    logged: false,
+        projects: []
 		}
 	},
     mounted: async function(){
 		if(localStorage.getItem("token"))
             this.logged = true
 
-        const res = await axios.get("/api/get_projects")
-        
+        const res = await axios.get("/api/projects/get")
+
         let all = res.data["projects"]
         let projects = []
         let project = []

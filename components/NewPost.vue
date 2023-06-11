@@ -4,11 +4,12 @@
         <div class="textareas">
             <Input :keyup="function() { }" id="title" placeholder="Post Title" type="text"/>
             <Input :keyup="function() { }" id="author" placeholder="Author" type="text"/>
+            <h2>
+              Make the post private
+              <input id="private" type="checkbox"/>
+            </h2>
         </div>
-        <div class="textareas">
-            <textarea nor name="contenten" id="contenten" cols="30" rows="10" placeholder="Content (EN)"></textarea>
-            <textarea name="contenttr" id="contenttr" cols="30" rows="10" placeholder="Content (TR)"></textarea>
-        </div>
+        <textarea name="content" id="content" cols="30" rows="10" placeholder="Content"></textarea>
         <Button :click="click">Post</Button>
     </main>
 </template>
@@ -23,17 +24,15 @@ export default {
         async click(e) {
             const title = document.getElementById("title").value
             const author = document.getElementById("author").value
-            const contenten = document.getElementById("contenten").value
-            const contenttr = document.getElementById("contenttr").value
+            const content = document.getElementById("content").value
+            const priv = document.getElementById("private").value
             const token = localStorage.getItem("token")
-            const res = await axios.post("/api/add_post", {
+            const res = await axios.post("/api/blog/add", {
                 token: token,
                 title: title,
                 author: author,
-                content: {
-                    tr: contenttr,
-                    en: contenten
-                },
+                content: content,
+                priv: priv==="on"
             })
             if(res.data["error"]!==0)
                 return alert("Error!")
@@ -52,9 +51,29 @@ h1{
     text-align: center;
 }
 
+h2{
+  background: var(--dark-two);
+  font-size: 25px;
+  border-radius: 20px;
+  border: none;
+  padding: 20px;
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type="checkbox"] {
+  -ms-transform: scale(2);
+  -moz-transform: scale(2);
+  -webkit-transform: scale(2);
+  -o-transform: scale(2);
+  transform: scale(2);
+  padding: 10px;
+}
+
 textarea{
     width: 500px;
-    font-size: 15px;
+    font-size: 20px;
     padding: 20px;
     border-radius: 20px;
     background: var(--dark-two);
@@ -67,7 +86,7 @@ textarea{
 }
 
 .textareas {
-    flex-direction: row;
+    flex-direction: column;
     display: flex;
     gap: 20px;
 }
