@@ -2,7 +2,7 @@
     <main>
         <Navbar />
         <Header>
-            <glitch>cat</glitch> {{ header }}
+            <label class="glitch">cat</label> {{ header }}
         </Header>
         <div class="resources">
             <Input :keyup="keyup" placeholder="Search resource" type="text"/>
@@ -87,7 +87,6 @@ export default {
         // then we can load all the resources
         res = await axios.get("/api/resources/get")
         this.all_resources = res.data["resources"]
-        console.log(res.data["resources"])
 	}
 }
 </script>

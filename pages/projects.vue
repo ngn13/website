@@ -2,12 +2,12 @@
     <div>
         <Navbar />
 	    <Header>
-		    <glitch>ls -la</glitch> projects
+		    <label class="glitch">ls -la</label> projects
 	    </Header>
         <div class="projects">
-            <ProjectList v-for="project in projects" :key="project">
-                <Project v-if="logged" v-for="p in project" :key="p" :name="`${p.name} (${p.click})`" :desc="p.desc" :url="p.url"/>
-                <Project v-if="!logged" v-for="p in project" :key="p" :name="p.name" :desc="p.desc" :url="p.url"/>
+            <ProjectList v-for="project in projects" :key="project[0].name">
+                <Project v-if="logged" v-for="p in project" :key="p.name" :name="`${p.name} (${p.click})`" :desc="p.desc" :url="p.url"/>
+                <Project v-if="!logged" v-for="p in project" :key="p.desc" :name="p.name" :desc="p.desc" :url="p.url"/>
             </ProjectList>
 	    </div>
         <NewProject v-if="logged"/>

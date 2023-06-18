@@ -2,7 +2,7 @@
     <div>
         <Navbar />
         <Header>
-            <glitch>/dev/</glitch>blog
+          <label class="glitch">/dev/</label>blog
         </Header>
         <div class="blogs">
             <Input :keyup="keyup" placeholder="Search post" type="text"/>

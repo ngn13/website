@@ -2,7 +2,7 @@
     <div class="all">
         <Navbar />
         <Header>
-            <glitch class="title">{{ post.title }}</glitch>
+            <label class="glitch title">{{ post.title }}</label>
             <p>{{ post.info }}</p>
         </Header>
         <div class="postcontain">

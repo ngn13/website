@@ -2,7 +2,7 @@
     <div>
         <Navbar />
         <Header>
-            <glitch>echo</glitch> hello world!
+            <label class="glitch">echo</label> hello world!
         </Header>
         <div class="info">
             <Card>

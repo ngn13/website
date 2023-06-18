@@ -290,7 +290,7 @@ body {
   }
 }
 
-glitch {
+.glitch {
   animation-name: colorAnimation;
   animation-iteration-count: infinite;
   animation-duration: 10s;
