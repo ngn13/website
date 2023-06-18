@@ -39,7 +39,7 @@
         </div>
         <Logout v-if="logged"/>
         <div class="version">
-            <p>v2.3</p>
+            <p>v2.4</p>
         </div>
     </div>
 </template>
