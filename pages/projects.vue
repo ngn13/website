@@ -5,9 +5,9 @@
 		    <label class="glitch">ls -la</label> projects
 	    </Header>
         <div class="projects">
-            <ProjectList v-for="project in projects" :key="project[0].name">
-                <Project v-if="logged" v-for="p in project" :key="p.name" :name="`${p.name} (${p.click})`" :desc="p.desc" :url="p.url"/>
-                <Project v-if="!logged" v-for="p in project" :key="p.desc" :name="p.name" :desc="p.desc" :url="p.url"/>
+            <ProjectList v-for="project in projects" :key="project.id">
+                <Project v-if="logged" v-for="p in project.list" :key="p.name" :name="`${p.name} (${p.click})`" :desc="p.desc" :url="p.url"/>
+<Project v-if="!logged" v-for="p in project.list" :key="p.desc" :name="p.name" :desc="p.desc" :url="p.url"/>
             </ProjectList>
 	    </div>
         <NewProject v-if="logged"/>
@@ -40,17 +40,21 @@ export default {
 		}
 	},
     mounted: async function(){
-		if(localStorage.getItem("token"))
-            this.logged = true
+		    if(localStorage.getItem("token"))
+          this.logged = true
 
         const res = await axios.get("/api/projects/get")
 
         let all = res.data["projects"]
+        let pcounter = 0
         let projects = []
-        let project = []
+        let project = {
+          id: pcounter,
+          list: []
+        }
         for(let i = 0; i<all.length; i++){
-            if(project.length!==3)
-                project.push({
+            if(project["list"].length!==3)
+                project["list"].push({
                     name: all[i]["name"],
                     desc: all[i]["desc"],
                     click: all[i]["click"],
@@ -58,7 +62,11 @@ export default {
                 })
             else{
                 projects.push(project)
-                project = []
+                pcounter += 1
+                project = {
+                  id: pcounter,
+                  list: []
+                }
             }
 
             if(i===all.length-1){
@@ -66,7 +74,8 @@ export default {
             }
         }
         this.projects = projects
-	}
+        console.log(this.projects)
+  }
 }
 </script>
 
