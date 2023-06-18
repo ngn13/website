@@ -53,28 +53,30 @@ export default {
           list: []
         }
         for(let i = 0; i<all.length; i++){
-            if(project["list"].length!==3)
-                project["list"].push({
-                    name: all[i]["name"],
-                    desc: all[i]["desc"],
-                    click: all[i]["click"],
-                    url: `/l/${all[i]["name"].toLowerCase().replaceAll(" ", "")}`
-                })
-            else{
-                projects.push(project)
-                pcounter += 1
-                project = {
-                  id: pcounter,
-                  list: []
-                }
+          if(project["list"].length===3){
+            projects.push(project)
+            pcounter += 1
+            project = {
+              id: pcounter,
+              list: []
             }
+          }
 
-            if(i===all.length-1){
-                projects.push(project)
-            }
+          project["list"].push({
+            name: all[i]["name"],
+            desc: all[i]["desc"],
+            click: all[i]["click"],
+            url: `/l/${all[i]["name"]
+              .toLowerCase()
+              .replaceAll(" ", "")}`
+          })
+
+          if(i===all.length-1){
+            projects.push(project)
+          }
         }
+
         this.projects = projects
-        console.log(this.projects)
   }
 }
 </script>

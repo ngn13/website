@@ -20,7 +20,7 @@ div{
     gap: 30px;
 }
 
-@media only screen and (max-width: 1121px) {
+@media only screen and (max-width: 1416px) {
     div {
         flex-direction: column;
     }

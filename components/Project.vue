@@ -31,7 +31,7 @@ main {
     cursor: pointer;
     transition: .4s;
     height: 100px;
-    width: 80%;
+    width: 450px;
 }
 
 main:hover{
@@ -54,7 +54,7 @@ h2{
     font-size: 25px;
 }
 
-@media only screen and (max-width: 1121px) {
+@media only screen and (max-width: 1416px) {
     main{
         width: 80%;
     }
