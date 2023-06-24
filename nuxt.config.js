@@ -2,7 +2,7 @@ export default {
   head: {
     title: "[ngn]",
     htmlAttrs: {
-      lang: "en",
+      lang: "en"
     },
     meta: [
       { charset: "utf-8" },
@@ -10,14 +10,24 @@ export default {
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
       { hid: "og:title", content: "[ngn]" },
-      { hid: "og:description",  content: "personal website of ngn | read my blogs, check out my projects, discover cool resources" },
-      { hid: "og:url",  content: "https://ngn13.fun" },
-      { name: "theme-color", content: "#141414", "data-react-helmet":"true"},
+      {
+        hid: "og:description",
+        content:
+          "personal website of ngn | read my blogs, check out my projects, discover cool resources"
+      },
+      { hid: "og:url", content: "https://ngn13.fun" },
+      { name: "theme-color", content: "#141414", "data-react-helmet": "true" }
     ],
 
     link: [
-      { rel: "stylesheet", href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" },
-      { rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.css" }
+      {
+        rel: "stylesheet",
+        href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      },
+      {
+        rel: "stylesheet",
+        href: "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.css"
+      }
     ]
   },
   css: ["@/static/global.css"],
@@ -26,11 +36,11 @@ export default {
   buildModules: [],
   modules: ["@nuxtjs/axios"],
   axios: {
-    baseURL: "/",
+    baseURL: "/"
   },
   build: {},
   serverMiddleware: {
     "/api": "~/api",
-    "/l": "~/links",
-  },
-};
+    "/l": "~/links"
+  }
+}
