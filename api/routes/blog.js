@@ -68,7 +68,7 @@ blog.post("/add", async (req, res) => {
     typeof title !== "string" ||
     typeof author !== "string" ||
     typeof content !== "string" ||
-    typeof priv !== boolean
+    typeof priv !== "boolean"
   )
     return res.json({ error: 1 })
 
