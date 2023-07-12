@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+@import url("./font.css");
+@import url("./github.css");
 
 :root {
   --white: white;
@@ -8,9 +9,13 @@
   --dark-four: #242526;
   --dark-fife: #3a3b3c;
   --border-rad: 30px;
+  /*
+  old shadow animation
   --def-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  */
+  --def-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 * {

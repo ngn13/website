@@ -6,7 +6,7 @@ export default {
     },
     meta: [
       { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=1200" },
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
       { hid: "og:title", content: "[ngn]" },
@@ -18,16 +18,11 @@ export default {
       { hid: "og:url", content: "https://ngn13.fun" },
       { name: "theme-color", content: "#141414", "data-react-helmet": "true" }
     ],
-
     link: [
       {
         rel: "stylesheet",
-        href: "https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+        href: "https://files.ngn13.fun/boxicons.min.css",
       },
-      {
-        rel: "stylesheet",
-        href: "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.css"
-      }
     ]
   },
   css: ["@/static/global.css"],

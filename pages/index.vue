@@ -45,7 +45,7 @@
     </div>
     <Logout v-if="logged" />
     <div class="version">
-      <p>v2.5</p>
+      <p>v2.6</p>
     </div>
   </div>
 </template>

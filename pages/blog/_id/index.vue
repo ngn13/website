@@ -21,7 +21,7 @@ import marked from "marked"
 export default {
   head() {
     return {
-      title: "[ngn] | " + this.post.title,
+      title: "[ngn] | blog",
       meta: [
         {
           hid: "description",
@@ -82,8 +82,9 @@ p {
 .markdown-body {
   font-size: 25px;
   padding: 50px;
-  border-radius: 15px;
-  background-color: var(--dark-three);
+  border-radius: 10px;
+  background-color: var(--dark-two);
+  box-shadow: var(--def-shadow);
 }
 </style>
 

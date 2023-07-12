@@ -29,9 +29,9 @@ main {
   gap: 20px;
   padding: 40px;
   cursor: pointer;
-  transition: 0.4s;
   height: 100px;
   width: 450px;
+  transition: .4s;
 }
 
 main:hover {

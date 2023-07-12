@@ -1,9 +1,10 @@
+// https://v2.nuxt.com/deployments/pm2/
 module.exports = {
   apps: [
     {
-      name: "My Website",
+      name: "ngn13.fun website",
       exec_mode: "cluster",
-      instances: "max", // Or a number of instances
+      instances: "max",
       script: "./node_modules/nuxt/bin/nuxt.js",
       args: "start"
     }

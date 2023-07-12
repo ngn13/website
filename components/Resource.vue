@@ -32,9 +32,9 @@ main {
   color: var(--white);
   justify-content: space-between;
   align-items: center;
-  transition: 0.4s;
   width: 80%;
   cursor: pointer;
+  transition: .4s;
 }
 
 main:hover {
