@@ -1,17 +1,38 @@
-# My Website | [ngn13.fun](https://ngn13.fun)
-This repo contains the source code of my personal website.
-It's written NuxtJS and supports full SSR. As database,
-it uses mongodb. It's just a personal project that
-I am working on.
+# create-svelte
 
-## Setup
-For some reason if you want to setup my website localy
-install `nodejs` and `npm`, then run the following:
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+
+## Creating a project
+
+If you're seeing this, you've probably already done this step. Congrats!
+
 ```bash
-git clone https://github.com/ngn13/ngn13.fun.git && cd ngn13.fun &&
-npm i
-echo "PASS=password" > .env
-echo "DATABASE=mongodb://127.0.0.1" > .env
-npm run build
-npm run start
+# create a new project in the current directory
+npm create svelte@latest
+
+# create a new project in my-app
+npm create svelte@latest my-app
 ```
+
+## Developing
+
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```bash
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
+
+## Building
+
+To create a production version of your app:
+
+```bash
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
