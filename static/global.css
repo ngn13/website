@@ -25,15 +25,13 @@
 }
 
 body {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   background: var(--dark-one);
   font-family: "Ubuntu", sans-serif;
   overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(0, 0, 0, 0.7);
 }
 
 ::-webkit-scrollbar {
@@ -296,7 +294,7 @@ body {
   }
 }
 
-c {
+.c, c {
   animation-name: colorAnimation;
   animation-iteration-count: infinite;
   animation-duration: 10s;

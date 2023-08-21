@@ -10,7 +10,6 @@
   <div>
     <NavbarLink link="/">home</NavbarLink>
     <NavbarLink link="/projects">projects</NavbarLink>
-    <NavbarLink link="/resources">resources</NavbarLink>
     <NavbarLink link="/blog">blog</NavbarLink>
     <NavbarLink link="https://github.com/ngn13/ngn13.fun">source</NavbarLink>
   </div>

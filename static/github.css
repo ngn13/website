@@ -47,6 +47,9 @@
 }
 
 .markdown-body a {
+  animation-name: colorAnimation;
+  animation-iteration-count: infinite;
+  animation-duration: 10s;
   background-color: transparent;
   color: #58a6ff;
   text-decoration: none;

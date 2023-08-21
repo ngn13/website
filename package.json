@@ -13,5 +13,10 @@
 		"svelte": "^4.0.5",
 		"vite": "^4.4.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@types/dompurify": "^3.0.2",
+		"dompurify": "^3.0.5",
+		"marked": "^7.0.4"
+	}
 }

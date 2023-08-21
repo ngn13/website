@@ -9,8 +9,7 @@
 <style>
 header {
   background: 
-    linear-gradient(rgba(1, 1, 1, 0.96), 
-    rgba(11, 11, 11, 0.808)), 
+    linear-gradient(rgba(11, 11, 11, 0.808), rgba(1, 1, 1, 0.96)), 
     url("https://files.ngn13.fun/banner.png");
   background-size: 50%;
   width: 100%;
