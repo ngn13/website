@@ -1,17 +1,20 @@
-# My Website | [ngn13.fun](https://ngn13.fun)
-This repo contains the source code of my personal website.
-It's written NuxtJS and supports full SSR. As database,
-it uses mongodb. It's just a personal project that
-I am working on.
+# [ngn13.fun](https://ngn13.fun) | my personal website
+This is the frontend application for my personal website, it's written in SvelteKit and vanilla CSS
 
-## Setup
-For some reason if you want to setup my website localy
-install `nodejs` and `npm`, then run the following:
+## development setup
 ```bash
-git clone https://github.com/ngn13/ngn13.fun.git && cd ngn13.fun &&
+git clone https://github.com/ngn13/ngn13.fun && cd ngn13.fun
 npm i
-echo "PASS=password" > .env
-echo "DATABASE=mongodb://127.0.0.1" > .env
-npm run build
-npm run start
+npm run dev
 ```
+
+## build setup
+```bash
+git clone https://github.com/ngn13/ngn13.fun && cd ngn13.fun
+npm i
+npm run build
+```
+
+## license
+you cannot publish my website or parts of it on any server/domain without my permission 
+if you want to do this (for some reason) [contact me](mailto:ngn13proton@proton.me)
