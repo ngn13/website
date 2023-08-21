@@ -34,7 +34,7 @@
       techinal details you may want to know:
       <ul>
         <li><c> </c> I built the frontend app using SvelteKit</li> 
-        <li><c> </c> I deploy my app to vercel using Github actions</li>
+        <li><c> </c> I deploy my app to vercel using Github integration</li>
         <li><c>󰒋 </c> Backend server is written in Go and it's hosted on my server</li>
         <li><c> </c> And yup, I also have other services hosted on the same server</li>
       </ul>
