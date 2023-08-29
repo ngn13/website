@@ -58,12 +58,11 @@
       <ul>
         <li><c> </c> <a href="https://github.com/ngn13">Github</a></li> 
         <li><c>󰫑 </c> <a href="https://mastodon.social/@ngn">Mastodon</a></li> 
-        <li><c>󰙯 </c> <a href="https://discord.com/users/568131907368386565">Discord</a></li>
         <li><c> </c> <a href="mailto:ngn13proton@proton.me">Email</a></li>
       </ul>
-      Or you can DM me on matrix:
+      Or add me on XMPP, which is the platform that I use most actively:
       <br>
-      <c>@ngn:matrix.ngn13.fun</c>
+      <c>ngn@chat.ngn13.fun</c>
     </Card>
   </div>
 </main>
