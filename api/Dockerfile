@@ -11,4 +11,8 @@ COPY util ./util
 
 EXPOSE 7001 
 RUN make 
+
+ARG PASSWORD
+ENV PASS $PASSWORD
+
 ENTRYPOINT ["/app/server"]

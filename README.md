@@ -41,7 +41,8 @@ services:
             - "127.0.0.1:7002:4173"
         depends_on:
             - api
-        env_file: all.env
+        args:
+            API_URL: "https://api.ngn.tf"
 
     api:
         build: ./api
@@ -49,12 +50,8 @@ services:
             - "127.0.0.1:7001:7001"
         volumes:
             - ./api/api.db:/api.db
-        env_file: all.env
-```
-Enviroment variables can be set in the `all.env` file:
-```env
-PASS=securepassword
-VITE_API_URL_DEV="https://api.ngn.tf"
+        args:
+            PASSWORD: "supersecure"
 ```
 
 ## History
