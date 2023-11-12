@@ -9,8 +9,6 @@ All code is licensed under AGPL version 3 (see [LICENSE.txt](LICENSE.txt))
 > **Note**  
 > I do not accept PRs as this is just my personal project. 
 
-**Current Version**: 4.0
-
 ## Directory structure
 ### `app`
 Contains frontend application, written with SvelteKit. It supports full SSR.
