@@ -6,5 +6,6 @@ USER svelte
 WORKDIR /app
 COPY --chown=svelte:svelte . /app
 
+EXPOSE 4173 
 RUN npm install && npm run build
 CMD ["npm", "run", "preview"]

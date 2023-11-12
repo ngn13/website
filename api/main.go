@@ -30,7 +30,7 @@ func main() {
   routes.Setup(app, db)
 
   log.Println("Starting web server at port 7001")
-  err = app.Listen("127.0.0.1:7001")
+  err = app.Listen("0.0.0.0:7001")
   if err != nil {
     log.Printf("Error starting the webserver: %s", err.Error())
   }
