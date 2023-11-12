@@ -1,2 +1,2 @@
-api/server
-api/data.db
+*.yaml
+*.env

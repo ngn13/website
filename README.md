@@ -31,8 +31,9 @@ by running `admin_script`.
 
 ## Deployment
 Easiest way to deploy is to use docker. I have created a `compose.yaml` file so the API and the 
-frontend application can be deployed easily with just the `docker compose up` command:
+frontend application can be deployed easily with just the `docker-compose up` command:
 ```yaml
+version: "3"
 services:
     app:
         build: ./app
@@ -40,8 +41,7 @@ services:
             - "127.0.0.1:7002:7002"
         depends_on:
             - api
-        enviroment:
-            - VITE_API_URL_DEV="https://api.ngn.tf"
+        env_file: all.env
 
     api:
         build: ./api
@@ -49,8 +49,12 @@ services:
             - "127.0.0.1:7001:7001"
         volumes:
             - ./api/api.db:/api.db
-        enviroment:
-            - PASS=securepassword
+        env_file: all.env
+```
+Enviroment variables can be set in the `all.env` file:
+```env
+PASS=securepassword
+VITE_API_URL_DEV="https://api.ngn.tf"
 ```
 
 ## History

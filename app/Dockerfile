@@ -4,7 +4,7 @@ RUN apk update && apk upgrade && adduser -D svelte
 USER svelte
 
 WORKDIR /app
-COPY --chown=svelteuser:svelte . /app
+COPY --chown=svelte:svelte . /app
 
 RUN npm install && npm run build
 CMD ["npm", "run", "preview"]
