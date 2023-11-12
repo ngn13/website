@@ -38,7 +38,7 @@ services:
     app:
         build: ./app
         ports:
-            - "127.0.0.1:7002:7002"
+            - "127.0.0.1:7002:4173"
         depends_on:
             - api
         env_file: all.env
