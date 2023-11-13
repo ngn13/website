@@ -19,7 +19,7 @@
     <p>
       These are free to use FOSS services that I host on my server. 
       If you want an account on any of these services, or if you are having issues with them, 
-      please send an email to services@ngn.tf 
+      please get in contact with me 
     </p>
   </div>
   {#each data.services as services_list}

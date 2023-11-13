@@ -61,9 +61,8 @@
       If you want to contact me directly, send me an email:
       <ul>
         <li><c></c> <a href="mailto:ngn13proton@proton.me">Personal email address</a></li>
-        <li><c>󰇮</c> <a href="mailto:ngn13proton@proton.me">Proton email address</a></li>
       </ul>
-      Or you can add me on XMPP: <c>ngn@chat.ngn13.fun</c>
+      Or you can add me on XMPP: <c>ngn@chat.ngn.tf</c>
     </Card>
   </div>
   <Card title="bash donate.sh">

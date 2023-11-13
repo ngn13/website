@@ -15,7 +15,7 @@
 
 <div class="main">
   <div class="title">
-    root@ngn13.fun:~# {current}
+    root@ngn.tf:~# {current}
   </div> 
   <div class="content">
     <slot></slot>

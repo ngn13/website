@@ -99,7 +99,7 @@ def remove_post() -> None:
         print(f"[-] Error removing post: {res['error']}")
         return
 
-    print("[-] Post has been deleted")
+    print("[-] Post has been removed")
 
 def add_service() -> None:
     token = get_token()
@@ -132,7 +132,7 @@ def remove_service() -> None:
         print(f"[-] Error removing service: {res['error']}")
         return
 
-    print("[+] Serivce has been added")
+    print("[+] Serivce has been removed")
 
 cmds = {
     "login": login,
