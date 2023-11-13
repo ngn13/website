@@ -53,7 +53,7 @@ services:
     ports:
       - "127.0.0.1:7001:7001"
     volumes:
-      - ./api/api.db:/api.db
+      - ./api/data.db:/app/data.db
 ```
 
 ## History
