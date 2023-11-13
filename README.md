@@ -30,28 +30,30 @@ installed on to the PATH by running the `install.sh` script. After installation 
 by running `admin_script`.
 
 ## Deployment
-Easiest way to deploy is to use docker. I have created a `compose.yaml` file so the API and the 
+Easiest way to deploy is to use docker. I have created a `compose.yml` file so the API and the 
 frontend application can be deployed easily with just the `docker-compose up` command:
 ```yaml
 version: "3"
 services:
-    app:
-        build: ./app
-        ports:
-            - "127.0.0.1:7002:4173"
-        depends_on:
-            - api
-        args:
-            API_URL: "https://api.ngn.tf"
+  app:
+    build:
+      context: ./app
+      args:
+        API_URL: "https://api.ngn.tf"
+    ports:
+      - "127.0.0.1:7002:4173"
+    depends_on:
+      - api
 
-    api:
-        build: ./api
-        ports:
-            - "127.0.0.1:7001:7001"
-        volumes:
-            - ./api/api.db:/api.db
-        args:
-            PASSWORD: "supersecure"
+  api:
+    build:
+      context: ./api
+      args:
+        PASSWORD: "securepassword"
+    ports:
+      - "127.0.0.1:7001:7001"
+    volumes:
+      - ./api/api.db:/api.db
 ```
 
 ## History
