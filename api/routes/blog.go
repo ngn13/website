@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/ngn13/website/api/util"
@@ -29,7 +30,7 @@ func BlogDb(db *sql.DB) {
 
 func GetIP(c *fiber.Ctx) string {
   if c.Get("X-Real-IP") != "" {
-    return c.Get("X-Real-IP")
+    return strings.Clone(c.Get("X-Real-IP"))
   }
 
   return c.IP()

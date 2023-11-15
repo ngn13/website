@@ -121,7 +121,6 @@ func AddPost(c *fiber.Ctx) error{
   }
 
   post.Date = time.Now().Format("02/01/06")
-  log.Println(post.Date)
   post.ID = TitleToID(post.Title)
 
   _, err := DB.Exec(
