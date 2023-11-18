@@ -53,16 +53,18 @@
     </Card>
 
     <Card title="wall">
-      Here are some of my socials: 
+      Here are some links if you want to get in contact with me: 
       <ul>
         <li><c> </c> <a href="https://github.com/ngn13">Github</a></li> 
         <li><c>󰫑 </c> <a href="https://mastodon.social/@ngn">Mastodon</a></li> 
-      </ul>
-      If you want to contact me directly, send me an email:
-      <ul>
-        <li><c></c> <a href="mailto:ngn13proton@proton.me">Personal email address</a></li>
+        <li><c> </c> <a href="mailto:ngn13proton@proton.me">Email</a></li> 
       </ul>
       Or you can add me on XMPP: <c>ngn@chat.ngn.tf</c>
+      <br>
+      And lastly my PGP key is:
+      <ul>
+        <li><a href="https://keyoxide.org/F9E70878C2FB389AEC2BA34CA3654DF5AD9F641D"><c>F9E70878C2FB389AEC2BA34CA3654DF5AD9F641D</c></a></li>
+      </ul>
     </Card>
   </div>
   <Card title="bash donate.sh">
@@ -130,7 +132,7 @@ a:hover {
   font-size: 15px;
 }
 
-@media only screen and (max-width: 1076px) {
+@media only screen and (max-width: 1200px) {
   .flexbox {
     flex-direction: column;
   }

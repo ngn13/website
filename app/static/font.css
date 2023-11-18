@@ -1,13 +1,8 @@
-/*
- *  fonts are located under /static/fonts, they are from nerdfonts 
- *  see nerdfonts.com 
- *
-*/
-
 @font-face {
   font-family: "Ubuntu";
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url("/fonts/UbuntuNF.ttf");
+  /* im using nerd fonts btw */
+  src: url("https://files.ngn.tf/fonts/UbuntuNF.ttf");
 }
