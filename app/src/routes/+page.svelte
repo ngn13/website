@@ -63,7 +63,7 @@
       <br>
       And lastly my PGP key is:
       <ul>
-        <li><a href="https://keyoxide.org/F9E70878C2FB389AEC2BA34CA3654DF5AD9F641D"><c>F9E70878C2FB389AEC2BA34CA3654DF5AD9F641D</c></a></li>
+        <li class="pgp"><a href="https://keyoxide.org/F9E70878C2FB389AEC2BA34CA3654DF5AD9F641D"><c>F9E70878C2FB389AEC2BA34CA3654DF5AD9F641D</c></a></li>
       </ul>
     </Card>
   </div>
@@ -96,6 +96,12 @@ code {
   color: white;
   border-radius: var(--radius);
   text-shadow: var(--text-shadow);
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.pgp {
   word-wrap: break-word;
   white-space: pre-wrap;
   word-break: break-word;
