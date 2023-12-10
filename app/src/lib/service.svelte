@@ -2,15 +2,15 @@
   export let desc
   export let url
 
-  let icon = "󰅇"
+  let icon = "<i class='nf nf-md-clipboard_multiple'></i>"
   let audio
 
   function copy() {
     audio.play()
     navigator.clipboard.writeText(url)
-    icon = "󰅎"
+    icon = "<i class='nf nf-md-clipboard_check'></i>"
     setTimeout(()=>{
-      icon = "󰅇"
+      icon = "<i class='nf nf-md-clipboard_multiple'></i>"
     }, 500)
   }
 </script>
@@ -24,8 +24,8 @@
     <p>{desc}</p>
   </div>
   <div>
-    <a on:click={copy} href="#">{icon}</a>
-    <a href="{url}"></a>
+    <a on:click={copy} href="#">{@html icon}</a>
+    <a href="{url}"><i class="nf nf-oct-link_external"></i></a>
   </div>
 </main>
 

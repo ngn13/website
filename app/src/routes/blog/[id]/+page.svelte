@@ -111,9 +111,13 @@
     {@html sanitized}
   </div>
   <div class="votes">
-    <h3 on:click={async ()=>{upvote()}} class="{upvote_status}">󰜷</h3>
+    <h3 on:click={async ()=>{upvote()}} class="{upvote_status}">
+      <i class="nf nf-md-arrow_up_bold"></i>
+    </h3>
     <p>{data.vote}</p>
-    <h3 on:click={async ()=>{downvote()}} class="{downvote_status}">󰜮</h3>
+    <h3 on:click={async ()=>{downvote()}} class="{downvote_status}">
+      <i class="nf nf-md-arrow_down_bold"></i>
+    </h3>
   </div>
 </main>
 
@@ -144,10 +148,12 @@ main {
   flex-direction: column;
   text-align: center;
   text-shadow: var(--text-shadow);
+  gap: 3px;
+  margin-top: 10px;
 }
 
 .votes h3{
-  font-size: 40px;
+  font-size: 27px;
   cursor: pointer;
 }
 

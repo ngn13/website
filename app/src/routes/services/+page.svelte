@@ -15,11 +15,11 @@
 <Header><c>ls -l</c> services</Header>
 <main>
   <div class="info">
-    <h1></h1>
+    <h1><i class="nf nf-oct-info"></i></h1>
     <p>
       These are free to use FOSS services that I host on my server. 
       If you want an account on any of these services, or if you are having issues with them, 
-      please get in contact with me 
+      please send an email to <a href="mailto:services@ngn.tf"><c>services@ngn.tf</c></a>
     </p>
   </div>
   {#each data.services as services_list}
@@ -39,16 +39,19 @@
   animation-iteration-count: infinite;
 }
 
+.info a {
+  text-decoration: none;
+}
+
 .info {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 40px;
+  padding: 30px;
   color: white;
   border-radius: var(--radius); 
   font-size: 25px;
-  margin-bottom: 30px;
 }
 
 main {

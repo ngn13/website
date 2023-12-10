@@ -1,8 +1,10 @@
+/* im using nerd fonts btw */
+@import "https://www.nerdfonts.com/assets/css/webfont.css";
+
 @font-face {
   font-family: "Ubuntu";
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  /* im using nerd fonts btw */
-  src: url("https://files.ngn.tf/fonts/UbuntuNF.ttf");
+  src: url("/ubuntu.ttf");
 }

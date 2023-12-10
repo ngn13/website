@@ -32,10 +32,22 @@
       You are currently on my personal website, for all you nerds, here is some 
       techinal details you may want to know:
       <ul>
-        <li><c> </c> I built the frontend app using SvelteKit</li> 
-        <li><c>󰒋 </c> Backend API is written in Go and it's hosted on my server</li>
-        <li><c> </c> All assets (images, fonts etc.) are hosted on my server as well</li>
-        <li><c> </c> No cloudflare, no CAPTCHAs, no CDNs, this website is %100 privacy friendly</li>
+        <li>
+          <c><i class="nf nf-seti-svelte"></i></c> 
+          I built the frontend app using SvelteKit
+        </li> 
+        <li>
+          <c><i class="nf nf-md-server"></i></c> 
+          Backend API is written in Go and it's hosted on my server
+        </li>
+        <li>
+          <c><i class="nf nf-md-file_image"></i></c> 
+          All assets (images etc.) are hosted on my server as well
+        </li>
+        <li>
+          <c><i class="nf nf-md-eye_off"></i></c> 
+          No cloudflare, no CAPTCHAs, no CDNs, this website is %100 privacy friendly
+        </li>
       </ul>
     </Card>
   </div>
@@ -55,9 +67,18 @@
     <Card title="wall">
       Here are some links if you want to get in contact with me: 
       <ul>
-        <li><c> </c> <a href="https://github.com/ngn13">Github</a></li> 
-        <li><c>󰫑 </c> <a href="https://mastodon.social/@ngn">Mastodon</a></li> 
-        <li><c> </c> <a href="mailto:ngn13proton@proton.me">Email</a></li> 
+        <li>
+          <c><i class="nf nf-cod-github"></i></c> 
+          <a href="https://github.com/ngn13">Github</a>
+        </li> 
+        <li>
+          <c><i class="nf nf-md-mastodon"></i></c> 
+          <a href="https://mastodon.social/@ngn">Mastodon</a>
+        </li> 
+        <li>
+          <c><i class="nf nf-md-email"></i></c> 
+          <a href="mailto:ngn@ngn.tf">Email</a>
+        </li> 
       </ul>
       Or you can add me on XMPP: <c>ngn@chat.ngn.tf</c>
       <br>

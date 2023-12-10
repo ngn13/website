@@ -91,7 +91,7 @@ def add_post() -> None:
 def remove_post() -> None:
     token = get_token()
     id = input("[>] Post ID: ")
-    res = req.delete(join("admin/blog/del")+f"?id={id}", headers={
+    res = req.delete(join("admin/blog/remove")+f"?id={id}", headers={
         "Authorization": token
     }).json()
 
