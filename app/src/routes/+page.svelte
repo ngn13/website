@@ -7,7 +7,7 @@
   <title>[ngn] | homepage</title> 
   <meta content="[ngn] | homepage" property="og:title" />
   <meta content="Homepage of my personal website" property="og:description" />
-  <meta content="https://ngn13.fun" property="og:url" />
+  <meta content="https://ngn.tf" property="og:url" />
   <meta content="#000000" data-react-helmet="true" name="theme-color" />
 </svelte:head>
 

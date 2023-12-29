@@ -10,7 +10,7 @@
   <title>[ngn] | blog</title> 
   <meta content="[ngn] | blog" property="og:title" />
   <meta content="View my blog posts" property="og:description" />
-  <meta content="https://ngn13.fun" property="og:url" />
+  <meta content="https://ngn.tf" property="og:url" />
   <meta content="#000000" data-react-helmet="true" name="theme-color" />
 </svelte:head>
 
