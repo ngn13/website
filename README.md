@@ -6,7 +6,7 @@
 This repo contains all the source code for my personal website, [ngn.tf](https://ngn.tf)
 All code is licensed under AGPL version 3 (see [LICENSE.txt](LICENSE.txt))
 
-> **Note**  
+> [!IMPORTANT]
 > I do not accept PRs as this is just my personal project. 
 
 ## Directory structure
