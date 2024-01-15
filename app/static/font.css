@@ -6,5 +6,5 @@
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url("/ubuntu.ttf");
+  src: url("/ubuntu.woff2") format("woff2");
 }
