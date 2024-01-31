@@ -22,7 +22,6 @@
 
 <style>
 a {
-  margin-left: 20px;
   font-weight: 700;
   font-size: 22px;
   text-decoration: none;

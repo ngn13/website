@@ -25,6 +25,7 @@
         <li>🖥️ I'm interested in cyber security, programming and electronics</li>
         <li>❤️ I love and support Free/Libre and Open Source Software (FLOSS)</li>
         <li>🐧 My GNU/Linux distribution of choice is Artix, however I am currently running Arch</li>
+        <li>🎸 I enjoy listening random stuff (mostly modern rock), so <a href="https://hp.ngn.tf/watch?v=lYBUbBu4W08"><c>here</c></a> is a random song that I like!</li>
       </ul>
     </Card>
 
@@ -33,20 +34,21 @@
       techinal details you may want to know:
       <ul>
         <li>
-          <c><i class="nf nf-seti-svelte"></i></c> 
-          I built the frontend app using SvelteKit
+          <c><i class="nf nf-md-license"></i></c> 
+          I built this website from scratch and its licensed under <a href="https://www.gnu.org/licenses/agpl-3.0.en.html"><c>AGPLv3</c></a>.
+          All the source is avaliable over on my github.
         </li> 
         <li>
-          <c><i class="nf nf-md-server"></i></c> 
-          Backend API is written in Go and it's hosted on my server
-        </li>
-        <li>
           <c><i class="nf nf-md-file_image"></i></c> 
-          All assets (images etc.) are hosted on my server as well
+          All assets (images etc.) are hosted on my server
         </li>
         <li>
           <c><i class="nf nf-md-eye_off"></i></c> 
           No cloudflare, no CAPTCHAs, no CDNs, this website is %100 privacy friendly
+        </li>
+        <li>
+          <c><i class="nf nf-md-server"></i></c> 
+          You can discover other services and pages I host over on the <a href="/services"><c>services page</c></a>
         </li>
       </ul>
     </Card>
@@ -88,20 +90,10 @@
       </ul>
     </Card>
   </div>
-  <Card title="bash donate.sh">
-    If you want to do something stupid with your mone- 
-    <br>
-    I mean if you want to support me and my silly little work, here is my monero wallet address:
-    <br>
-    <br>
-    <code>
-      46q7G7u7cmASvJm7AmrhmNg6ctS77mYMmDAy1QxpDn5w57xV3GUY5za4ZPZHAjqaXdfS5YRWm4AVj5UArLDA1retRkJp47F 
-    </code>
-  </Card>
 </main>
 
 <div class="version">
-  <p>v4.0</p>
+  <p>v4.1</p>
 </div>
 
 <style>
@@ -110,16 +102,6 @@ main{
   flex-direction: column;
   gap: 35px;
   padding: 50px;
-}
-
-code {
-  background: var(--dark-two);
-  color: white;
-  border-radius: var(--radius);
-  text-shadow: var(--text-shadow);
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  word-break: break-word;
 }
 
 .pgp {

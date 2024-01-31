@@ -11,6 +11,7 @@
     <NavbarLink link="/">home</NavbarLink>
     <NavbarLink link="/services">services</NavbarLink>
     <NavbarLink link="/blog">blog</NavbarLink>
+    <NavbarLink link="/donate">donate</NavbarLink>
     <NavbarLink type="icon" link="https://github.com/ngn13/website">
       <i class="nf nf-cod-github"></i></NavbarLink>
   </div>
@@ -33,10 +34,10 @@ nav {
 
 div {
   display: flex;
-  overflow: hidden;
   align-items: center;
-  justify-content: center;
-  gap: 1px;
+  flex-wrap: wrap;
+  justify-content: right;
+  gap: 15px;
 }
 
 h3 {
