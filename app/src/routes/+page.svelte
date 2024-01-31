@@ -93,7 +93,7 @@
 </main>
 
 <div class="version">
-  <p>v4.2</p>
+  <p>v4.3</p>
 </div>
 
 <style>

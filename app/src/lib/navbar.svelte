@@ -13,8 +13,6 @@
     <NavbarLink link="/blog">blog</NavbarLink>
     <NavbarLink link="/donate">donate</NavbarLink>
     <NavbarLink link="https://stats.ngn.tf">status</NavbarLink>
-    <NavbarLink type="icon" link="https://github.com/ngn13/website">
-      <i class="nf nf-cod-github"></i></NavbarLink>
   </div>
 </nav>
 
