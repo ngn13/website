@@ -4,7 +4,7 @@
 
 <nav>
   <div>
-    <h3>[ngn]</h3>
+    <h3>[ngn.tf]</h3>
   </div>
 
   <div>
