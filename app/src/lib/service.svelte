@@ -24,7 +24,7 @@
     <p>{desc}</p>
   </div>
   <div>
-    <a on:click={copy} href="#">{@html icon}</a>
+    <button on:click={copy}>{@html icon}</button>
     <a href="{url}"><i class="nf nf-oct-link_external"></i></a>
   </div>
 </main>
@@ -57,15 +57,18 @@ div p {
   font-size: 20px; 
 }
 
-a {
+a, button {
   text-align: center;
   font-size: 30px;
   text-decoration: none;
   color: white;
   border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
 }
 
-a:hover {
+a:hover, button:hover{
   animation-name: colorAnimation;
   animation-duration: 5s;
   animation-iteration-count: infinite;
