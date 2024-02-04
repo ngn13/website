@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-  <title>[ngn] | donate</title> 
+  <title>[ngn.tf] | donate</title> 
   <meta content="[ngn] | donate" property="og:title" />
   <meta content="Give me all of your life savings" property="og:description" />
   <meta content="https://ngn.tf" property="og:url" />

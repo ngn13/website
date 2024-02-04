@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-  <title>[ngn] | blog</title> 
+  <title>[ngn.tf] | blog</title> 
   <meta content="[ngn] | blog" property="og:title" />
   <meta content="View my blog posts" property="og:description" />
   <meta content="https://ngn.tf" property="og:url" />

@@ -91,7 +91,7 @@
 </script>
 
 <svelte:head>
-  <title>[ngn] | {data.title}</title> 
+  <title>[ngn.tf] | {data.title}</title> 
   <meta content="[ngn] | blog" property="og:title" />
   <meta content="{data.content.substring(0, 100)}..." property="og:description" />
   <meta content="https://ngn.tf" property="og:url" />

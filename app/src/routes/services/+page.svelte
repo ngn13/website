@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-  <title>[ngn] | services</title> 
+  <title>[ngn.tf] | services</title> 
   <meta content="[ngn] | services" property="og:title" />
   <meta content="Stuff that I host" property="og:description" />
   <meta content="https://ngn.tf" property="og:url" />

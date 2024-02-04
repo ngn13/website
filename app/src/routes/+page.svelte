@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-  <title>[ngn] | homepage</title> 
+  <title>[ngn.tf] | homepage</title> 
   <meta content="[ngn] | homepage" property="og:title" />
   <meta content="Homepage of my personal website" property="og:description" />
   <meta content="https://ngn.tf" property="og:url" />
