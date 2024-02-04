@@ -145,7 +145,7 @@ main {
 
 @media only screen and (max-width: 1316px) {
   main {
-    padding: 10px 5% 0% 5%;
+    padding: 50px 5% 50px 5%;
     flex-direction: column;
   }
 
