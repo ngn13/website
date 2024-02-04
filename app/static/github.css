@@ -703,7 +703,7 @@ https://github.com/ngn13/ngn13.fun/raw/main/static/fonts/latin.woff2
   margin: 0;
   font-size: 85%;
   white-space: break-spaces;
-  background-color: var(--dark-three);
+  background-color: var(--dark-two);
   border-radius: 6px;
 }
 
@@ -745,10 +745,10 @@ https://github.com/ngn13/ngn13.fun/raw/main/static/fonts/latin.woff2
 .markdown-body .highlight pre,
 .markdown-body pre {
   padding: 16px;
-  overflow: auto;
+  overflow: scroll;
   font-size: 85%;
   line-height: 1.45;
-  background-color: var(--dark-three);
+  background-color: var(--dark-two);
   border-radius: 6px;
 }
 
