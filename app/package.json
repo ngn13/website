@@ -16,7 +16,7 @@
 	"type": "module",
 	"dependencies": {
 		"@types/dompurify": "^3.0.2",
-		"dompurify": "^3.0.8",
+		"dompurify": "^3.0.9",
 		"marked": "^12.0.0"
 	}
 }
