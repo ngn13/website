@@ -43,7 +43,7 @@ main {
   color: white;
   gap: 100px;
   transition: .4s;
-  width: 100%;
+  flex-grow: 1;
 }
 
 div h1 {
