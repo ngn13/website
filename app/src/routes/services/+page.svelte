@@ -16,13 +16,15 @@
 <Header><c>ls</c> services</Header>
 <main>
   <Card title="cat services/*/info.txt">
-  {#each data.services as services_list}
-    <div class="flexrow">
-      {#each services_list as service}
-        <Service url="{service.url}" desc="{service.desc}">{service.name}</Service>
-      {/each} 
-    </div>
-  {/each}
+  <div class="flexcol">
+    {#each data.services as services_list}
+      <div class="flexrow">
+        {#each services_list as service}
+          <Service url="{service.url}" desc="{service.desc}">{service.name}</Service>
+        {/each} 
+      </div>
+    {/each}
+  </div>
   </Card>
 
   <Card title="cat services/details.txt">
@@ -63,6 +65,14 @@ main {
   justify-content: center;
   padding: 50px;
   gap: 30px;
+}
+
+.flexcol {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  gap: 25px;
 }
 
 .flexrow {
