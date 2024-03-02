@@ -89,12 +89,6 @@ main{
   padding: 50px;
 }
 
-.pgp {
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
 .flexbox {
   display: flex;
   gap: 30px;
