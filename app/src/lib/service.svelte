@@ -44,6 +44,7 @@ main {
   gap: 100px;
   transition: .4s;
   flex-grow: 1;
+  flex: 1 1 0px;
 }
 
 div h1 {

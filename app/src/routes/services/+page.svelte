@@ -72,7 +72,7 @@ main {
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  gap: 25px;
+  gap: 20px;
 }
 
 .flexrow {
@@ -81,7 +81,7 @@ main {
   align-content: center;
   justify-content: center;
   width: 100%;
-  gap: 25px;
+  gap: 20px;
 }
 
 a {
