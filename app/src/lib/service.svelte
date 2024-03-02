@@ -35,7 +35,7 @@ main {
   flex-direction: row;
   padding: 30px 30px 30px 30px;
   background: var(--dark-two);
-  border-radius: 7px 7px 0px 0px;
+  border-radius: var(--radius);
   box-shadow: var(--box-shadow);
   justify-content: space-between;
   align-items: center;
@@ -43,6 +43,7 @@ main {
   color: white;
   gap: 100px;
   transition: .4s;
+  width: 100%;
 }
 
 div h1 {

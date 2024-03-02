@@ -11,8 +11,10 @@ export async function load({ fetch }) {
 
   // Some really bad code to convert 
   // [service1, service2, service3...] 
+
   // to 
-  // [[service1, service2, service3], [service4, service5...]...]
+
+  // [[service1, service2], [service4, service5], [service4...]...]
   // so i can render it in the UI easily
 
   let all = data["result"]
@@ -24,11 +26,11 @@ export async function load({ fetch }) {
     currentlist.push(all[i])
     counter += 1
 
-    if(i == all.length-1 && counter != 3){
+    if(i == all.length-1 && counter != 2){
       services.push(currentlist)
     }
 
-    if (counter == 3) {
+    if (counter == 2) {
       services.push(currentlist)
       currentlist = []
       counter = 0

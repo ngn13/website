@@ -139,7 +139,7 @@ main {
 .content {
   padding: 50px;
   background: var(--dark-four);
-  border-radius: 0 0 7px 7px;
+  border-radius: 0 0 var(--radius) var(--radius);
   box-shadow: var(--box-shadow);
 }
 
@@ -152,7 +152,7 @@ main {
   .content {
     padding: 30px;
     background: var(--dark-four);
-    border-radius: 0 0 7px 7px;
+    border-radius: 0 0 var(--radius) var(--radius);
     box-shadow: var(--box-shadow);
   }
 }
@@ -160,7 +160,7 @@ main {
 .header {
   font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
   background: var(--dark-two);
-  border-radius: 7px 7px 0 0;
+  border-radius: var(--radius) var(--radius) 0 0;
   padding: 30px;
   box-shadow: var(--box-shadow);
   display: flex;

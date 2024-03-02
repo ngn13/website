@@ -19,38 +19,23 @@
 <main>
   <div class="flexbox">
     <Card title="whoami">
-      👋 Hello! I'm ngn! 
-      <ul>
-        <li>🇹🇷 I'm a high school student from Turkey</li>
-        <li>🖥️ I'm interested in cyber security, programming and electronics</li>
-        <li>❤️ I love and support Free/Libre and Open Source Software (FLOSS)</li>
-        <li>🐧 My GNU/Linux distribution of choice is Artix, however I am currently running Arch</li>
-        <li>🎸 I enjoy listening random stuff (mostly modern rock), so <a href="https://hp.ngn.tf/watch?v=lYBUbBu4W08"><c>here</c></a> is a random song that I like!</li>
-      </ul>
-    </Card>
-
-    <Card title="pwd">
-      You are currently on my personal website, for all you nerds, here is some 
-      techinal details you may want to know:
-      <ul>
-        <li>
-          <c><i class="nf nf-md-license"></i></c> 
-          I built this website from scratch and its licensed under <a href="https://www.gnu.org/licenses/agpl-3.0.en.html"><c>AGPLv3</c></a>.
-          All the source is avaliable over on my github.
-        </li> 
-        <li>
-          <c><i class="nf nf-md-file_image"></i></c> 
-          All assets (images etc.) are hosted on my server
-        </li>
-        <li>
-          <c><i class="nf nf-md-eye_off"></i></c> 
-          No cloudflare, no CAPTCHAs, no CDNs, this website is %100 privacy friendly
-        </li>
-        <li>
-          <c><i class="nf nf-md-server"></i></c> 
-          You can discover other services and pages I host over on the <a href="/services"><c>services page</c></a>
-        </li>
-      </ul>
+      <div class="whoami-box">
+        <div class="whoami-pic">
+          <img alt="My profile pic" src="https://files.ngn.tf/pplow.png">
+          <a href="https://keyoxide.org/F9E70878C2FB389AEC2BA34CA3654DF5AD9F641D">
+            <c><i class="nf nf-oct-key"></i> Keyoxide</c>
+          </a>
+        </div>
+        <div class="whoami-text">
+          👋 Hello! I'm ngn! 
+          <ul>
+            <li>🇹🇷 I'm a high school student from Turkey</li>
+            <li>🖥️ I'm interested in cyber security and programming.</li>
+            <li>❤️ I love and support Free/Libre and Open Source Software (FLOSS)</li>
+            <li>🐧 My GNU/Linux distribution of choice is Artix, however I am currently running Arch</li>
+          </ul>
+        </div>
+      </div>
     </Card>
   </div>
 
@@ -67,7 +52,9 @@
     </Card>
 
     <Card title="wall">
-      Here are some links if you want to get in contact with me: 
+      Here are some links if you want to get in contact with me, please do not 
+      use these if you want to contact about the services that I offer, I have a 
+      seperate email for that: <a href="mailto:services@ngn.tf"><c>services@ngn.tf</c></a>
       <ul>
         <li>
           <c><i class="nf nf-cod-github"></i></c> 
@@ -79,21 +66,19 @@
         </li> 
         <li>
           <c><i class="nf nf-md-email"></i></c> 
-          <a href="mailto:ngn@ngn.tf">Email</a>
+          <a href="mailto:ngn@ngn.tf">Email (personal)</a>
         </li> 
-      </ul>
-      Or you can add me on XMPP: <c>ngn@chat.ngn.tf</c>
-      <br>
-      And lastly my PGP key is:
-      <ul>
-        <li class="pgp"><a href="https://keyoxide.org/F9E70878C2FB389AEC2BA34CA3654DF5AD9F641D"><c>F9E70878C2FB389AEC2BA34CA3654DF5AD9F641D</c></a></li>
+        <li>
+          <c><i class="nf nf-md-xmpp"></i></c> 
+          <a href="xmpp:ngn@chat.ngn.tf">XMPP (my preferred way of communication)</a>
+        </li> 
       </ul>
     </Card>
   </div>
 </main>
 
 <div class="version">
-  <p>v4.4</p>
+  <p>v4.5</p>
 </div>
 
 <style>
@@ -115,9 +100,34 @@ main{
   gap: 30px;
 }
 
+.whoami-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+}
+
+.whoami-pic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.whoami-pic img {
+  width: 250px;
+  border-radius: 30px;
+
+  border: solid 1px white;
+  animation-name: fullBorderAnimation;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+}
+
+
 ul {
-  padding-left: 30px;
-  margin-bottom: 20px;
+  list-style: inside;
 }
 
 li {
@@ -143,6 +153,12 @@ a:hover {
 
 @media only screen and (max-width: 1200px) {
   .flexbox {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .whoami-box {
     flex-direction: column;
   }
 }

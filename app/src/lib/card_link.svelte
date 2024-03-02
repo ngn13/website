@@ -38,7 +38,7 @@ a {
   width: 100%;
   background: var(--dark-three);
   box-shadow: var(--box-shadow);
-  border-radius: 7px;
+  border-radius: var(--radius);
   cursor: pointer;
   transition: .4s;
   text-decoration: none;

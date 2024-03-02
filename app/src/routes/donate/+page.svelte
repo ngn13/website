@@ -18,13 +18,23 @@
 
 <main>
   <Card title="bash donate.sh">
-    If you want more services or if you want to support my work, feel free to donate. I pay around 300 Turkish Liras per month 
-    for all the hosting stuff, so even a small amount will be appreciated! You can send donations to the following XMR address:
-    <br>
-    <br>
-    <code>
-      46q7G7u7cmASvJm7AmrhmNg6ctS77mYMmDAy1QxpDn5w57xV3GUY5za4ZPZHAjqaXdfS5YRWm4AVj5UArLDA1retRkJp47F 
-    </code>
+    I work on free (as in freedom) software and offer free services. General hosting and 
+    stuff costs around 550₺ (~$17), so feel free to donate in order to help me keep
+    everything up and running!
+    <table>
+      <tr>
+        <th>Platform</th>
+        <th>Address/Link</th>
+      </tr>
+      <tr>
+        <td>Monero (XMR)</td>
+        <td>    
+          <code>
+          46q7G7u7cmASvJm7AmrhmNg6ctS77mYMmDAy1QxpDn5w57xV3GUY5za4ZPZHAjqaXdfS5YRWm4AVj5UArLDA1retRkJp47F 
+          </code>
+        </td>
+      </tr>
+    </table>
   </Card>
 </main>
 
@@ -34,6 +44,34 @@ main{
   flex-direction: column;
   gap: 35px;
   padding: 50px;
+}
+
+table {
+  border-collapse: collapse;
+  border: none;
+  color: white;
+  font-size: 20px;
+  width: 100%;
+  margin: 30px 0 0 0;
+  box-shadow: var(--box-shadow);
+}
+
+
+tr,th,td{
+  color: white;
+  background: var(--dark-two);
+}
+
+td,th{
+  border: solid 1px white;
+  padding: 10px;
+}
+
+th {
+  animation-name: colorAnimation;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  background: var(--dark-two);
 }
 
 code {

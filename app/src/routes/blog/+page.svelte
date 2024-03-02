@@ -37,15 +37,6 @@ main{
   padding-top: 50px;
 }
 
-input {
-  text-align: center;
-  background: var(--dark-two);
-  background: none;
-  border: none;
-  outline: none;
-  font-size: 40px;
-}
-
 p {
   font-size: 20px;
 }

@@ -29,7 +29,7 @@
   width: 100%;
   background: var(--dark-three);
   box-shadow: var(--box-shadow);
-  border-radius: 7px;
+  border-radius: var(--radius);
 }
 
 .title {
