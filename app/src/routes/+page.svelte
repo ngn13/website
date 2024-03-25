@@ -62,7 +62,7 @@
         </li> 
         <li>
           <c><i class="nf nf-md-mastodon"></i></c> 
-          <a href="https://mastodon.social/@ngn">Mastodon</a>
+          <a href="https://mastodon.social/@ngn" rel="me">Mastodon</a>
         </li> 
         <li>
           <c><i class="nf nf-md-email"></i></c> 
