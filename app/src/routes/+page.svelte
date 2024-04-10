@@ -78,7 +78,7 @@
 </main>
 
 <div class="version">
-  <p>v4.5</p>
+  <p>v4.6</p>
 </div>
 
 <style>
@@ -98,7 +98,8 @@ main{
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 40px;
+  justify-content: center;
+  gap: 35px;
 }
 
 .whoami-pic {
@@ -106,17 +107,22 @@ main{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 6px;
+
+  border-right: solid 1px var(--dark-fife);
+  padding: 0 35px 0 10px;
 }
 
 .whoami-pic img {
   width: 250px;
   border-radius: 30px;
 
-  border: solid 1px white;
+  border: solid 2px white;
   animation-name: fullBorderAnimation;
   animation-duration: 10s;
   animation-iteration-count: infinite;
+
+  box-shadow: rgba(50, 50, 93, 1) 0px 30px 60px -12px inset, rgba(0, 0, 0, 1) 0px 18px 36px -18px inset;
 }
 
 

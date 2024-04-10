@@ -49,7 +49,7 @@
       </li>
       <li>
         <c><i class="nf nf-md-speedometer"></i> Speed:</c> All the services are located in Turkey, and avaliable 
-        over an 233.68 Mbit/s interface. If you are close to Turkey you should have a fairly good experience. 
+        over an 400 Mbit/s interface. If you are close to Turkey you should have a fairly good experience. 
         If you are not, then you should probably use another provider for the service.
       </li>
     </ul>
