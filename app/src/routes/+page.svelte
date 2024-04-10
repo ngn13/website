@@ -125,7 +125,6 @@ main{
   box-shadow: rgba(50, 50, 93, 1) 0px 30px 60px -12px inset, rgba(0, 0, 0, 1) 0px 18px 36px -18px inset;
 }
 
-
 ul {
   list-style: inside;
 }
@@ -160,6 +159,12 @@ a:hover {
 @media only screen and (max-width: 900px) {
   .whoami-box {
     flex-direction: column;
+    gap: 25px;
+  }
+ 
+  .whoami-pic {
+    border-right: none;
+    padding: 0;
   }
 }
 </style>
