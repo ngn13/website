@@ -12,6 +12,8 @@
   <meta content="View my blog posts" property="og:description" />
   <meta content="https://ngn.tf" property="og:url" />
   <meta content="#000000" data-react-helmet="true" name="theme-color" />
+  <link rel="alternate" type="application/atom+xml" href="{import.meta.env.VITE_API_URL_DEV+'/blog/feed.atom'}" title="Atom Feed">
+  <link rel="alternate" type="application/rss+xml" href="{import.meta.env.VITE_API_URL_DEV+'/blog/feed.rss'}" title="RSS Feed">
 </svelte:head>
 
 <Header>

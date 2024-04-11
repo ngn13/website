@@ -18,8 +18,8 @@
 
 <main>
   <Card title="bash donate.sh">
-    I work on free (as in freedom) software and offer free services. General hosting and 
-    stuff costs around 550₺ (~$17), so feel free to donate in order to help me keep
+    I work on free/libre and open source software and offer free services. General hosting 
+    and stuff costs around 550₺ (~$17), so feel free to donate in order to help me keep
     everything up and running!
     <table>
       <tr>
