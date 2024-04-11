@@ -19,6 +19,7 @@ func Setup(app *fiber.App, db *sql.DB){
   })
 
   // blog routes 
+  app.Get("/blog/feed", GetFeed)
   app.Get("/blog/sum", SumPost)
   app.Get("/blog/get", GetPost)
   app.Get("/blog/vote/set", VoteSet)

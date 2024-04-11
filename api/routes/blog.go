@@ -4,9 +4,13 @@ import (
 	"database/sql"
 	"log"
 	"net/http"
+	"net/url"
+	"os"
 	"strings"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gorilla/feeds"
 	"github.com/ngn13/website/api/util"
 )
 
@@ -127,6 +131,76 @@ func GetPost(c *fiber.Ctx) error{
     "error": "",
     "result": post, 
   })
+}
+
+func GetFeed(c *fiber.Ctx) error{
+  var posts []Post = []Post{}
+  rows, err := DB.Query("SELECT * FROM posts")
+  if util.ErrorCheck(err, c) {
+    return util.ErrServer(c)
+  } 
+
+  for rows.Next() {
+    var post Post
+    err := PostFromRow(&post, rows)
+
+    if util.ErrorCheck(err, c) {
+      return util.ErrServer(c)
+    }
+    
+    if post.Public == 0 {
+      continue
+    }
+
+    posts = append(posts, post)
+  }
+  rows.Close()
+
+
+  blogurl, err := url.JoinPath(os.Getenv("URL"), "/blog")
+  if err != nil {
+    log.Printf("Failed to create the blog URL: %s\n", err.Error())
+    return c.JSON(fiber.Map{"error": "Server error"})
+  }
+
+  feed := &feeds.Feed{
+    Title:       "[ngn] | blog",
+    Link:        &feeds.Link{Href: blogurl},
+    Description: "ngn's personal blog",
+    Author:      &feeds.Author{Name: "ngn", Email: "ngn@ngn.tf"},
+    Created:     time.Now(),
+  }
+
+  feed.Items = []*feeds.Item{}
+  for _, p := range posts {
+    purl, err := url.JoinPath(blogurl, p.ID)
+    if err != nil {
+      log.Printf("Failed to create URL for '%s': %s\n", p.ID, err.Error())
+      continue
+    }
+
+    parsed, err := time.Parse("02/01/06", p.Date)
+    if err != nil {
+      log.Printf("Failed to parse time for '%s': %s\n", p.ID, err.Error())
+      continue
+    }
+
+    feed.Items = append(feed.Items, &feeds.Item{
+      Title:   p.Title,
+      Link:    &feeds.Link{Href: purl},
+      Author:  &feeds.Author{Name: p.Author},
+      Created: parsed,
+    })
+  }
+
+  atom, err := feed.ToAtom()
+  if err != nil {
+    log.Printf("Failed to create atom feed: %s", err.Error())
+    return c.JSON(fiber.Map{"error": "Server error"})
+  }
+
+  c.Set("Content-Type", "application/atom+xml")
+  return c.Send([]byte(atom))
 }
 
 func SumPost(c *fiber.Ctx) error{

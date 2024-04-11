@@ -2,6 +2,6 @@ server: *.go routes/* util/*
 	go build -o server .
 
 test:
-	PASSWORD=test ./server 
+	URL=http://localhost:5173/ PASSWORD=test ./server 
 
 .PHONY: test
