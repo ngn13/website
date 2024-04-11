@@ -193,7 +193,7 @@ func GetFeed() (*feeds.Feed, error){
   rows.Close()
 
 
-  blogurl, err := url.JoinPath(os.Getenv("URL"), "/blog")
+  blogurl, err := url.JoinPath(os.Getenv("FRONTEND_URL"), "/blog")
   if err != nil {
     return nil, fmt.Errorf("failed to create the blog URL: %s", err.Error())
   }
