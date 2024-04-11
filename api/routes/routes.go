@@ -19,7 +19,9 @@ func Setup(app *fiber.App, db *sql.DB){
   })
 
   // blog routes 
-  app.Get("/blog/feed", GetFeed)
+  app.Get("/blog/feed.atom", GetAtomFeed)
+  app.Get("/blog/feed.rss",  GetRSSFeed)
+  app.Get("/blog/feed.json", GetJSONFeed)
   app.Get("/blog/sum", SumPost)
   app.Get("/blog/get", GetPost)
   app.Get("/blog/vote/set", VoteSet)

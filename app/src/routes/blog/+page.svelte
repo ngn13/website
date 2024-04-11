@@ -19,26 +19,79 @@
 </Header>
 
 <main>
-  {#each posts as post} 
-    <CardLink url="/blog/{post.id}"  title="{post.title}">
-      <p>{post.author} | {post.date}</p>
-      <br>
-      {post.content}...
-    </CardLink>
-  {/each}
+  <div class="feed-list">
+    <a href="{import.meta.env.VITE_API_URL_DEV+'/blog/feed.rss'}">
+      <c><i class="nf nf-fa-rss_square"></i></c> <p>RSS</p>
+    </a>
+    <a href="{import.meta.env.VITE_API_URL_DEV+'/blog/feed.atom'}">
+      <c><i class="nf nf-fae-atom"></i></c> <p>Atom</p>
+    </a>
+    <a href="{import.meta.env.VITE_API_URL_DEV+'/blog/feed.json'}">
+      <c><i class="nf nf-seti-json"></i></c> <p>JSON</p>
+    </a>
+  </div>
+  <div class="post-list">
+    {#each posts as post} 
+      <CardLink url="/blog/{post.id}"  title="{post.title}">
+        <p>{post.author} | {post.date}</p>
+        <br>
+        {post.content}...
+      </CardLink>
+    {/each}
+  </div>
 </main>
 
 <style>
-main{
+.post-list{
   display: flex;
   flex-direction: column;
   gap: 35px;
+}
+
+main {
   padding: 15%;
   padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 p {
   font-size: 20px;
+}
+
+.feed-list{
+  text-align: right;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.feed-list a {
+  text-decoration: none;
+  padding: 10px 18px 10px 18px;
+  background: var(--dark-three);
+  border-radius: var(--radius);
+  color: var(--white);
+  font-size: 20px;
+  font-weight: 900;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 7px;
+
+  transition: .2s;
+}
+
+.feed-list a:hover {
+  box-shadow: var(--box-shadow);
+}
+
+.feed-list a i{
+  font-size: 21px;
 }
 
 @media only screen and (max-width: 1316px) {

@@ -78,7 +78,7 @@
 </main>
 
 <div class="version">
-  <p>v4.6</p>
+  <p>v4.8</p>
 </div>
 
 <style>

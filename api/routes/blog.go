@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+  "fmt"
 	"os"
 	"strings"
 	"time"
@@ -133,75 +134,7 @@ func GetPost(c *fiber.Ctx) error{
   })
 }
 
-func GetFeed(c *fiber.Ctx) error{
-  var posts []Post = []Post{}
-  rows, err := DB.Query("SELECT * FROM posts")
-  if util.ErrorCheck(err, c) {
-    return util.ErrServer(c)
-  } 
 
-  for rows.Next() {
-    var post Post
-    err := PostFromRow(&post, rows)
-
-    if util.ErrorCheck(err, c) {
-      return util.ErrServer(c)
-    }
-    
-    if post.Public == 0 {
-      continue
-    }
-
-    posts = append(posts, post)
-  }
-  rows.Close()
-
-
-  blogurl, err := url.JoinPath(os.Getenv("URL"), "/blog")
-  if err != nil {
-    log.Printf("Failed to create the blog URL: %s\n", err.Error())
-    return c.JSON(fiber.Map{"error": "Server error"})
-  }
-
-  feed := &feeds.Feed{
-    Title:       "[ngn] | blog",
-    Link:        &feeds.Link{Href: blogurl},
-    Description: "ngn's personal blog",
-    Author:      &feeds.Author{Name: "ngn", Email: "ngn@ngn.tf"},
-    Created:     time.Now(),
-  }
-
-  feed.Items = []*feeds.Item{}
-  for _, p := range posts {
-    purl, err := url.JoinPath(blogurl, p.ID)
-    if err != nil {
-      log.Printf("Failed to create URL for '%s': %s\n", p.ID, err.Error())
-      continue
-    }
-
-    parsed, err := time.Parse("02/01/06", p.Date)
-    if err != nil {
-      log.Printf("Failed to parse time for '%s': %s\n", p.ID, err.Error())
-      continue
-    }
-
-    feed.Items = append(feed.Items, &feeds.Item{
-      Title:   p.Title,
-      Link:    &feeds.Link{Href: purl},
-      Author:  &feeds.Author{Name: p.Author},
-      Created: parsed,
-    })
-  }
-
-  atom, err := feed.ToAtom()
-  if err != nil {
-    log.Printf("Failed to create atom feed: %s", err.Error())
-    return c.JSON(fiber.Map{"error": "Server error"})
-  }
-
-  c.Set("Content-Type", "application/atom+xml")
-  return c.Send([]byte(atom))
-}
 
 func SumPost(c *fiber.Ctx) error{
   var posts []Post = []Post{}
@@ -234,4 +167,109 @@ func SumPost(c *fiber.Ctx) error{
     "error": "",
     "result": posts, 
   })
+}
+
+func GetFeed() (*feeds.Feed, error){
+  var posts []Post = []Post{}
+  rows, err := DB.Query("SELECT * FROM posts")
+  if err != nil {
+    return nil, err
+  }
+
+  for rows.Next() {
+    var post Post
+    err := PostFromRow(&post, rows)
+
+    if err != nil {
+      return nil, err
+    }
+    
+    if post.Public == 0 {
+      continue
+    }
+
+    posts = append(posts, post)
+  }
+  rows.Close()
+
+
+  blogurl, err := url.JoinPath(os.Getenv("URL"), "/blog")
+  if err != nil {
+    return nil, fmt.Errorf("failed to create the blog URL: %s", err.Error())
+  }
+
+  feed := &feeds.Feed{
+    Title:       "[ngn.tf] | blog",
+    Link:        &feeds.Link{Href: blogurl},
+    Description: "ngn's personal blog",
+    Author:      &feeds.Author{Name: "ngn", Email: "ngn@ngn.tf"},
+    Created:     time.Now(),
+  }
+
+  feed.Items = []*feeds.Item{}
+  for _, p := range posts {
+    purl, err := url.JoinPath(blogurl, p.ID)
+    if err != nil {
+      return nil, fmt.Errorf("failed to create URL for '%s': %s\n", p.ID, err.Error())
+    }
+
+    parsed, err := time.Parse("02/01/06", p.Date)
+    if err != nil {
+      return nil, fmt.Errorf("failed to parse time for '%s': %s\n", p.ID, err.Error())
+    }
+
+    feed.Items = append(feed.Items, &feeds.Item{
+      Id:      p.ID,
+      Title:   p.Title,
+      Link:    &feeds.Link{Href: purl},
+      Author:  &feeds.Author{Name: p.Author},
+      Created: parsed,
+    })
+  }
+
+  return feed, nil
+}
+
+func GetAtomFeed(c *fiber.Ctx) error {
+  feed, err := GetFeed()
+  if util.ErrorCheck(err, c){
+    return util.ErrServer(c)
+  }
+
+  atom, err := feed.ToAtom()
+  if util.ErrorCheck(err, c){
+    return util.ErrServer(c)
+  }
+
+  c.Set("Content-Type", "application/atom+xml")
+  return c.Send([]byte(atom))
+}
+
+func GetRSSFeed(c *fiber.Ctx) error {
+  feed, err := GetFeed()
+  if util.ErrorCheck(err, c){
+    return util.ErrServer(c)
+  }
+
+  rss, err := feed.ToRss()
+  if util.ErrorCheck(err, c){
+    return util.ErrServer(c)
+  }
+
+  c.Set("Content-Type", "application/rss+xml")
+  return c.Send([]byte(rss))
+}
+
+func GetJSONFeed(c *fiber.Ctx) error {
+  feed, err := GetFeed()
+  if util.ErrorCheck(err, c){
+    return util.ErrServer(c)
+  }
+
+  json, err := feed.ToJSON()
+  if util.ErrorCheck(err, c){
+    return util.ErrServer(c)
+  }
+  c.Set("Content-Type", "application/feed+json")
+  return c.Send([]byte(json))
 }

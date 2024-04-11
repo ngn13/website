@@ -96,7 +96,7 @@
   <meta content="{data.content.substring(0, 100)}..." property="og:description" />
   <meta content="https://ngn.tf" property="og:url" />
   <meta content="#000000" data-react-helmet="true" name="theme-color" />
-  <link href="https://files.ngn.tf/markdown.css" rel="stylesheet">
+  <link href="/markdown.css" rel="stylesheet">
 </svelte:head>
 
 <Header>
@@ -122,7 +122,9 @@
   <div class="content markdown-body">
     {@html sanitized}
   </div>
-  </main>
+</main>
+
+
 <style>
 p {
   font-size: 30px;
