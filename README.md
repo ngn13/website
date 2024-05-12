@@ -72,7 +72,7 @@ on `ngn13.fun` as at this point I had my own hosting. The source code for this w
 deleted github repository of mine, I looked for a local copy on my old hard drive but I wasn't able 
 to find it. I also do not remember how it looked like, sooo this version is pretty much lost :(
 
-- **v2.0 (early 2022 - late 2023)**: After I discovered what SSR is, I decided to rewrite and rework 
+- **v2.0 (early 2023 - late 2023)**: After I discovered what SSR is, I decided to rewrite and rework 
 my website one more time in NuxtJS. I had really "fun time" using vue stuff. As NuxtJS supported 
 server-side code, this website had its own built in API. This website was also hosted on `ngn13.fun`
 
