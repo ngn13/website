@@ -1,12 +1,8 @@
-FROM oven/bun:1.1 as build
+FROM node:22.2.0 as build
 
 WORKDIR /app
 COPY . /app
-
-ARG API_URL
-ENV VITE_API_URL_DEV $API_URL
-
-RUN bun install && bun run build
+RUN npm install && npm run build
 
 FROM oven/bun:1.1 as main
 
@@ -18,5 +14,8 @@ COPY --from=build /app/package-lock.json ./package-lock.json
 
 EXPOSE 4173
 
-RUN bun ci --omit dev
-CMD ["bun", "build"]
+ARG API_URL
+ENV VITE_API_URL_DEV $API_URL
+
+RUN bun install
+CMD ["bun", "build/index.js"]
