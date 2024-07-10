@@ -3,7 +3,7 @@ module github.com/ngn13/website/api
 go 1.21.3
 
 require (
-	github.com/gofiber/fiber/v2 v2.52.4
+	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/gorilla/feeds v1.2.0
 	github.com/mattn/go-sqlite3 v1.14.22
 )
