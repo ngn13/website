@@ -99,7 +99,7 @@
   <link href="/markdown.css" rel="stylesheet">
 </svelte:head>
 
-<Header>
+<Header subtitle="{data.author} | {data.date}">
   {data.title}
 </Header>
 
@@ -107,41 +107,34 @@
   <audio bind:this={audio} preload="auto">
     <source src="/click.wav" type="audio/mpeg" />
   </audio>
-  <div class="header">
-    <p><b>Author:</b> {data.author} <b>| Date:</b> {data.date}</p>
-    <div>
-      <button on:click={async ()=>{upvote()}} class="{upvote_status}">
-        <i class="nf nf-md-arrow_up_bold"></i>
-      </button>
-      <p>{data.vote}</p>
-      <button on:click={async ()=>{downvote()}} class="{downvote_status}">
-        <i class="nf nf-md-arrow_down_bold"></i>
-      </button>
-    </div>
-  </div>
   <div class="content markdown-body">
     {@html sanitized}
+  </div>
+  <div class="votes">
+    <button on:click={async ()=>{upvote()}} class="{upvote_status}">
+      <i class="nf nf-md-arrow_up_bold"></i>
+    </button>
+    <p>{data.vote}</p>
+    <button on:click={async ()=>{downvote()}} class="{downvote_status}">
+      <i class="nf nf-md-arrow_down_bold"></i>
+    </button>
   </div>
 </main>
 
 
 <style>
-p {
-  font-size: 30px;
-}
-
 main {
   padding: 50px 10% 50px 10%;
   color: white;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: start;
 }
 
 .content {
-  padding: 50px;
+  padding: 35px;
   background: var(--dark-four);
-  border-radius: 0 0 var(--radius) var(--radius);
+  border-radius: var(--radius);
   box-shadow: var(--box-shadow);
 }
 
@@ -152,38 +145,28 @@ main {
   }
 
   .content {
-    padding: 30px;
     background: var(--dark-four);
     border-radius: 0 0 var(--radius) var(--radius);
     box-shadow: var(--box-shadow);
   }
 }
 
-.header {
-  font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
-  background: var(--dark-two);
-  border-radius: var(--radius) var(--radius) 0 0;
-  padding: 30px;
-  box-shadow: var(--box-shadow);
+.votes {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-} 
-
-.header div{
-  display: flex;
-  flex-direction: row;
+  flex-direction: column;
   text-align: center;
   text-shadow: var(--text-shadow);
   gap: 10px;
-  margin-top: 10px;
+  padding: 10px;
+  margin-left: 10px;
 }
 
-.header p {
-  font-size: 20px;
+.votes p {
+  font-size: 25px;
+  color: var(--dark-six);
 }
 
-.header div button{
+.votes button{
   display: flex; 
   flex-direction: row;
   gap: 10px;
@@ -192,14 +175,10 @@ main {
   border: none;
   font-size: 30px;
   cursor: pointer;
-  color: white;
+  color: var(--dark-six);
 }
 
-.header div p {
-  font-size: 25px;
-}
-
-.header div button:hover {
+.votes button:hover {
   animation-name: colorAnimation;
   animation-iteration-count: infinite;
   animation-duration: 10s;

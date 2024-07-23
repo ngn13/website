@@ -7,6 +7,7 @@
   --dark-three: #121212;
   --dark-four: #101010;
   --dark-fife: #3a3b3c;
+  --dark-six: #C0C0C0;
   --radius: 8px;
   /*
   old shadow animation
@@ -37,8 +38,8 @@ body {
 }
 
 ::-webkit-scrollbar {
-  border-radius: 10px;
-  width: 10px;
+  border-radius: 5px;
+  width: 1px;
 }
 
 ::-webkit-scrollbar-track {

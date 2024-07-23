@@ -80,7 +80,7 @@
 </main>
 
 <div class="version">
-  <p>v4.8</p>
+  <p>v4.9</p>
 </div>
 
 <style>

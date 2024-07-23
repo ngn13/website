@@ -691,7 +691,7 @@
 }
 
 .markdown-body span.float-right>span {
-  displaydebian: block;
+  display: block;
   margin: 13px auto 0;
   overflow: hidden;
   text-align: right;
@@ -703,7 +703,7 @@
   margin: 0;
   font-size: 85%;
   white-space: break-spaces;
-  background-color: var(--dark-two);
+  background: var(--dark-two);
   border-radius: 6px;
 }
 
@@ -745,7 +745,7 @@
 .markdown-body .highlight pre,
 .markdown-body pre {
   padding: 16px;
-  overflow: scroll;
+  overflow: auto;
   font-size: 85%;
   line-height: 1.45;
   background-color: var(--dark-two);

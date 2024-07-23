@@ -63,8 +63,8 @@ tr,th,td{
 }
 
 td,th{
-  border: solid 1px white;
-  padding: 10px;
+  border: solid 1px var(--dark-fife);
+  padding: 16px;
 }
 
 th {
@@ -75,10 +75,6 @@ th {
 }
 
 code {
-  background: var(--dark-two);
-  color: white;
-  border-radius: var(--radius);
-  text-shadow: var(--text-shadow);
   word-wrap: break-word;
   white-space: pre-wrap;
   word-break: break-word;
