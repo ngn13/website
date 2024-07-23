@@ -21,7 +21,7 @@ header {
 
 h1 {
   font-weight: 900;
-  font-size: 5.5vw;
+  font-size: 500%;
   padding: 120px;
   padding-bottom: 0;
   text-align: center;
@@ -33,7 +33,7 @@ h1 {
 h4 {
   padding-bottom: 120px;
   font-weight: 600;
-  font-size: 2.2vw;
+  font-size: 200%;
   text-align: center;
   color: white;
   text-size-adjust: 80%;

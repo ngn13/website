@@ -128,7 +128,14 @@ main {
   color: white;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: start;
+}
+
+@media only screen and (max-width: 816px) {
+  main {
+    padding: 50px 20% 50px 20%;
+  }
 }
 
 .content {
@@ -136,19 +143,8 @@ main {
   background: var(--dark-four);
   border-radius: var(--radius);
   box-shadow: var(--box-shadow);
-}
-
-@media only screen and (max-width: 1316px) {
-  main {
-    padding: 50px 5% 50px 5%;
-    flex-direction: column;
-  }
-
-  .content {
-    background: var(--dark-four);
-    border-radius: 0 0 var(--radius) var(--radius);
-    box-shadow: var(--box-shadow);
-  }
+  width: auto;
+  width: 100%;
 }
 
 .votes {
@@ -157,7 +153,7 @@ main {
   text-align: center;
   text-shadow: var(--text-shadow);
   gap: 10px;
-  padding: 10px;
+  padding: 15px 5px 15px 5px;
   margin-left: 10px;
 }
 
