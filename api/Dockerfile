@@ -2,15 +2,17 @@ FROM golang:1.22.5
 
 WORKDIR /app
 
-COPY *.go ./
-COPY *.mod ./
-COPY *.sum ./
+COPY *.go     ./
+COPY *.mod    ./
+COPY *.sum    ./
 COPY Makefile ./
-COPY routes ./routes
-COPY util ./util
+COPY routes   ./routes
+COPY global   ./global
+COPY database ./database
+COPY util     ./util
 
 EXPOSE 7001
-RUN go build
+RUN make
 
 ARG PASSWORD
 ENV PASSWORD $PASSWORD
