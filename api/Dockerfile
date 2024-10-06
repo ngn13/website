@@ -7,7 +7,7 @@ COPY *.mod    ./
 COPY *.sum    ./
 COPY Makefile ./
 COPY routes   ./routes
-COPY global   ./config
+COPY config   ./config
 COPY database ./database
 COPY util     ./util
 
