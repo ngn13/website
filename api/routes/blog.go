@@ -3,164 +3,40 @@ package routes
 import (
 	"database/sql"
 	"fmt"
-	"net/http"
 	"net/url"
-	"os"
+	"path"
+	"strings"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gorilla/feeds"
+	"github.com/ngn13/website/api/config"
 	"github.com/ngn13/website/api/database"
-	"github.com/ngn13/website/api/global"
 	"github.com/ngn13/website/api/util"
 )
 
-func PostFromRow(post *global.Post, rows *sql.Rows) error {
-	err := rows.Scan(&post.ID, &post.Title, &post.Author, &post.Date, &post.Content, &post.Public, &post.Vote)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func GetPostByID(db *database.Type, id string) (global.Post, string) {
-	var post global.Post = global.Post{}
-	post.Title = "NONE"
-
-	rows, err := db.Sql.Query("SELECT * FROM posts WHERE id = ?", id)
-
-	if err != nil {
-		return post, "Server error"
-	}
-
-	success := rows.Next()
-	if !success {
-		rows.Close()
-		return post, "Post not found"
-	}
-
-	err = PostFromRow(&post, rows)
-	if err != nil {
-		rows.Close()
-		return post, "Server error"
-	}
-	rows.Close()
-
-	if post.Title == "NONE" {
-		return post, "Post not found"
-	}
-
-	return post, ""
-}
-
-func VoteStat(c *fiber.Ctx) error {
+func GET_Post(c *fiber.Ctx) error {
 	var (
-		db *database.Type
-		id string
-	)
-
-	db = c.Locals("database").(*database.Type)
-	id = c.Query("id")
-
-	if id == "" {
-		return util.ErrBadData(c)
-	}
-
-	for i := 0; i < len(db.Votes); i++ {
-		if db.Votes[i].Client == util.GetIP(c) && db.Votes[i].Post == id {
-			return c.JSON(fiber.Map{
-				"error":  "",
-				"result": db.Votes[i].Status,
-			})
-		}
-	}
-
-	return c.Status(http.StatusNotFound).JSON(util.ErrorJSON("Client never voted"))
-}
-
-func VoteSet(c *fiber.Ctx) error {
-	var (
+		post  database.Post
 		id    string
-		to    string
-		voted bool
-		db    *database.Type
+		db    *sql.DB
+		found bool
+		err   error
 	)
 
-	db = c.Locals("database").(*database.Type)
-	id = c.Query("id")
-	to = c.Query("to")
-	voted = false
+	db = *(c.Locals("database").(**sql.DB))
 
-	if id == "" || (to != "upvote" && to != "downvote") {
+	if id = c.Query("id"); id == "" {
 		return util.ErrBadData(c)
 	}
 
-	for i := 0; i < len(db.Votes); i++ {
-		if db.Votes[i].Client == util.GetIP(c) && db.Votes[i].Post == id && db.Votes[i].Status == to {
-			return c.Status(http.StatusForbidden).JSON(util.ErrorJSON("Client already voted"))
-		}
-
-		if db.Votes[i].Client == util.GetIP(c) && db.Votes[i].Post == id && db.Votes[i].Status != to {
-			voted = true
-		}
-	}
-
-	post, msg := GetPostByID(db, id)
-	if msg != "" {
-		return c.Status(http.StatusNotFound).JSON(util.ErrorJSON(msg))
-	}
-
-	vote := post.Vote + 1
-
-	if to == "downvote" {
-		vote = post.Vote - 1
-	}
-
-	if to == "downvote" && voted {
-		vote = vote - 1
-	}
-
-	if to == "upvote" && voted {
-		vote = vote + 1
-	}
-
-	_, err := db.Sql.Exec("UPDATE posts SET vote = ? WHERE title = ?", vote, post.Title)
-	if util.ErrorCheck(err, c) {
+	if found, err = post.Get(db, id); err != nil {
+		util.Fail("error while search for a post (\"%s\"): %s", id, err.Error())
 		return util.ErrServer(c)
 	}
 
-	for i := 0; i < len(db.Votes); i++ {
-		if db.Votes[i].Client == util.GetIP(c) && db.Votes[i].Post == id && db.Votes[i].Status != to {
-			db.Votes[i].Status = to
-			return util.NoError(c)
-		}
-	}
-
-	var entry = global.Vote{}
-	entry.Client = util.GetIP(c)
-	entry.Status = to
-	entry.Post = id
-	db.Votes = append(db.Votes, entry)
-	return util.NoError(c)
-}
-
-func GetPost(c *fiber.Ctx) error {
-	var (
-		id string
-		db *database.Type
-	)
-
-	id = c.Query("id")
-	db = c.Locals("database").(*database.Type)
-
-	if id == "" {
-		return util.ErrBadData(c)
-	}
-
-	post, msg := GetPostByID(db, id)
-	if msg != "" {
-		return c.Status(http.StatusNotFound).JSON(util.ErrorJSON(msg))
+	if !found {
+		return util.ErrEntryNotExists(c)
 	}
 
 	return c.JSON(fiber.Map{
@@ -169,25 +45,27 @@ func GetPost(c *fiber.Ctx) error {
 	})
 }
 
-func SumPost(c *fiber.Ctx) error {
+func GET_PostSum(c *fiber.Ctx) error {
 	var (
-		posts []global.Post
-		post  global.Post
-		db    *database.Type
+		posts []database.Post
+		rows  *sql.Rows
+		db    *sql.DB
 		err   error
 	)
 
-	db = c.Locals("database").(*database.Type)
+	db = *(c.Locals("database").(**sql.DB))
 
-	rows, err := db.Sql.Query("SELECT * FROM posts")
-	if util.ErrorCheck(err, c) {
+	if rows, err = db.Query("SELECT * FROM posts"); err != nil {
+		util.Fail("cannot load posts: %s", err.Error())
 		return util.ErrServer(c)
 	}
+	defer rows.Close()
 
 	for rows.Next() {
-		err = PostFromRow(&post, rows)
+		var post database.Post
 
-		if util.ErrorCheck(err, c) {
+		if err = post.Load(rows); err != nil {
+			util.Fail("error while loading post: %s", err.Error())
 			return util.ErrServer(c)
 		}
 
@@ -201,7 +79,6 @@ func SumPost(c *fiber.Ctx) error {
 
 		posts = append(posts, post)
 	}
-	rows.Close()
 
 	return c.JSON(fiber.Map{
 		"error":  "",
@@ -209,22 +86,21 @@ func SumPost(c *fiber.Ctx) error {
 	})
 }
 
-func GetFeed(db *database.Type) (*feeds.Feed, error) {
+func getFeed(db *sql.DB) (*feeds.Feed, error) {
 	var (
-		posts []global.Post
-		post  global.Post
+		posts []database.Post
 		err   error
 	)
 
-	rows, err := db.Sql.Query("SELECT * FROM posts")
+	rows, err := db.Query("SELECT * FROM posts")
 	if err != nil {
 		return nil, err
 	}
 
 	for rows.Next() {
-		err := PostFromRow(&post, rows)
+		var post database.Post
 
-		if err != nil {
+		if err = post.Load(rows); err != nil {
 			return nil, err
 		}
 
@@ -236,7 +112,10 @@ func GetFeed(db *database.Type) (*feeds.Feed, error) {
 	}
 	rows.Close()
 
-	blogurl, err := url.JoinPath(os.Getenv("FRONTEND_URL"), "/blog")
+	blogurl, err := url.JoinPath(
+		config.Get("frontend_url"), "/blog",
+	)
+
 	if err != nil {
 		return nil, fmt.Errorf("failed to create the blog URL: %s", err.Error())
 	}
@@ -273,46 +152,52 @@ func GetFeed(db *database.Type) (*feeds.Feed, error) {
 	return feed, nil
 }
 
-func GetAtomFeed(c *fiber.Ctx) error {
-	feed, err := GetFeed(c.Locals("database").(*database.Type))
-	if util.ErrorCheck(err, c) {
+func GET_Feed(c *fiber.Ctx) error {
+	var (
+		db   *sql.DB
+		err  error
+		feed *feeds.Feed
+		name []string
+		res  string
+		ext  string
+	)
+
+	db = *(c.Locals("database").(**sql.DB))
+
+	if name = strings.Split(path.Base(c.Path()), "."); len(name) != 2 {
+		return util.ErrNotFound(c)
+	}
+	ext = name[1]
+
+	if feed, err = getFeed(db); err != nil {
+		util.Fail("cannot obtain the feed: %s", err.Error())
 		return util.ErrServer(c)
 	}
 
-	atom, err := feed.ToAtom()
-	if util.ErrorCheck(err, c) {
+	switch ext {
+	case "atom":
+		res, err = feed.ToAtom()
+		c.Set("Content-Type", "application/atom+xml")
+		break
+
+	case "json":
+		res, err = feed.ToJSON()
+		c.Set("Content-Type", "application/feed+json")
+		break
+
+	case "rss":
+		res, err = feed.ToRss()
+		c.Set("Content-Type", "application/rss+xml")
+		break
+
+	default:
+		return util.ErrNotFound(c)
+	}
+
+	if err != nil {
+		util.Fail("cannot obtain the feed as the specified format: %s", err.Error())
 		return util.ErrServer(c)
 	}
 
-	c.Set("Content-Type", "application/atom+xml")
-	return c.Send([]byte(atom))
-}
-
-func GetRSSFeed(c *fiber.Ctx) error {
-	feed, err := GetFeed(c.Locals("database").(*database.Type))
-	if util.ErrorCheck(err, c) {
-		return util.ErrServer(c)
-	}
-
-	rss, err := feed.ToRss()
-	if util.ErrorCheck(err, c) {
-		return util.ErrServer(c)
-	}
-
-	c.Set("Content-Type", "application/rss+xml")
-	return c.Send([]byte(rss))
-}
-
-func GetJSONFeed(c *fiber.Ctx) error {
-	feed, err := GetFeed(c.Locals("database").(*database.Type))
-	if util.ErrorCheck(err, c) {
-		return util.ErrServer(c)
-	}
-
-	json, err := feed.ToJSON()
-	if util.ErrorCheck(err, c) {
-		return util.ErrServer(c)
-	}
-	c.Set("Content-Type", "application/feed+json")
-	return c.Send([]byte(json))
+	return c.Send([]byte(res))
 }

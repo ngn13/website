@@ -37,9 +37,9 @@ main {
   background: var(--dark-two);
   border-radius: var(--radius);
   box-shadow: var(--box-shadow);
+  border: solid 1px var(--border-color);
   justify-content: space-between;
   align-items: center;
-  border: none;
   color: white;
   gap: 100px;
   transition: .4s;

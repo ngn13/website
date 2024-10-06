@@ -30,11 +30,12 @@
   background: var(--dark-three);
   box-shadow: var(--box-shadow);
   border-radius: var(--radius);
+  border: solid 1px var(--border-color);
 }
 
 .title {
   background: var(--dark-two);
-  padding: 30px;
+  padding: 25px;
   border-radius: 7px 7px 0px 0px;
   font-size: 20px; 
   font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
@@ -43,8 +44,7 @@
 
 .content {
   background: var(--dark-three);
-  padding: 40px;
-  padding-top: 30px;
+  padding: 30px;
   color: white;
   border-radius: 5px;
   font-size: 25px;

@@ -1,38 +1,39 @@
 package routes
 
 import (
-	"log"
+	"database/sql"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/ngn13/website/api/database"
-	"github.com/ngn13/website/api/global"
 	"github.com/ngn13/website/api/util"
 )
 
-func GetServices(c *fiber.Ctx) error {
+func GET_Services(c *fiber.Ctx) error {
 	var (
-		services []global.Service = []global.Service{}
-		service  global.Service
-		db       *database.Type
+		services []database.Service
+		rows     *sql.Rows
+		db       *sql.DB
 		err      error
 	)
 
-	db = c.Locals("database").(*database.Type)
+	db = *(c.Locals("database").(**sql.DB))
 
-	rows, err := db.Sql.Query("SELECT * FROM services")
-	if util.ErrorCheck(err, c) {
+	if rows, err = db.Query("SELECT * FROM services"); err != nil {
+		util.Fail("cannot load services: %s", err.Error())
 		return util.ErrServer(c)
 	}
+	defer rows.Close()
 
 	for rows.Next() {
-		if err = rows.Scan(&service.Name, &service.Desc, &service.Url); err != nil {
-			log.Println("Error scaning services row: " + err.Error())
-			continue
+		var service database.Service
+
+		if err = service.Load(rows); err != nil {
+			util.Fail("error while loading service: %s", err.Error())
+			return util.ErrServer(c)
 		}
+
 		services = append(services, service)
 	}
-
-	rows.Close()
 
 	return c.JSON(fiber.Map{
 		"error":  "",

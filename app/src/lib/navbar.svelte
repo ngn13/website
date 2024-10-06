@@ -11,7 +11,7 @@
     <NavbarLink link="/">home</NavbarLink>
     <NavbarLink link="/services">services</NavbarLink>
     <NavbarLink link="/blog">blog</NavbarLink>
-    <NavbarLink link="/donate">donate</NavbarLink>
+    <!-- <NavbarLink link="/donate">donate</NavbarLink> -->
     <NavbarLink link="https://stats.ngn.tf">status</NavbarLink>
   </div>
 </nav>
@@ -19,7 +19,7 @@
 <style>
 nav {
   background: var(--dark-one);
-  padding: 25px 30px 27px 25px;
+  padding: 20px 26px 22px 20px;
   display: flex;
   flex-direction: row;
   align-items: center;

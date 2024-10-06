@@ -42,6 +42,7 @@ a {
   cursor: pointer;
   transition: .4s;
   text-decoration: none;
+  border: solid 1px var(--border-color);
 }
 
 a:hover > .title {
@@ -51,7 +52,7 @@ a:hover > .title {
 .title {
   border: solid 1px var(--dark-two);
   background: var(--dark-two);
-  padding: 30px;
+  padding: 25px;
   border-radius: 7px 7px 0px 0px;
   font-size: 20px; 
   font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
@@ -60,7 +61,7 @@ a:hover > .title {
 
 .content {
   background: var(--dark-three);
-  padding: 40px;
+  padding: 30px;
   padding-top: 30px;
   color: white;
   border-radius: 5px;

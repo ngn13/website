@@ -23,7 +23,7 @@
     <Card title="whoami">
       <div class="whoami-box">
         <div class="whoami-pic">
-          <img alt="My profile pic" src="https://files.ngn.tf/pplow.png">
+          <img alt="My profile" src="https://files.ngn.tf/pplow.png">
           <a href="https://keyoxide.org/F9E70878C2FB389AEC2BA34CA3654DF5AD9F641D">
             <c><i class="nf nf-oct-key"></i> Keyoxide</c>
           </a>
@@ -54,9 +54,9 @@
     </Card>
 
     <Card title="wall">
-      Here are some links if you want to get in contact with me, please do not 
-      use these if you want to contact about the services that I offer, I have a 
-      seperate email for that: <a href="mailto:services@ngn.tf"><c>services@ngn.tf</c></a>
+      Here are some links if you want to get in contact with me, I highly
+      prefer email and I usually respond to emails in 1 or 2 days, just make
+      sure to check your spam folder (turns out running a TOR relay gets your IP into multiple blacklists)
       <ul>
         <li>
           <c><i class="nf nf-cod-github"></i></c> 
@@ -64,15 +64,15 @@
         </li> 
         <li>
           <c><i class="nf nf-md-mastodon"></i></c> 
-          <a href="https://mastodon.social/@ngn" rel="me">Mastodon</a>
+          <a href="https://defcon.social/@ngn" rel="me">Mastodon</a>
         </li> 
         <li>
           <c><i class="nf nf-md-email"></i></c> 
-          <a href="mailto:ngn@ngn.tf">Email (personal)</a>
+          <a href="mailto:ngn@ngn.tf">Email</a>
         </li> 
         <li>
           <c><i class="nf nf-md-xmpp"></i></c> 
-          <a href="xmpp:ngn@chat.ngn.tf">XMPP (my preferred way of communication)</a>
+          <a href="xmpp:ngn@chat.ngn.tf">XMPP</a>
         </li> 
       </ul>
     </Card>
@@ -80,20 +80,20 @@
 </main>
 
 <div class="version">
-  <p>v4.9</p>
+  <p>v5.0</p>
 </div>
 
 <style>
 main{
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 28px;
   padding: 50px;
 }
 
 .flexbox {
   display: flex;
-  gap: 30px;
+  gap: 28px;
 }
 
 .whoami-box {
@@ -116,10 +116,10 @@ main{
 }
 
 .whoami-pic img {
-  width: 250px;
-  border-radius: 30px;
+  width: 200px;
+  border-radius: 20px;
 
-  border: solid 2px white;
+  border: solid 1px var(--border-color);
   animation-name: fullBorderAnimation;
   animation-duration: 10s;
   animation-iteration-count: infinite;

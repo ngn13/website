@@ -47,7 +47,7 @@
 .post-list{
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 28px;
 }
 
 main {
@@ -68,14 +68,15 @@ p {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 10px;
 }
 
 .feed-list a {
   text-decoration: none;
-  padding: 10px 18px 10px 18px;
+  padding: 10px 15px 10px 15px;
   background: var(--dark-three);
   border-radius: var(--radius);
+  border: solid 1px var(--border-color);
   color: var(--white);
   font-size: 20px;
   font-weight: 900;

@@ -1,13 +1,19 @@
 package util
 
 import (
-	"log"
+	"crypto/sha512"
+	"fmt"
 	"math/rand"
 	"net/http"
 	"strings"
 
 	"github.com/gofiber/fiber/v2"
 )
+
+func GetSHA512(s string) string {
+	hasher := sha512.New()
+	return fmt.Sprintf("%x", hasher.Sum([]byte(s)))
+}
 
 func TitleToID(name string) string {
 	return strings.ToLower(strings.ReplaceAll(name, " ", ""))
@@ -19,15 +25,6 @@ func CreateToken() string {
 		s[i] = byte(65 + rand.Intn(25))
 	}
 	return string(s)
-}
-
-func ErrorCheck(err error, c *fiber.Ctx) bool {
-	if err != nil {
-		log.Printf("Server error: '%s' on %s\n", err, c.Path())
-		return true
-	}
-
-	return false
 }
 
 func ErrorJSON(error string) fiber.Map {
@@ -48,8 +45,12 @@ func ErrServer(c *fiber.Ctx) error {
 	return c.Status(http.StatusInternalServerError).JSON(ErrorJSON("Server error"))
 }
 
-func ErrExists(c *fiber.Ctx) error {
+func ErrEntryExists(c *fiber.Ctx) error {
 	return c.Status(http.StatusConflict).JSON(ErrorJSON("Entry already exists"))
+}
+
+func ErrEntryNotExists(c *fiber.Ctx) error {
+	return c.Status(http.StatusNotFound).JSON(ErrorJSON("Entry does not exist"))
 }
 
 func ErrBadData(c *fiber.Ctx) error {
@@ -62,6 +63,10 @@ func ErrBadJSON(c *fiber.Ctx) error {
 
 func ErrAuth(c *fiber.Ctx) error {
 	return c.Status(http.StatusUnauthorized).JSON(ErrorJSON("Authentication failed"))
+}
+
+func ErrNotFound(c *fiber.Ctx) error {
+	return c.Status(http.StatusNotFound).JSON(ErrorJSON("Requested endpoint not found"))
 }
 
 func NoError(c *fiber.Ctx) error {

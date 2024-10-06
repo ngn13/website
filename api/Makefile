@@ -1,10 +1,10 @@
 all: server
 
-server: *.go routes/*.go util/*.go global/*.go database/*.go
+server: *.go routes/*.go database/*.go util/*.go config/*.go
 	go build -o $@ .
 
 test:
-	FRONTEND_URL=http://localhost:5173/ PASSWORD=test ./server
+	API_FRONTEND_URL=http://localhost:5173/ API_PASSWORD=test ./server
 
 format:
 	gofmt -s -w .

@@ -15,7 +15,7 @@
   let audio
 
   async function get_status() {
-    const res = await fetch(api+"/blog/vote/status?id="+data.id)
+    const res = await fetch(api+"/blog/vote/get?id="+data.id)
     const json = await res.json()
     
     if(json["error"]!= ""){
@@ -61,6 +61,7 @@
     if (voted){
       data.vote += 2
     } 
+    
     else {
       voted = true
       data.vote += 1
@@ -81,6 +82,7 @@
     if (voted){
       data.vote -= 2
     } 
+
     else {
       voted = true
       data.vote -= 1
@@ -139,9 +141,10 @@ main {
 }
 
 .content {
-  padding: 35px;
+  padding: 30px;
   background: var(--dark-four);
   border-radius: var(--radius);
+  border: solid 1px var(--border-color);
   box-shadow: var(--box-shadow);
   width: auto;
   width: 100%;

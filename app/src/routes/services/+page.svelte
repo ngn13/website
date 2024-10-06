@@ -32,9 +32,7 @@
     <ul>
       <li>
         <c><i class="nf nf-cod-account"></i> Registration:</c> All the services are offered for free, and all of them 
-        are accessiable to public. If you want to use a service that requires 
-        registration, you can email <a href="mailto:services@ngn.tf"><c>services@ngn.tf</c></a>
-        for an account.
+        are accessiable to public. And registrations are open for the all services that support account registrations.
       </li>
       <li>
         <c><i class="nf nf-fa-eye_slash"></i> Privacy:</c> To protect user privacy, all the web proxy logs are cleared regularly. 
@@ -64,7 +62,7 @@ main {
   align-content: center;
   justify-content: center;
   padding: 50px;
-  gap: 30px;
+  gap: 28px;
 }
 
 .flexcol {
@@ -72,7 +70,7 @@ main {
   flex-direction: column;
   align-content: center;
   justify-content: center;
-  gap: 20px;
+  gap: 13px;
 }
 
 .flexrow {
@@ -81,11 +79,7 @@ main {
   align-content: center;
   justify-content: center;
   width: 100%;
-  gap: 20px;
-}
-
-a {
-  text-decoration: none;
+  gap: 13px;
 }
 
 ul {

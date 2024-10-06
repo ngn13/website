@@ -2,18 +2,10 @@ package database
 
 import (
 	"database/sql"
-	"github.com/ngn13/website/api/global"
 )
 
-type Type struct {
-	Sql   *sql.DB
-	Votes []global.Vote
-}
-
-func (t *Type) Setup() error {
-	t.Votes = []global.Vote{}
-
-	_, err := t.Sql.Exec(`
+func Setup(db *sql.DB) error {
+	_, err := db.Exec(`
     CREATE TABLE IF NOT EXISTS posts(
       id      TEXT NOT NULL UNIQUE,
       title   TEXT NOT NULL,
@@ -29,7 +21,7 @@ func (t *Type) Setup() error {
 		return err
 	}
 
-	_, err = t.Sql.Exec(`
+	_, err = db.Exec(`
     CREATE TABLE IF NOT EXISTS services( 
       name    TEXT NOT NULL UNIQUE,
       desc    TEXT NOT NULL,
@@ -37,19 +29,16 @@ func (t *Type) Setup() error {
     );
   `)
 
-	return err
-}
-
-func (t *Type) Open(p string) error {
-	var err error
-
-	if t.Sql, err = sql.Open("sqlite3", p); err != nil {
+	if err != nil {
 		return err
 	}
 
-	return t.Setup()
-}
+	_, err = db.Exec(`
+    CREATE TABLE IF NOT EXISTS votes( 
+      hash       TEXT NOT NULL UNIQUE,
+      is_upvote  INTEGER NOT NULL
+    );
+  `)
 
-func (t *Type) Close() {
-	t.Sql.Close()
+	return err
 }

@@ -1,10 +1,9 @@
 FROM node:22.8.0 as build
 
 WORKDIR /app
-COPY . /app
+COPY .  /app
 
-ARG API_URL
-ENV VITE_API_URL_DEV $API_URL
+ENV VITE_API_URL_DEV http://placeholder/
 
 RUN npm install && npm run build
 
@@ -19,4 +18,5 @@ COPY --from=build /app/package-lock.json ./package-lock.json
 EXPOSE 4173
 
 RUN bun install
-CMD ["bun", "build/index.js"]
+
+CMD ["./docker/entry.sh"]

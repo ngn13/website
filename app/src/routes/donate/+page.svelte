@@ -19,7 +19,7 @@
 <main>
   <Card title="bash donate.sh">
     I work on free/libre and open source software and offer free services. General hosting 
-    and stuff costs around 550₺ (~$17), so feel free to donate in order to help me keep
+    and stuff costs around 550₺ (~$17) per month, so feel free to donate in order to help me keep
     everything up and running!
     <table>
       <tr>
@@ -35,6 +35,8 @@
         </td>
       </tr>
     </table>
+    Also huge thanks to all of you who has donated so far, even if it's a small amount, I highly
+    appreciate it. Thank you!
   </Card>
 </main>
 
@@ -52,7 +54,7 @@ table {
   color: white;
   font-size: 20px;
   width: 100%;
-  margin: 30px 0 0 0;
+  margin: 30px 0 30px 0;
   box-shadow: var(--box-shadow);
 }
 
