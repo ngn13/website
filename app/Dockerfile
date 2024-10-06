@@ -18,5 +18,6 @@ COPY --from=build /app/package-lock.json ./package-lock.json
 EXPOSE 4173
 
 RUN bun install
+RUN chmod +x ./docker/entry.sh
 
 CMD ["./docker/entry.sh"]
