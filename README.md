@@ -36,7 +36,7 @@ services:
     build:
       context: ./app
     environment:
-      - API_URL: "https://api.ngn.tf"
+      - API_URL="https://api.ngn.tf"
     ports:
       - "127.0.0.1:7002:3000"
     depends_on:
@@ -46,8 +46,8 @@ services:
     build:
       context: ./api
     environment:
-      - API_PASSWORD: "securepassword"
-      - API_FRONTEND_URL: "https://ngn.tf"
+      - API_PASSWORD="securepassword"
+      - API_FRONTEND_URL="https://ngn.tf"
     ports:
       - "127.0.0.1:7001:7001"
     volumes:
