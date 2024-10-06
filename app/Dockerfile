@@ -12,6 +12,7 @@ FROM oven/bun:1.1 as main
 WORKDIR /app
 
 COPY --from=build /app/build ./build
+COPY --from=build /app/docker ./docker
 COPY --from=build /app/package.json ./package.json
 COPY --from=build /app/package-lock.json ./package-lock.json
 
