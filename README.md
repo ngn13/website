@@ -35,8 +35,8 @@ services:
   app:
     build:
       context: ./app
-    environment:
-      - API_URL="https://api.ngn.tf"
+      args:
+        API_URL: https://api.ngn.tf
     ports:
       - "127.0.0.1:7002:3000"
     depends_on:
