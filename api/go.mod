@@ -5,7 +5,7 @@ go 1.21.3
 require (
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/gorilla/feeds v1.2.0
-	github.com/mattn/go-sqlite3 v1.14.23
+	github.com/mattn/go-sqlite3 v1.14.24
 )
 
 require (
