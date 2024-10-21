@@ -8,7 +8,7 @@ ENV VITE_API_URL_DEV $API_URL
 
 RUN npm install && npm run build
 
-FROM oven/bun:1.1.20 as main
+FROM oven/bun:1.1.31 as main
 
 WORKDIR /app
 
