@@ -1,17 +1,19 @@
 FROM golang:1.23.4
 
-WORKDIR /app
+WORKDIR /api
 
 COPY *.go     ./
 COPY *.mod    ./
 COPY *.sum    ./
 COPY Makefile ./
+COPY util     ./util
+COPY views    ./views
 COPY routes   ./routes
 COPY config   ./config
+COPY status   ./status
 COPY database ./database
-COPY util     ./util
 
 EXPOSE 7001
 RUN make
 
-ENTRYPOINT ["/app/server"]
+ENTRYPOINT ["/api/api.elf"]

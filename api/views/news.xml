@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{.frontend.Host}} news</title>
+  <updated>2025-01-02T20:46:24Z</updated>
+  <subtitle>News and updates about my self-hosted services and projects</subtitle>
+  <link href="{{.frontend.String}}/news"></link>
+</feed>

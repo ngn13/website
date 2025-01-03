@@ -1,0 +1,9 @@
+{
+  "name": "Test Service",
+  "desc": {
+    "en": "Service used for testing the API",
+    "tr": "API'ı test etmek için kullanılan servis"
+  },
+  "check_url": "http://localhost:7001",
+  "clear": "http://localhost:7001"
+}
