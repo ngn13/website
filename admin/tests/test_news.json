@@ -1,0 +1,12 @@
+{
+  "id": "test_news",
+  "title": {
+    "en": "Very important news",
+    "tr": "Çok önemli haber"
+  },
+  "author": "ngn",
+  "content": {
+    "en": "Just letting you know that I'm testing the API",
+    "tr": "Sadece API'ı test ettiğimi bilmenizi istedim"
+  }
+}

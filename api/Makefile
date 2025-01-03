@@ -1,10 +1,12 @@
-all: server
+GOSRCS = $(wildcard *.go) $(wildcard */*.go)
 
-server: *.go routes/*.go database/*.go util/*.go config/*.go
-	go build -o $@ .
+all: api.elf
 
-test:
-	API_FRONTEND_URL=http://localhost:5173/ API_PASSWORD=test ./server
+api.elf: $(GOSRCS)
+	go build -o $@
+
+run:
+	API_DEBUG=true API_FRONTEND_URL=http://localhost:5173/ API_PASSWORD=test ./api.elf
 
 format:
 	gofmt -s -w .

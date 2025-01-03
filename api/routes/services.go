@@ -1,8 +1,6 @@
 package routes
 
 import (
-	"database/sql"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/ngn13/website/api/database"
 	"github.com/ngn13/website/api/util"
@@ -11,32 +9,29 @@ import (
 func GET_Services(c *fiber.Ctx) error {
 	var (
 		services []database.Service
-		rows     *sql.Rows
-		db       *sql.DB
-		err      error
+		service  database.Service
 	)
 
-	db = *(c.Locals("database").(**sql.DB))
+	db := c.Locals("database").(*database.Type)
+	name := c.Query("name")
 
-	if rows, err = db.Query("SELECT * FROM services"); err != nil {
-		util.Fail("cannot load services: %s", err.Error())
-		return util.ErrServer(c)
-	}
-	defer rows.Close()
-
-	for rows.Next() {
-		var service database.Service
-
-		if err = service.Load(rows); err != nil {
-			util.Fail("error while loading service: %s", err.Error())
-			return util.ErrServer(c)
+	if name != "" {
+		if s, err := db.ServiceFind(name); err != nil {
+			return util.ErrInternal(c, err)
+		} else if s != nil {
+			return util.JSON(c, 200, fiber.Map{
+				"result": s,
+			})
 		}
 
+		return util.ErrNotExist(c)
+	}
+
+	for db.ServiceNext(&service) {
 		services = append(services, service)
 	}
 
-	return c.JSON(fiber.Map{
-		"error":  "",
+	return util.JSON(c, 200, fiber.Map{
 		"result": services,
 	})
 }
