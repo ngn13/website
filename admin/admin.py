@@ -65,8 +65,8 @@ class AdminAPI:
         return title.lower().replace(" ", "_")
 
     def _check_multilang_field(self, ml: Dict[str, str]) -> bool:
-        for l in self.languages:
-            if l in ml and ml[l] != "":
+        for lang in self.languages:
+            if lang in ml and ml[lang] != "":
                 return True
         return False
 
@@ -114,24 +114,26 @@ class AdminAPI:
         )
 
     def add_service(self, service: Dict[str, str]):
-        if not "name" in service or service["name"] == "":
+        if "name" not in service or service["name"] == "":
             raise Exception('Service structure is missing required "name" field')
 
-        if not "desc" in service:
+        if "desc" not in service:
             raise Exception('Service structure is missing required "desc" field')
 
         if (
-            (not "clear" in service or service["clear"] == "")
-            and (not "onion" in service or service["onion"] == "")
-            and (not "i2p" in service or service["i2p"] == "")
+            ("clear" not in service or service["clear"] == "")
+            and ("onion" not in service or service["onion"] == "")
+            and ("i2p" not in service or service["i2p"] == "")
         ):
             raise Exception(
-                'Service structure is missing "clear", "onion" and "i2p" field, at least one needed'
+                'Service structure is missing "clear", "onion" '
+                + 'and "i2p" field, at least one needed'
             )
 
         if not self._check_multilang_field(service["desc"]):
             raise Exception(
-                'Service structure field "desc" needs at least one supported language entry'
+                'Service structure field "desc" needs at least '
+                + "one supported language entry"
             )
 
         self.PUT("/v1/admin/service/add", service)
@@ -146,26 +148,28 @@ class AdminAPI:
         self.GET("/v1/admin/service/check")
 
     def add_news(self, news: Dict[str, str]):
-        if not "id" in news or news["id"] == "":
+        if "id" not in news or news["id"] == "":
             raise Exception('News structure is missing required "id" field')
 
-        if not "author" in news or news["author"] == "":
+        if "author" not in news or news["author"] == "":
             raise Exception('News structure is missing required "author" field')
 
-        if not "title" in news:
+        if "title" not in news:
             raise Exception('News structure is missing required "title" field')
 
-        if not "content" in news:
+        if "content" not in news:
             raise Exception('News structure is missing required "content" field')
 
         if not self._check_multilang_field(news["title"]):
             raise Exception(
-                'News structure field "title" needs at least one supported language entry'
+                'News structure field "title" needs at least '
+                + "one supported language entry"
             )
 
         if not self._check_multilang_field(news["content"]):
             raise Exception(
-                'News structure field "content" needs at least one supported language entry'
+                'News structure field "content" needs at least '
+                + "one supported language entry"
             )
 
         self.PUT("/v1/admin/news/add", news)
@@ -205,8 +209,8 @@ def __handle_command(log: Log, api: AdminAPI, cmd: str) -> None:
             data["desc"] = {}
 
             data["name"] = log.input("Serivce name")
-            for l in api.languages:
-                data["desc"][l] = log.input("Serivce desc (%s)" % l)
+            for lang in api.languages:
+                data["desc"][lang] = log.input("Serivce desc (%s)" % lang)
             data["check_url"] = log.input("Serivce status check URL")
             data["clear"] = log.input("Serivce clearnet URL")
             data["onion"] = log.input("Serivce onion URL")
@@ -216,7 +220,7 @@ def __handle_command(log: Log, api: AdminAPI, cmd: str) -> None:
             log.info("Service has been added")
 
         case "del_service":
-            api.del_service(self.log.input("Serivce name"))
+            api.del_service(log.input("Serivce name"))
             log.info("Service has been deleted")
 
         case "check_services":
@@ -229,11 +233,11 @@ def __handle_command(log: Log, api: AdminAPI, cmd: str) -> None:
             news["content"] = {}
 
             data["id"] = log.input("News ID")
-            for l in api.languages:
-                data["title"][l] = log.input("News title (%s)" % l)
+            for lang in api.languages:
+                data["title"][lang] = log.input("News title (%s)" % lang)
             data["author"] = log.input("News author")
-            for l in api.languages:
-                data["content"][l] = log.input("News content (%s)" % l)
+            for lang in api.languages:
+                data["content"][lang] = log.input("News content (%s)" % lang)
 
             api.add_news(data)
             log.info("News has been added")
@@ -245,12 +249,13 @@ def __handle_command(log: Log, api: AdminAPI, cmd: str) -> None:
         case "logs":
             logs = api.logs()
 
-            if None == logs["result"] or len(logs["result"]) == 0:
+            if logs["result"] is None or len(logs["result"]) == 0:
                 return log.info("No available logs")
 
-            for l in logs["result"]:
+            for log in logs["result"]:
                 log.info(
-                    "Time: %s | Action: %s" % (__format_time(l["time"]), l["action"])
+                    "Time: %s | Action: %s"
+                    % (__format_time(log["time"]), log["action"])
                 )
 
 
@@ -283,7 +288,7 @@ def __handle_command_with_file(log: Log, api: AdminAPI, cmd: str, file: str) -> 
         case "logs":
             logs = api.logs()
 
-            if None == logs["result"] or len(logs["result"]) == 0:
+            if logs["result"] is None or len(logs["result"]) == 0:
                 return log.info("No available logs")
 
             __dump_json_file(logs["result"], file)
@@ -306,7 +311,7 @@ if __name__ == "__main__":
 
     url = getenv(API_URL_ENV)
 
-    if url == None:
+    if url is None:
         log.error(
             "Please specify the API URL using %s environment variable" % API_URL_ENV
         )

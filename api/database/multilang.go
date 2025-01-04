@@ -16,7 +16,7 @@ func (ml *Multilang) Supports(lang string) bool {
 	ml_ref := reflect.ValueOf(ml).Elem()
 
 	for i := 0; i < reflect.Indirect(ml_ref).NumField(); i++ {
-		if name := reflect.Indirect(ml_ref).Field(i).Type().Name(); strings.ToLower(name) == lang {
+		if name := reflect.Indirect(ml_ref).Type().Field(i).Name; strings.ToLower(name) == lang {
 			return true
 		}
 	}

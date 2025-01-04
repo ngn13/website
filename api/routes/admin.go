@@ -138,6 +138,8 @@ func PUT_AddNews(c *fiber.Ctx) error {
 		return util.ErrBadJSON(c)
 	}
 
+	news.Time = uint64(time.Now().Unix())
+
 	if !news.IsValid() {
 		return util.ErrBadReq(c)
 	}

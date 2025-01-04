@@ -1,17 +1,17 @@
 <script>
-  export let desc
-  export let url
+  export let desc;
+  export let url;
 
-  let icon = "<i class='nf nf-md-clipboard_multiple'></i>"
-  let audio
+  let icon = "<i class='nf nf-md-clipboard_multiple'></i>";
+  let audio;
 
   function copy() {
-    audio.play()
-    navigator.clipboard.writeText(url)
-    icon = "<i class='nf nf-md-clipboard_check'></i>"
-    setTimeout(()=>{
-      icon = "<i class='nf nf-md-clipboard_multiple'></i>"
-    }, 500)
+    audio.play();
+    navigator.clipboard.writeText(url);
+    icon = "<i class='nf nf-md-clipboard_check'></i>";
+    setTimeout(() => {
+      icon = "<i class='nf nf-md-clipboard_multiple'></i>";
+    }, 500);
   }
 </script>
 
@@ -25,54 +25,56 @@
   </div>
   <div>
     <button on:click={copy}>{@html icon}</button>
-    <a href="{url}"><i class="nf nf-oct-link_external"></i></a>
+    <a href={url}><i class="nf nf-oct-link_external"></i></a>
   </div>
 </main>
 
 <style>
-main {
-  display: flex;
-  flex-direction: row;
-  padding: 30px 30px 30px 30px;
-  background: var(--dark-two);
-  border-radius: var(--radius);
-  box-shadow: var(--box-shadow);
-  border: solid 1px var(--border-color);
-  justify-content: space-between;
-  align-items: center;
-  color: white;
-  gap: 100px;
-  transition: .4s;
-  flex-grow: 1;
-  flex: 1 1 0px;
-}
+  main {
+    display: flex;
+    flex-direction: row;
+    padding: 30px 30px 30px 30px;
+    background: var(--dark-two);
+    border-radius: var(--radius);
+    box-shadow: var(--box-shadow);
+    border: solid 1px var(--border-color);
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    gap: 100px;
+    transition: 0.4s;
+    flex-grow: 1;
+    flex: 1 1 0px;
+  }
 
-div h1 {
-  animation-name: colorAnimation;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  font-size: 30px;
-}
+  div h1 {
+    animation-name: colorAnimation;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    font-size: 30px;
+  }
 
-div p {
-  margin-top: 10px;
-  font-size: 20px; 
-}
+  div p {
+    margin-top: 10px;
+    font-size: 20px;
+  }
 
-a, button {
-  text-align: center;
-  font-size: 30px;
-  text-decoration: none;
-  color: white;
-  border: none;
-  background: none;
-  outline: none;
-  cursor: pointer;
-}
+  a,
+  button {
+    text-align: center;
+    font-size: 30px;
+    text-decoration: none;
+    color: white;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+  }
 
-a:hover, button:hover{
-  animation-name: colorAnimation;
-  animation-duration: 5s;
-  animation-iteration-count: infinite;
-}
+  a:hover,
+  button:hover {
+    animation-name: colorAnimation;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+  }
 </style>

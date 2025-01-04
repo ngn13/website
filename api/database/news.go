@@ -57,7 +57,7 @@ func (n *News) Scan(rows *sql.Rows) (err error) {
 }
 
 func (n *News) IsValid() bool {
-	return n.Author != "" && n.ID != "" && !n.Title.Empty() && !n.Content.Empty()
+	return n.Time != 0 && n.Author != "" && n.ID != "" && !n.Title.Empty() && !n.Content.Empty()
 }
 
 func (db *Type) NewsNext(n *News) bool {
