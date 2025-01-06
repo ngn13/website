@@ -1,65 +1,70 @@
 <script>
-  import Header from "../../lib/header.svelte";
-  import Card from "../../lib/card.svelte";
+  import Header from "$lib/header.svelte";
+  import Head from "$lib/head.svelte";
+  import { color } from "$lib/util.js";
 </script>
 
-<svelte:head>
-  <title>[ngn.tf] | donate</title>
-  <meta content="[ngn] | donate" property="og:title" />
-  <meta content="Give me all of your life savings" property="og:description" />
-  <meta content="https://ngn.tf" property="og:url" />
-  <meta content="#000000" data-react-helmet="true" name="theme-color" />
-</svelte:head>
-
-<Header>
-  <c>bash</c>
-  donate.sh
-</Header>
+<Head title="donate" desc="give me all of your life savings" />
+<Header title="donate money!" picture="money" />
 
 <main>
-  <Card title="bash donate.sh">
-    I work on free/libre and open source software and offer free services. General hosting and stuff
-    costs around 550₺ (~$17) per month, so feel free to donate in order to help me keep everything
-    up and running!
-    <table>
-      <thead>
-        <tr>
-          <th>Platform</th>
-          <th>Address/Link</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Monero (XMR)</td>
-          <td>
-            <code>
-              46q7G7u7cmASvJm7AmrhmNg6ctS77mYMmDAy1QxpDn5w57xV3GUY5za4ZPZHAjqaXdfS5YRWm4AVj5UArLDA1retRkJp47F
-            </code>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    Also huge thanks to all of you who has donated so far, even if it's a small amount, I highly appreciate
-    it. Thank you!
-  </Card>
+  <span
+    >I spend a lot of time working on different projects and maintaining different services.</span
+  >
+  <span
+    >I also spend a lot of money, but unlike time, you don't usually get much of it for free.</span
+  >
+  <span
+    >I mostly pay for hosting and electricity. Which when added up costs around 550₺ per month, that
+    is Turkish Lira, equals to ~$15 at time of writing.</span
+  >
+  <br />
+  <br />
+  <span
+    >So even a small donation would be highly appreciated and it would help me keep everything up
+    and running.</span
+  >
+  <table>
+    <thead>
+      <tr>
+        <th style="color: var(--{color()})">Platform</th>
+        <th style="color: var(--{color()})">Address/Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Monero (XMR)</td>
+        <td>
+          <code>
+            46q7G7u7cmASvJm7AmrhmNg6ctS77mYMmDAy1QxpDn5w57xV3GUY5za4ZPZHAjqaXdfS5YRWm4AVj5UArLDA1retRkJp47F
+          </code>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <span
+    >Also huge thanks to all of you who has donated so far, as I said, I highly appreciate it. Thank
+    you!</span
+  >
 </main>
 
 <style>
   main {
-    display: flex;
-    flex-direction: column;
-    gap: 35px;
     padding: 50px;
   }
 
+  main span {
+    font-size: var(--size-4);
+    color: var(--white-1);
+  }
+
   table {
-    border-collapse: collapse;
-    border: none;
-    color: white;
-    font-size: 20px;
-    width: 100%;
-    margin: 30px 0 30px 0;
     box-shadow: var(--box-shadow);
+    background: var(--black-3);
+    border-collapse: collapse;
+    font-size: var(--size-3);
+    margin: 30px 0 30px 0;
+    width: 100%;
   }
 
   tr,
@@ -67,19 +72,22 @@
   td {
     color: white;
     background: var(--dark-two);
+    text-align: left;
   }
 
   td,
   th {
-    border: solid 1px var(--dark-fife);
+    border: solid 1px var(--black-4);
     padding: 16px;
   }
 
   th {
-    animation-name: colorAnimation;
-    animation-duration: 10s;
-    animation-iteration-count: infinite;
-    background: var(--dark-two);
+    font-weight: 1000;
+  }
+
+  td {
+    color: var(--white-2);
+    font-weight: 400;
   }
 
   code {

@@ -295,6 +295,15 @@ def __handle_command_with_file(log: Log, api: AdminAPI, cmd: str, file: str) -> 
             log.info("Logs has been saved")
 
 
+commands = [
+    "add_service",
+    "del_service",
+    "check_services",
+    "add_news",
+    "del_news",
+    "logs"
+]
+
 if __name__ == "__main__":
     log = Log()
 
@@ -310,6 +319,18 @@ if __name__ == "__main__":
         exit(1)
 
     url = getenv(API_URL_ENV)
+    valid_cmd = False
+
+    for cmd in commands:
+        if argv[1] == cmd:
+            valid_cmd = True
+            break
+
+    if not valid_cmd:
+        log.error(
+            "Invalid command, run the script with no commands to list the available commands"
+        )
+        exit(1)
 
     if url is None:
         log.error(

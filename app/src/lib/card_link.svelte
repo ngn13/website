@@ -1,7 +1,7 @@
 <script>
+  import { click } from "$lib/util.js";
   export let title;
   export let url;
-  let audio;
 
   let current = "";
   let i = 0;
@@ -16,16 +16,9 @@
     );
     i += 1;
   }
-
-  function epicSound() {
-    audio.play();
-  }
 </script>
 
-<a on:click={epicSound} data-sveltekit-preload-data href={url}>
-  <audio bind:this={audio} preload="auto">
-    <source src="/click.wav" type="audio/mpeg" />
-  </audio>
+<a on:click={click} data-sveltekit-preload-data href={url}>
   <div class="title">
     {current}
   </div>

@@ -1,3 +1,9 @@
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+}
+
 @keyframes colorAnimation {
   100%,
   0% {

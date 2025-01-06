@@ -1,12 +1,25 @@
 <script>
-  export let subtitle = "";
+  import { color } from "$lib/util.js";
+  import { _ } from "svelte-i18n";
+
+  export let picture = "";
+  export let title = "";
+
+  let current = "";
+
+  for (let i = 0; i < title.length; i++) {
+    setTimeout(
+      () => {
+        current += title[i];
+      },
+      100 * (i + 1)
+    );
+  }
 </script>
 
 <header>
-  <h1>
-    <slot></slot>
-  </h1>
-  <h4><c>{subtitle}</c></h4>
+  <h1 style="color: var(--{color()})">{current}</h1>
+  <img src="/profile/{picture}.png" alt="" />
 </header>
 
 <style>
@@ -16,25 +29,54 @@
     background-size: 50%;
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+  }
+
+  img {
+    padding: 50px 50px 0 50px;
+    width: 220px;
+    bottom: 0;
+    left: 0;
   }
 
   h1 {
-    font-weight: 900;
-    font-size: 500%;
-    padding: 120px;
-    padding-bottom: 0;
+    font-size: var(--size-7);
+    font-family:
+      Consolas,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
+    padding: 50px 50px 30px 50px;
+    white-space: nowrap;
     text-align: center;
     color: white;
     text-shadow: var(--text-shadow);
-    text-size-adjust: 80%;
   }
 
-  h4 {
-    padding-bottom: 120px;
-    font-weight: 600;
-    font-size: 200%;
-    text-align: center;
-    color: white;
-    text-size-adjust: 80%;
+  h1::after {
+    content: "_";
+    display: inline-block;
+    animation: blink 1.5s steps(2) infinite;
+  }
+
+  @media only screen and (max-width: 900px) {
+    header {
+      display: block;
+    }
+
+    h1 {
+      padding: 80px;
+    }
+
+    img {
+      display: none;
+    }
   }
 </style>

@@ -1,189 +1,101 @@
 <script>
-  import Header from "../lib/header.svelte";
-  import Card from "../lib/card.svelte";
+  import Header from "$lib/header.svelte";
+  import Content from "$lib/content.svelte";
+  import Head from "$lib/head.svelte";
+  import Card from "$lib/card.svelte";
+  import Link from "$lib/link.svelte";
+
+  import { color } from "$lib/util.js";
+  import { _ } from "svelte-i18n";
 </script>
 
-<svelte:head>
-  <title>[ngn.tf] | homepage</title>
-  <meta content="[ngn] | homepage" property="og:title" />
-  <meta content="Homepage of my personal website" property="og:description" />
-  <meta content="https://ngn.tf" property="og:url" />
-  <meta content="#000000" data-react-helmet="true" name="theme-color" />
-  <link
-    rel="alternate"
-    type="application/atom+xml"
-    href={import.meta.env.VITE_API_URL_DEV + "/blog/feed.atom"}
-    title="Atom Feed"
-  />
-  <link
-    rel="alternate"
-    type="application/rss+xml"
-    href={import.meta.env.VITE_API_URL_DEV + "/blog/feed.rss"}
-    title="RSS Feed"
-  />
-</svelte:head>
+<Head title="home" desc="home page of my personal website" />
+<Header title={$_("home.title")} picture="tired" />
 
-<Header>
-  <c>echo</c>
-  hello world!
-</Header>
-
-<main>
-  <div class="flexbox">
-    <Card title="whoami">
-      <div class="whoami-box">
-        <div class="whoami-pic">
-          <img alt="My profile" src="https://files.ngn.tf/pplow.png" />
-          <a href="https://keyoxide.org/F9E70878C2FB389AEC2BA34CA3654DF5AD9F641D">
-            <c><i class="nf nf-oct-key"></i> Keyoxide</c>
-          </a>
-        </div>
-        <div class="whoami-text">
-          👋 Hello! I'm ngn!
-          <ul>
-            <li>🇹🇷 I'm a high school student from Turkey</li>
-            <li>🖥️ I'm interested in cyber security and programming.</li>
-            <li>❤️ I love and support Free/Libre and Open Source Software (FLOSS)</li>
-            <li>
-              🐧 My GNU/Linux distribution of choice is Artix, however I am currently running Arch
-            </li>
-          </ul>
-        </div>
+<Content>
+  <Card title={$_("home.welcome.title")}>
+    <span> 👋 {$_("home.welcome.desc")}</span>
+    <ul>
+      <li>🇹🇷 {$_("home.welcome.whoami")}</li>
+      <li>🖥️ {$_("home.welcome.interest")}</li>
+      <li>❤️ {$_("home.welcome.support")}</li>
+    </ul>
+  </Card>
+  <Card title={$_("home.work.title")}>
+    <span>{$_("home.work.desc")}</span>
+    <ul>
+      <li>⌨️ {$_("home.work.build")}</li>
+      <li>🚩 {$_("home.work.ctf")}</li>
+      <li>👥 {$_("home.work.contribute")}</li>
+      <li>📑 {$_("home.work.wiki")}</li>
+    </ul>
+  </Card>
+  <Card title={$_("home.links.title")}>
+    <span>{$_("home.links.desc")}:</span>
+    <ul>
+      <li>
+        <Link icon="nf-fa-key" link="https://keyoxide.org/F9E70878C2FB389AEC2BA34CA3654DF5AD9F641D">
+          PGP
+        </Link>
+      </li>
+      <li>
+        <Link icon="nf-md-mastodon" link="https://defcon.social/@ngn">Mastodon</Link>
+      </li>
+      <li>
+        <Link icon="nf-cod-github" link="https://github.com/ngn13">Github</Link>
+      </li>
+      <li>
+        <Link icon="nf-md-email" link="mailto:ngn@ngn.tf">Email</Link>
+        <span class="prefer">({$_("home.links.prefer")})</span>
+      </li>
+    </ul>
+  </Card>
+  <Card title={$_("home.info.title")}>
+    <div class="services">
+      <div class="info">
+        <span>
+          {$_("home.info.desc")}
+        </span>
+        <ul>
+          <li>
+            <i style="color: var(--{color()});" class="nf nf-md-speedometer_slow"></i>
+            {$_("home.info.speed")}
+          </li>
+          <li>
+            <i style="color: var(--{color()});" class="nf nf-fa-lock"></i>
+            {$_("home.info.security")}
+          </li>
+          <li>
+            <i style="color: var(--{color()});" class="nf nf-fa-network_wired"></i>
+            {$_("home.info.privacy")}
+          </li>
+          <li>
+            <i style="color: var(--{color()});" class="nf nf-md-eye_off"></i>
+            {$_("home.info.bullshit")}
+          </li>
+        </ul>
       </div>
-    </Card>
-  </div>
-
-  <div class="flexbox">
-    <Card title="ps -eaf">
-      I usually spend my time...
-      <ul>
-        <li><c>⌨️</c> building random projects</li>
-        <li><c>👥</c> contributing stuff that I like</li>
-        <li><c>🚩</c> solving CTFs</li>
-        <li><c>🖥️</c> customizing my desktop</li>
-        <li>
-          <c>📑</c> posting random stuff on my blog, you should definitely check it out btw (it's very
-          active)
-        </li>
-      </ul>
-    </Card>
-
-    <Card title="wall">
-      Here are some links if you want to get in contact with me, I highly prefer email and I usually
-      respond to emails in 1 or 2 days, just make sure to check your spam folder (turns out running
-      a TOR relay gets your IP into multiple blacklists)
-      <ul>
-        <li>
-          <c><i class="nf nf-cod-github"></i></c>
-          <a href="https://github.com/ngn13">Github</a>
-        </li>
-        <li>
-          <c><i class="nf nf-md-mastodon"></i></c>
-          <a href="https://defcon.social/@ngn" rel="me">Mastodon</a>
-        </li>
-        <li>
-          <c><i class="nf nf-md-email"></i></c>
-          <a href="mailto:ngn@ngn.tf">Email</a>
-        </li>
-        <li>
-          <c><i class="nf nf-md-xmpp"></i></c>
-          <a href="xmpp:ngn@chat.ngn.tf">XMPP</a>
-        </li>
-      </ul>
-    </Card>
-  </div>
-</main>
-
-<div class="version">
-  <p>v5.0</p>
-</div>
+    </div>
+  </Card>
+</Content>
 
 <style>
-  main {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    padding: 50px;
+  .prefer {
+    color: var(--white-2);
+    font-style: italic;
   }
 
-  .flexbox {
-    display: flex;
-    gap: 28px;
-  }
-
-  .whoami-box {
+  .services {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 35px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 28px;
   }
 
-  .whoami-pic {
+  .services .info {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-
-    border-right: solid 1px var(--dark-fife);
-    padding: 0 35px 0 10px;
-  }
-
-  .whoami-pic img {
-    width: 200px;
-    border-radius: 20px;
-
-    border: solid 1px var(--border-color);
-    animation-name: fullBorderAnimation;
-    animation-duration: 10s;
-    animation-iteration-count: infinite;
-
-    box-shadow:
-      rgba(50, 50, 93, 1) 0px 30px 60px -12px inset,
-      rgba(0, 0, 0, 1) 0px 18px 36px -18px inset;
-  }
-
-  ul {
-    list-style: inside;
-  }
-
-  li {
-    padding-top: 15px;
-  }
-
-  a {
-    color: white;
-    text-decoration: none;
-  }
-
-  a:hover {
-    font-weight: 900;
-  }
-
-  .version {
-    color: var(--dark-fife);
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    font-size: 15px;
-  }
-
-  @media only screen and (max-width: 1200px) {
-    .flexbox {
-      flex-direction: column;
-    }
-  }
-
-  @media only screen and (max-width: 900px) {
-    .whoami-box {
-      flex-direction: column;
-      gap: 25px;
-    }
-
-    .whoami-pic {
-      border-right: none;
-      padding: 0;
-    }
   }
 </style>

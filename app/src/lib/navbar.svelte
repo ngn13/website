@@ -1,30 +1,29 @@
 <script>
-  import { color } from "$lib/util.js";
   import NavbarLink from "./navbar_link.svelte";
+  import NavbarSwitch from "./navbar_switch.svelte";
+
+  import { color } from "$lib/util.js";
+  import { _ } from "svelte-i18n";
 </script>
 
 <nav style="border-bottom: solid 2px var(--{color()});">
   <h3 style="color: var(--{color()})">[ngn.tf]</h3>
-
   <div>
-    <NavbarLink link="/">home</NavbarLink>
-    <NavbarLink link="/news">news</NavbarLink>
-    <NavbarLink link="/services">services</NavbarLink>
-    <!-- <NavbarLink link="/donate">donate</NavbarLink> -->
+    <NavbarLink link="/">{$_("navbar.home")}</NavbarLink>
+    <NavbarLink link="/services">{$_("navbar.services")}</NavbarLink>
+    <NavbarLink link="/donate">{$_("navbar.donate")}</NavbarLink>
+    <NavbarSwitch />
   </div>
 </nav>
 
 <style>
   nav {
-    background: var(--dark-one);
+    background: var(--black-1);
     padding: 20px 30px 20px 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    /*animation-name: borderAnimation;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;*/
     box-shadow: var(--def-shadow);
   }
 
@@ -38,6 +37,6 @@
 
   h3 {
     font-weight: 900;
-    font-size: 20px;
+    font-size: var(--size-4);
   }
 </style>
