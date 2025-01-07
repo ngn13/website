@@ -89,6 +89,7 @@ func main() {
 
 	// v1 user routes
 	v1.Get("/services", routes.GET_Services)
+	v1.Get("/visitor", routes.GET_Visitor)
 	v1.Get("/news/:lang", routes.GET_News)
 
 	// v1 admin routes

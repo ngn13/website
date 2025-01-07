@@ -3,7 +3,7 @@
   import Link from "$lib/link.svelte";
 
   import { color, time_from_ts } from "$lib/util.js";
-  import { locale } from "svelte-i18n";
+  import { _, locale } from "svelte-i18n";
 
   export let service = {};
   let style = "";
@@ -18,23 +18,35 @@
       <p>{service.desc[$locale.slice(0, 2)]}</p>
     </div>
     <div class="links">
-      <Link link={service.clear}><Icon icon="nf-oct-link" /></Link>
+      <Link highlight={false} link={service.clear}><Icon icon="nf-oct-link" /></Link>
       {#if service.onion != ""}
-        <Link link={service.onion}><Icon icon="nf-linux-tor" /></Link>
+        <Link highlight={false} link={service.onion}><Icon icon="nf-linux-tor" /></Link>
       {/if}
       {#if service.i2p != ""}
-        <Link link={service.i2p}><span style="color: var(--{color()})">I2P</span></Link>
+        <Link highlight={false} link={service.i2p}
+          ><span style="color: var(--{color()})">I2P</span></Link
+        >
       {/if}
     </div>
   </div>
   <div class="check">
-    <h1>Last checked at {time_from_ts(service.check_time)}</h1>
+    <h1>
+      {$_("services.last", {
+        values: { time: time_from_ts(service.check_time) },
+      })}
+    </h1>
     {#if service.check_res == 0}
-      <span style="background: var(--white-2)">Down</span>
+      <span style="background: var(--white-2)">
+        {$_("services.status.down")}
+      </span>
     {:else if service.check_res == 1}
-      <span style="background: var(--{color()})">Up</span>
+      <span style="background: var(--{color()})">
+        {$_("services.status.up")}
+      </span>
     {:else if service.check_res == 2}
-      <span style="background: var(--white-2)">Slow</span>
+      <span style="background: var(--white-2)">
+        {$_("services.status.slow")}
+      </span>
     {/if}
   </div>
 </main>

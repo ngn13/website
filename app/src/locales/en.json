@@ -6,7 +6,7 @@
     "donate": "donate"
   },
   "home": {
-    "title": "hello world!",
+    "title": "Hello world!",
     "welcome": {
       "title": "about",
       "desc": "Welcome to my website, I'm ngn",
@@ -36,6 +36,32 @@
       "bullshit": "No CDNs, no cloudflare, no CAPTCHA, no analytics, no bullshit",
       "link": "see all the services"
     }
+  },
+  "services": {
+    "title": "Service Status",
+    "search": "Search for a service",
+    "feed": "News and updates",
+    "last": "Last checked at {time}",
+    "status": {
+      "up": "Up",
+      "down": "Down",
+      "slow": "Slow"
+    }
+  },
+  "donate": {
+    "title": "donate money!",
+    "info": "I spend a lot of time working on different projects and maintaining different services.",
+    "price": "I mostly pay for hosting and electricity. Which when added up costs around 550₺ per month, that is Turkish Lira, equals to ~$15 at time of writing (ik the economy is great).",
+    "details": "So even a small donation would be highly appreciated and it would help me keep everything up and running.",
+    "thanks": "Also huge thanks to all of you who has donated so far, as I said, I highly appreciate it. Thank you!",
+    "table": {
+      "platform": "Platform",
+      "address": "Adress/Link"
+    }
+  },
+  "error": {
+    "title": "Something went wrong!",
+    "report": "report this issue"
   },
   "footer": {
     "source": "Source",

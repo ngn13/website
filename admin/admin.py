@@ -301,7 +301,7 @@ commands = [
     "check_services",
     "add_news",
     "del_news",
-    "logs"
+    "logs",
 ]
 
 if __name__ == "__main__":

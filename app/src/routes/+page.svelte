@@ -1,6 +1,5 @@
 <script>
   import Header from "$lib/header.svelte";
-  import Content from "$lib/content.svelte";
   import Head from "$lib/head.svelte";
   import Card from "$lib/card.svelte";
   import Link from "$lib/link.svelte";
@@ -10,9 +9,9 @@
 </script>
 
 <Head title="home" desc="home page of my personal website" />
-<Header title={$_("home.title")} picture="tired" />
+<Header picture="tired" title={$_("home.title")} />
 
-<Content>
+<main>
   <Card title={$_("home.welcome.title")}>
     <span> 👋 {$_("home.welcome.desc")}</span>
     <ul>
@@ -77,9 +76,19 @@
       </div>
     </div>
   </Card>
-</Content>
+</main>
 
 <style>
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+
+    padding: 50px;
+    gap: 28px;
+  }
+
   .prefer {
     color: var(--white-2);
     font-style: italic;
@@ -97,5 +106,11 @@
   .services .info {
     display: flex;
     flex-direction: column;
+  }
+
+  @media only screen and (max-width: 900px) {
+    main {
+      flex-direction: column;
+    }
   }
 </style>

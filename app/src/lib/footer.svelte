@@ -1,13 +1,15 @@
 <script>
   import Link from "$lib/link.svelte";
+  import { onMount } from "svelte";
+  import { visitor } from "$lib/api.js";
   import { color } from "$lib/util.js";
   import { _ } from "svelte-i18n";
 
-  let visitor_count = 1001;
+  let visitor_count = 0;
 
-  function should_congrat() {
-    return visitor_count % 1000 == 0;
-  }
+  onMount(async () => {
+    visitor_count = await visitor(fetch);
+  });
 </script>
 
 <footer style="border-top: solid 2px var(--{color()});">
@@ -32,8 +34,8 @@
   <div class="useless">
     <span>
       {$_("footer.number", { values: { count: visitor_count } })}
-      {#if should_congrat()}
-        <span style="color: var(--{color()})">({$_("footer.congrats")})</span>
+      {#if visitor_count % 1000 == 0}
+        <span style="color: var(--{color()})">({$_("footer.congrat")})</span>
       {/if}
     </span>
     <span>

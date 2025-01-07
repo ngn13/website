@@ -1,14 +1,21 @@
 <script>
   import Navbar from "$lib/navbar.svelte";
   import Footer from "$lib/footer.svelte";
+  import Error from "$lib/error.svelte";
+
+  let { data, children } = $props();
 </script>
 
 <main>
-  <Navbar />
-  <div class="content">
-    <slot></slot>
-  </div>
-  <Footer />
+  {#if data.error === null}
+    <Navbar />
+    <div class="content">
+      {@render children()}
+    </div>
+    <Footer />
+  {:else}
+    <Error error={data.error} />>
+  {/if}
 </main>
 
 <style>

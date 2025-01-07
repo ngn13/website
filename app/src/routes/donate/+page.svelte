@@ -1,39 +1,39 @@
 <script>
   import Header from "$lib/header.svelte";
   import Head from "$lib/head.svelte";
+  import Icon from "$lib/icon.svelte";
+
   import { color } from "$lib/util.js";
+  import { _ } from "svelte-i18n";
 </script>
 
 <Head title="donate" desc="give me all of your life savings" />
-<Header title="donate money!" picture="money" />
+<Header picture="money" title={$_("donate.title")} />
 
 <main>
-  <span
-    >I spend a lot of time working on different projects and maintaining different services.</span
-  >
-  <span
-    >I also spend a lot of money, but unlike time, you don't usually get much of it for free.</span
-  >
-  <span
-    >I mostly pay for hosting and electricity. Which when added up costs around 550₺ per month, that
-    is Turkish Lira, equals to ~$15 at time of writing.</span
-  >
+  <span> </span>
+  <span>
+    {$_("donate.info")}
+    {$_("donate.price")}
+  </span>
   <br />
   <br />
-  <span
-    >So even a small donation would be highly appreciated and it would help me keep everything up
-    and running.</span
-  >
+  <span>
+    {$_("donate.details")}
+  </span>
   <table>
     <thead>
       <tr>
-        <th style="color: var(--{color()})">Platform</th>
-        <th style="color: var(--{color()})">Address/Link</th>
+        <th style="color: var(--{color()})">{$_("donate.table.platform")}</th>
+        <th style="color: var(--{color()})">{$_("donate.table.address")}</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>Monero (XMR)</td>
+        <td>
+          <Icon icon="nf-fa-monero" />
+          Monero (XMR)
+        </td>
         <td>
           <code>
             46q7G7u7cmASvJm7AmrhmNg6ctS77mYMmDAy1QxpDn5w57xV3GUY5za4ZPZHAjqaXdfS5YRWm4AVj5UArLDA1retRkJp47F
@@ -42,10 +42,9 @@
       </tr>
     </tbody>
   </table>
-  <span
-    >Also huge thanks to all of you who has donated so far, as I said, I highly appreciate it. Thank
-    you!</span
-  >
+  <span>
+    {$_("donate.thanks")}
+  </span>
 </main>
 
 <style>
@@ -77,6 +76,7 @@
 
   td,
   th {
+    font-size: var(--size-4);
     border: solid 1px var(--black-4);
     padding: 16px;
   }

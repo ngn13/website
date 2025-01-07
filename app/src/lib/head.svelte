@@ -1,5 +1,7 @@
 <script>
-  import { frontend_url, api_url } from "$lib/util.js";
+  import { frontend_url } from "$lib/util.js";
+  import { api_url } from "$lib/api.js";
+
   export let desc, title;
 </script>
 

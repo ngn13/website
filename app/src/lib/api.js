@@ -1,21 +1,33 @@
+import { urljoin } from "$lib/util.js";
+
 const version = "v1";
-const url = new URL(version + "/", import.meta.env.VITE_API_URL).href;
+const url = urljoin(import.meta.env.VITE_API_URL, version);
 
-function join(path) {
-  if (null === path || path === "") return url;
+function api_url(path = null, query = {}) {
+  return urljoin(url, path, query);
+}
 
-  if (path[0] === "/") path = path.slice(1);
+function check_err(json) {
+  if (!("error" in json)) throw new Error('API response is missing the "error" key');
 
-  return new URL(path, url).href;
+  if (json["error"] != "") throw new Error(`API returned an error: ${json["error"]}`);
+
+  if (!("result" in json)) throw new Error('API response is missing the "result" key');
+}
+
+async function GET(fetch, url) {
+  const res = await fetch(url);
+  const json = await res.json();
+  check_err(json);
+  return json["result"];
+}
+
+async function visitor(fetch) {
+  return GET(fetch, api_url("/visitor"));
 }
 
 async function services(fetch) {
-  const res = await fetch(join("/services"));
-  const json = await res.json();
-
-  if (!("result" in json)) return [];
-
-  return json.result;
+  return GET(fetch, api_url("/services"));
 }
 
-export { version, join, services };
+export { version, api_url, visitor, services };

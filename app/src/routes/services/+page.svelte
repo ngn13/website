@@ -4,42 +4,42 @@
   import Link from "$lib/link.svelte";
   import Head from "$lib/head.svelte";
 
-  import { api_url } from "$lib/util.js";
-  import { locale } from "svelte-i18n";
+  import { _, locale } from "svelte-i18n";
+  import { api_url } from "$lib/api.js";
 
-  export let data;
-
-  let list = data.list,
-    services = list;
-  let value = "";
+  let { data } = $props();
+  let list = $state(data.services);
 
   function change(input) {
-    value = input.target.value.toLowerCase();
-    services = [];
+    let value = input.target.value.toLowerCase();
+    list = [];
 
     if (value === "") {
-      services = list;
+      list = data.services;
       return;
     }
 
-    list.forEach((s) => {
-      if (s.name.toLowerCase().includes(value)) services.push(s);
+    data.services.forEach((s) => {
+      if (s.name.toLowerCase().includes(value)) list.push(s);
+      else if (s.desc[$locale.slice(0, 2)].toLowerCase().includes(value)) list.push(s);
     });
   }
 </script>
 
 <Head title="services" desc="my self-hosted services and projects" />
-<Header title="service status" picture="cool" />
+<Header picture="cool" title={$_("services.title")} />
 
 <main>
   <div class="title">
-    <input on:input={change} type="text" placeholder="Search for a service" />
+    <input oninput={change} type="text" placeholder={$_("services.search")} />
     <div>
-      <Link icon="nf-fa-feed" link={api_url("/news/" + $locale.slice(0, 2))}>News and updates</Link>
+      <Link icon="nf-fa-feed" link={api_url("/news/" + $locale.slice(0, 2))}
+        >{$_("services.feed")}</Link
+      >
     </div>
   </div>
   <div class="services">
-    {#each services as service}
+    {#each list as service}
       <Service {service} />
     {/each}
   </div>

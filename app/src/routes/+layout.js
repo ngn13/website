@@ -1,19 +1,29 @@
-import { locale, waitLocale } from "svelte-i18n";
-import { init, register } from "svelte-i18n";
-import { browser } from "$app/environment";
+import { init, register, waitLocale } from "svelte-i18n";
+import { browser_lang } from "$lib/util.js";
+import { services } from "$lib/api.js";
 import languages from "$lib/lang.js";
 
-const defaultLocale = languages[0].code;
-
+// setup the locale
 for (let i = 0; i < languages.length; i++)
   register(languages[i].code, () => import(/* @vite-ignore */ languages[i].path));
 
 init({
-  fallbackLocale: defaultLocale,
-  initialLocale: browser ? window.navigator.language.slice(0, 2).toLowerCase() : defaultLocale,
+  fallbackLocale: languages[0].code,
+  initialLocale: browser_lang(),
 });
 
-export const load = async () => {
-  if (browser) locale.set(window.navigator.language);
+// load locales & load data from the API
+export async function load({ fetch }) {
   await waitLocale();
-};
+
+  try {
+    return {
+      services: await services(fetch),
+      error: null,
+    };
+  } catch (err) {
+    return {
+      error: err,
+    };
+  }
+}

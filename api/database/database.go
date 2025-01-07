@@ -17,6 +17,18 @@ func (db *Type) Load() (err error) {
 		return fmt.Errorf("cannot access the database: %s", err.Error())
 	}
 
+	// see database/visitor.go
+	_, err = db.sql.Exec(`
+    CREATE TABLE IF NOT EXISTS visitor_count(
+      id    TEXT NOT NULL UNIQUE,
+      count INTEGER NOT NULL
+    );
+  `)
+
+	if err != nil {
+		return fmt.Errorf("failed to create the visitor_count table: %s", err.Error())
+	}
+
 	// see database/service.go
 	_, err = db.sql.Exec(`
     CREATE TABLE IF NOT EXISTS services(

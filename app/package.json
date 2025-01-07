@@ -3,7 +3,7 @@
   "version": "6.0",
   "private": true,
   "scripts": {
-    "dev": "VITE_API_URL=http://127.0.0.1:7001 VITE_FRONTEND_URL=http://localhost:5173 vite dev",
+    "dev": "VITE_BUG_REPORT_URL=https://github.com/ngn13/website/issues VITE_API_URL=http://127.0.0.1:7001 VITE_FRONTEND_URL=http://localhost:5173 vite dev",
     "build": "vite build",
     "preview": "vite preview --host",
     "lint": "prettier --check .",

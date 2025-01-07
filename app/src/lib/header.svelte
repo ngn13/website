@@ -4,29 +4,23 @@
 
   export let picture = "";
   export let title = "";
-
-  let current = "";
-
-  for (let i = 0; i < title.length; i++) {
-    setTimeout(
-      () => {
-        current += title[i];
-      },
-      100 * (i + 1)
-    );
-  }
 </script>
 
 <header>
-  <h1 style="color: var(--{color()})">{current}</h1>
+  <div>
+    <h1 class="title" style="color: var(--{color()})">
+      {title.toLowerCase()}
+    </h1>
+    <h1 class="cursor" style="color: var(--{color()})">_</h1>
+  </div>
   <img src="/profile/{picture}.png" alt="" />
 </header>
 
 <style>
   header {
-    background: linear-gradient(rgba(11, 11, 11, 0.808), rgba(1, 1, 1, 0.96)),
-      url("https://files.ngn.tf/banner.png");
+    background: var(--background);
     background-size: 50%;
+
     width: 100%;
     height: 100%;
     display: flex;
@@ -35,15 +29,12 @@
     align-items: end;
   }
 
-  img {
-    padding: 50px 50px 0 50px;
-    width: 220px;
-    bottom: 0;
-    left: 0;
-  }
-
-  h1 {
-    font-size: var(--size-7);
+  header div {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    padding: 50px 50px 30px 50px;
+    font-size: var(--size-6);
     font-family:
       Consolas,
       Monaco,
@@ -53,17 +44,30 @@
       Bitstream Vera Sans Mono,
       Courier New,
       monospace;
-    padding: 50px 50px 30px 50px;
     white-space: nowrap;
-    text-align: center;
-    color: white;
-    text-shadow: var(--text-shadow);
+    justify-content: start;
+    width: min-content;
   }
 
-  h1::after {
+  header div .title {
+    text-shadow: var(--text-shadow);
+    overflow: hidden;
+    width: 0;
+    animation: typing 1s steps(20, end) forwards;
+    animation-delay: 0.3s;
+  }
+
+  header div .cursor {
     content: "_";
     display: inline-block;
     animation: blink 1.5s steps(2) infinite;
+  }
+
+  header img {
+    padding: 50px 50px 0 50px;
+    width: var(--profile-size);
+    bottom: 0;
+    left: 0;
   }
 
   @media only screen and (max-width: 900px) {
@@ -71,11 +75,7 @@
       display: block;
     }
 
-    h1 {
-      padding: 80px;
-    }
-
-    img {
+    header img {
       display: none;
     }
   }
