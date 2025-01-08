@@ -64,8 +64,8 @@ func (db *Type) NewsNext(n *News) bool {
 	var err error
 
 	if nil == db.rows {
-		if db.rows, err = db.sql.Query("SELECT * FROM news"); err != nil {
-			util.Fail("failed to query news table: %s", err.Error())
+		if db.rows, err = db.sql.Query("SELECT * FROM " + TABLE_NEWS); err != nil {
+			util.Fail("failed to query table: %s", err.Error())
 			goto fail
 		}
 	}
@@ -75,7 +75,7 @@ func (db *Type) NewsNext(n *News) bool {
 	}
 
 	if err = n.Scan(db.rows); err != nil {
-		util.Fail("failed to scan the news table: %s", err.Error())
+		util.Fail("failed to scan the table: %s", err.Error())
 		goto fail
 	}
 
@@ -92,7 +92,7 @@ fail:
 
 func (db *Type) NewsRemove(id string) error {
 	_, err := db.sql.Exec(
-		"DELETE FROM news WHERE id = ?",
+		"DELETE FROM "+TABLE_NEWS+" WHERE id = ?",
 		id,
 	)
 
@@ -105,7 +105,7 @@ func (db *Type) NewsAdd(n *News) (err error) {
 	}
 
 	_, err = db.sql.Exec(
-		`INSERT OR REPLACE INTO news(
+		"INSERT OR REPLACE INTO "+TABLE_NEWS+`(
 			id, title, author, time, content
 		) values(?, ?, ?, ?, ?)`,
 		n.ID, n.title,

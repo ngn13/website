@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS admin_log(
+  action TEXT NOT NULL,
+  time   INTEGER NOT NULL
+);

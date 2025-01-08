@@ -1,6 +1,7 @@
 <script>
-  import { locale } from "svelte-i18n";
+  import { language, set_lang } from "$lib/util.js";
   import languages from "$lib/lang.js";
+
   let icon = "",
     indx = 0,
     len = languages.length;
@@ -9,18 +10,20 @@
     if (indx >= languages.length) indx = 0;
 
     icon = languages[indx].icon;
-    locale.set(languages[indx++].code);
+    set_lang(languages[indx++].code);
   }
 
   for (indx = 0; indx < len; indx++) {
-    if (languages[indx].code == $locale.slice(0, 2)) {
+    if (languages[indx].code == $language) {
       icon = languages[indx++].icon;
       break;
     }
   }
 </script>
 
-<button on:click={next}>{icon}</button>
+<button on:click={next}>
+  {icon}
+</button>
 
 <style>
   button {

@@ -24,8 +24,8 @@ func (db *Type) AdminLogNext(l *AdminLog) bool {
 	var err error
 
 	if nil == db.rows {
-		if db.rows, err = db.sql.Query("SELECT * FROM admin_log"); err != nil {
-			util.Fail("failed to query admin_log table: %s", err.Error())
+		if db.rows, err = db.sql.Query("SELECT * FROM " + TABLE_ADMIN_LOG); err != nil {
+			util.Fail("failed to query table: %s", err.Error())
 			goto fail
 		}
 	}
@@ -35,7 +35,7 @@ func (db *Type) AdminLogNext(l *AdminLog) bool {
 	}
 
 	if err = l.Scan(db.rows); err != nil {
-		util.Fail("failed to scan the admin_log table: %s", err.Error())
+		util.Fail("failed to scan the table: %s", err.Error())
 		goto fail
 	}
 
@@ -52,7 +52,7 @@ fail:
 
 func (db *Type) AdminLogAdd(l *AdminLog) error {
 	_, err := db.sql.Exec(
-		`INSERT INTO admin_log(
+		"INSERT INTO "+TABLE_ADMIN_LOG+`(
 			action, time
 		) values(?, ?)`,
 		&l.Action, &l.Time,

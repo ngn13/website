@@ -4,8 +4,11 @@
   import Card from "$lib/card.svelte";
   import Link from "$lib/link.svelte";
 
-  import { color } from "$lib/util.js";
+  import { color, language } from "$lib/util.js";
   import { _ } from "svelte-i18n";
+
+  const { data } = $props();
+  let projects = $state(data.projects);
 </script>
 
 <Head title="home" desc="home page of my personal website" />
@@ -24,6 +27,7 @@
     <span>{$_("home.work.desc")}</span>
     <ul>
       <li>⌨️ {$_("home.work.build")}</li>
+      <li>🤦 {$_("home.work.fix")}</li>
       <li>🚩 {$_("home.work.ctf")}</li>
       <li>👥 {$_("home.work.contribute")}</li>
       <li>📑 {$_("home.work.wiki")}</li>
@@ -38,43 +42,52 @@
         </Link>
       </li>
       <li>
+        <Link icon="nf-md-email" link="mailto:ngn@ngn.tf">Email</Link>
+      </li>
+      <li>
         <Link icon="nf-md-mastodon" link="https://defcon.social/@ngn">Mastodon</Link>
       </li>
+    </ul>
+    <span>
+      {$_("home.links.prefer")}
+    </span>
+  </Card>
+  <Card title={$_("home.services.title")}>
+    <span>
+      {$_("home.services.desc")}
+    </span>
+    <ul>
       <li>
-        <Link icon="nf-cod-github" link="https://github.com/ngn13">Github</Link>
+        <i style="color: var(--{color()});" class="nf nf-md-speedometer_slow"></i>
+        {$_("home.services.speed")}
       </li>
       <li>
-        <Link icon="nf-md-email" link="mailto:ngn@ngn.tf">Email</Link>
-        <span class="prefer">({$_("home.links.prefer")})</span>
+        <i style="color: var(--{color()});" class="nf nf-fa-lock"></i>
+        {$_("home.services.security")}
+      </li>
+      <li>
+        <i style="color: var(--{color()});" class="nf nf-fa-network_wired"></i>
+        {$_("home.services.privacy")}
+      </li>
+      <li>
+        <i style="color: var(--{color()});" class="nf nf-md-eye_off"></i>
+        {$_("home.services.bullshit")}
       </li>
     </ul>
+    <Link linK="/services">{$_("home.services.link")}</Link>
   </Card>
-  <Card title={$_("home.info.title")}>
-    <div class="services">
-      <div class="info">
-        <span>
-          {$_("home.info.desc")}
-        </span>
-        <ul>
-          <li>
-            <i style="color: var(--{color()});" class="nf nf-md-speedometer_slow"></i>
-            {$_("home.info.speed")}
-          </li>
-          <li>
-            <i style="color: var(--{color()});" class="nf nf-fa-lock"></i>
-            {$_("home.info.security")}
-          </li>
-          <li>
-            <i style="color: var(--{color()});" class="nf nf-fa-network_wired"></i>
-            {$_("home.info.privacy")}
-          </li>
-          <li>
-            <i style="color: var(--{color()});" class="nf nf-md-eye_off"></i>
-            {$_("home.info.bullshit")}
-          </li>
-        </ul>
-      </div>
-    </div>
+  <Card title={$_("home.projects.title")}>
+    <span>
+      {$_("home.projects.desc")}:
+    </span>
+    <ul>
+      {#each projects as project}
+        <li>
+          <Link active={true} link={project.url}>{project.name}</Link>:
+          {project.desc[$language]}
+        </li>
+      {/each}
+    </ul>
   </Card>
 </main>
 
@@ -87,25 +100,6 @@
 
     padding: 50px;
     gap: 28px;
-  }
-
-  .prefer {
-    color: var(--white-2);
-    font-style: italic;
-  }
-
-  .services {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 28px;
-  }
-
-  .services .info {
-    display: flex;
-    flex-direction: column;
   }
 
   @media only screen and (max-width: 900px) {

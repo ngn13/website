@@ -97,6 +97,23 @@ a URL query named "name".
 Returns a Atom feed of news for the given language. Supports languages that are supported
 by Multilang.
 
+### GET /v1/metrics
+Returns metrics about the API usage. The metric data has the following format:
+```
+{
+  "number":8,
+  "since":1736294400,
+  "total":8
+}
+```
+Where:
+- `number`: Visitor number of the the current visitor (integer)
+- `since`: Metric collection start date (integer, UNIX timestamp)
+- `total`: Total number of visitors (integer)
+
+Note that visitor number may change after a certain amount of requests by other clients,
+if the client wants to preserve it's visitor number, it should save it somewhere.
+
 ### GET /v1/admin/logs
 Returns a list of administrator logs. Each log has the following JSON format:
 ```

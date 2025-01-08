@@ -1,6 +1,9 @@
 import { browser } from "$app/environment";
+import { locale } from "svelte-i18n";
+import languages from "$lib/lang.js";
+import { writable, get } from "svelte/store";
 
-const default_lang = "en";
+const default_language = languages[0].code;
 const colors = [
   "yellow",
   "cyan",
@@ -10,7 +13,32 @@ const colors = [
   //  "blue" (looks kinda ass)
 ];
 
+let language = writable(default_language);
 let colors_pos = -1;
+
+function browser_lang() {
+  if (browser) return window.navigator.language.slice(0, 2).toLowerCase();
+  else return get(language);
+}
+
+function set_lang(lang) {
+  language.set(default_language);
+
+  if (lang === null || lang === undefined) {
+    if (browser) set_lang(browser_lang());
+    return;
+  }
+
+  lang = lang.slice(0, 2);
+
+  for (let i = 0; i < languages.length; i++) {
+    if (lang === languages[i].code) {
+      language.set(lang);
+      locale.set(lang);
+      return;
+    }
+  }
+}
 
 function urljoin(url, path = null, query = {}) {
   let url_len = url.length;
@@ -42,13 +70,40 @@ function click() {
   audio.play();
 }
 
-function browser_lang() {
-  if (browser) return window.navigator.language.slice(0, 2).toLowerCase();
-  return default_lang;
-}
-
 function time_from_ts(ts) {
-  return new Date(ts * 1000).toLocaleTimeString();
+  if (ts === 0 || ts === undefined) return;
+
+  let ts_date = new Date(ts * 1000);
+  let ts_zone = ts_date.toString().match(/([A-Z]+[\+-][0-9]+)/)[1];
+
+  return (
+    new Intl.DateTimeFormat(browser_lang(), {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    }).format(ts_date) + ` (${ts_zone})`
+  );
 }
 
-export { urljoin, frontend_url, browser_lang, click, color, time_from_ts };
+function date_from_ts(ts) {
+  if (ts === 0 || ts === undefined) return;
+
+  return new Intl.DateTimeFormat(browser_lang(), {
+    month: "2-digit",
+    year: "2-digit",
+    day: "2-digit",
+  }).format(new Date(ts * 1000));
+}
+
+export {
+  default_language,
+  browser_lang,
+  language,
+  set_lang,
+  urljoin,
+  frontend_url,
+  click,
+  color,
+  time_from_ts,
+  date_from_ts,
+};

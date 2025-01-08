@@ -2,8 +2,8 @@
   import Icon from "$lib/icon.svelte";
   import Link from "$lib/link.svelte";
 
-  import { color, time_from_ts } from "$lib/util.js";
-  import { _, locale } from "svelte-i18n";
+  import { color, time_from_ts, language } from "$lib/util.js";
+  import { _ } from "svelte-i18n";
 
   export let service = {};
   let style = "";
@@ -15,7 +15,7 @@
   <div class="info">
     <div class="title">
       <h1>{service.name}</h1>
-      <p>{service.desc[$locale.slice(0, 2)]}</p>
+      <p>{service.desc[$language]}</p>
     </div>
     <div class="links">
       <Link highlight={false} link={service.clear}><Icon icon="nf-oct-link" /></Link>

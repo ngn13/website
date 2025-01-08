@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS news(
+  id      TEXT NOT NULL UNIQUE,
+  title   TEXT NOT NULL,
+  author  TEXT NOT NULL,
+  time    INTEGER NOT NULL,
+  content TEXT NOT NULL
+);

@@ -58,8 +58,8 @@ func (db *Type) ServiceNext(s *Service) bool {
 	var err error
 
 	if nil == db.rows {
-		if db.rows, err = db.sql.Query("SELECT * FROM services"); err != nil {
-			util.Fail("failed to query services table: %s", err.Error())
+		if db.rows, err = db.sql.Query("SELECT * FROM " + TABLE_SERVICES); err != nil {
+			util.Fail("failed to query table: %s", err.Error())
 			goto fail
 		}
 	}
@@ -69,7 +69,7 @@ func (db *Type) ServiceNext(s *Service) bool {
 	}
 
 	if err = s.Scan(db.rows, nil); err != nil {
-		util.Fail("failed to scan the services table: %s", err.Error())
+		util.Fail("failed to scan the table: %s", err.Error())
 		goto fail
 	}
 
@@ -91,7 +91,7 @@ func (db *Type) ServiceFind(name string) (*Service, error) {
 		err error
 	)
 
-	if row = db.sql.QueryRow("SELECT * FROM services WHERE name = ?", name); row == nil || row.Err() == sql.ErrNoRows {
+	if row = db.sql.QueryRow("SELECT * FROM "+TABLE_SERVICES+" WHERE name = ?", name); row == nil || row.Err() == sql.ErrNoRows {
 		return nil, nil
 	}
 
@@ -104,7 +104,7 @@ func (db *Type) ServiceFind(name string) (*Service, error) {
 
 func (db *Type) ServiceRemove(name string) error {
 	_, err := db.sql.Exec(
-		"DELETE FROM services WHERE name = ?",
+		"DELETE FROM "+TABLE_SERVICES+" WHERE name = ?",
 		name,
 	)
 
@@ -117,7 +117,7 @@ func (db *Type) ServiceUpdate(s *Service) (err error) {
 	}
 
 	_, err = db.sql.Exec(
-		`INSERT OR REPLACE INTO services(
+		"INSERT OR REPLACE INTO "+TABLE_SERVICES+`(
 			name, desc, check_time, check_res, check_url, clear, onion, i2p
 		) values(?, ?, ?, ?, ?, ?, ?, ?)`,
 		s.Name, s.desc,

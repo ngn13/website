@@ -39,7 +39,7 @@
     "license": "Lisans",
     "privacy": "Gizlilik",
     "powered": "Svelte, Go, SQLite ve yemek param tarafından destekleniyor",
-    "number": "{count}. ziyaretçisiniz",
+    "number": "{since} tarihinden beri {number}. ziyaretçisiniz",
     "congrat": "tebrikler!!",
     "version": "Kullan API versiyonu {api_version}, arayüz versiyonu {frontend_version}"
   }

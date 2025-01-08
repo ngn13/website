@@ -103,6 +103,56 @@ func GET_CheckService(c *fiber.Ctx) error {
 	return util.JSON(c, 200, nil)
 }
 
+func PUT_AddProject(c *fiber.Ctx) error {
+	var (
+		project database.Project
+		err     error
+	)
+
+	db := c.Locals("database").(*database.Type)
+
+	if c.BodyParser(&project) != nil {
+		return util.ErrBadJSON(c)
+	}
+
+	if !project.IsValid() {
+		return util.ErrBadReq(c)
+	}
+
+	if err = admin_log(c, fmt.Sprintf("Added project \"%s\"", project.Name)); err != nil {
+		return util.ErrInternal(c, err)
+	}
+
+	if err = db.ProjectAdd(&project); err != nil {
+		return util.ErrInternal(c, err)
+	}
+
+	return util.JSON(c, 200, nil)
+}
+
+func DEL_DelProject(c *fiber.Ctx) error {
+	var (
+		name string
+		err  error
+	)
+
+	db := c.Locals("database").(*database.Type)
+
+	if name = c.Query("name"); name == "" {
+		util.ErrBadReq(c)
+	}
+
+	if err = admin_log(c, fmt.Sprintf("Removed project \"%s\"", name)); err != nil {
+		return util.ErrInternal(c, err)
+	}
+
+	if err = db.ProjectRemove(name); err != nil {
+		return util.ErrInternal(c, err)
+	}
+
+	return util.JSON(c, 200, nil)
+}
+
 func DEL_DelNews(c *fiber.Ctx) error {
 	var (
 		id  string

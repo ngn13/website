@@ -22,12 +22,16 @@ async function GET(fetch, url) {
   return json["result"];
 }
 
-async function visitor(fetch) {
-  return GET(fetch, api_url("/visitor"));
+async function get_metrics(fetch) {
+  return GET(fetch, api_url("/metrics"));
 }
 
-async function services(fetch) {
+async function get_services(fetch) {
   return GET(fetch, api_url("/services"));
 }
 
-export { version, api_url, visitor, services };
+async function get_projects(fetch) {
+  return GET(fetch, api_url("/projects"));
+}
+
+export { version, api_url, get_metrics, get_services, get_projects };

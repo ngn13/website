@@ -89,15 +89,21 @@ func main() {
 
 	// v1 user routes
 	v1.Get("/services", routes.GET_Services)
-	v1.Get("/visitor", routes.GET_Visitor)
+	v1.Get("/projects", routes.GET_Projects)
+	v1.Get("/metrics", routes.GET_Metrics)
 	v1.Get("/news/:lang", routes.GET_News)
 
 	// v1 admin routes
 	v1.Use("/admin", routes.AuthMiddleware)
 	v1.Get("/admin/logs", routes.GET_AdminLogs)
+
 	v1.Get("/admin/service/check", routes.GET_CheckService)
 	v1.Put("/admin/service/add", routes.PUT_AddService)
 	v1.Delete("/admin/service/del", routes.DEL_DelService)
+
+	v1.Put("/admin/project/add", routes.PUT_AddProject)
+	v1.Delete("/admin/project/del", routes.DEL_DelProject)
+
 	v1.Put("/admin/news/add", routes.PUT_AddNews)
 	v1.Delete("/admin/news/del", routes.DEL_DelNews)
 

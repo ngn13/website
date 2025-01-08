@@ -1,14 +1,15 @@
 <script>
+  import { color, date_from_ts } from "$lib/util.js";
+  import { get_metrics } from "$lib/api.js";
   import Link from "$lib/link.svelte";
+
   import { onMount } from "svelte";
-  import { visitor } from "$lib/api.js";
-  import { color } from "$lib/util.js";
   import { _ } from "svelte-i18n";
 
-  let visitor_count = 0;
+  let data = {};
 
   onMount(async () => {
-    visitor_count = await visitor(fetch);
+    data = await get_metrics(fetch);
   });
 </script>
 
@@ -33,8 +34,13 @@
   </div>
   <div class="useless">
     <span>
-      {$_("footer.number", { values: { count: visitor_count } })}
-      {#if visitor_count % 1000 == 0}
+      {$_("footer.number", {
+        values: {
+          number: data.number,
+          since: date_from_ts(data.since),
+        },
+      })}
+      {#if data.number % 1000 == 0}
         <span style="color: var(--{color()})">({$_("footer.congrat")})</span>
       {/if}
     </span>

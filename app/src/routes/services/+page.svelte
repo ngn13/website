@@ -4,24 +4,25 @@
   import Link from "$lib/link.svelte";
   import Head from "$lib/head.svelte";
 
-  import { _, locale } from "svelte-i18n";
+  import { language } from "$lib/util.js";
   import { api_url } from "$lib/api.js";
+  import { _ } from "svelte-i18n";
 
   let { data } = $props();
-  let list = $state(data.services);
+  let services = $state(data.services);
 
   function change(input) {
     let value = input.target.value.toLowerCase();
-    list = [];
+    services = [];
 
     if (value === "") {
-      list = data.services;
+      services = data.services;
       return;
     }
 
     data.services.forEach((s) => {
-      if (s.name.toLowerCase().includes(value)) list.push(s);
-      else if (s.desc[$locale.slice(0, 2)].toLowerCase().includes(value)) list.push(s);
+      if (s.name.toLowerCase().includes(value)) services.push(s);
+      else if (s.desc[$language].toLowerCase().includes(value)) services.push(s);
     });
   }
 </script>
@@ -33,13 +34,11 @@
   <div class="title">
     <input oninput={change} type="text" placeholder={$_("services.search")} />
     <div>
-      <Link icon="nf-fa-feed" link={api_url("/news/" + $locale.slice(0, 2))}
-        >{$_("services.feed")}</Link
-      >
+      <Link icon="nf-fa-feed" link={api_url("/news/" + $language)}>{$_("services.feed")}</Link>
     </div>
   </div>
   <div class="services">
-    {#each list as service}
+    {#each services as service}
       <Service {service} />
     {/each}
   </div>
