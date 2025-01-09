@@ -5,7 +5,6 @@ go 1.21.3
 require (
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/mattn/go-sqlite3 v1.14.24
-	github.com/russross/blackfriday/v2 v2.1.0
 )
 
 require (

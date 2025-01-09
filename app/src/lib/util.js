@@ -49,13 +49,13 @@ function urljoin(url, path = null, query = {}) {
   else if (path[0] === "/") url = new URL(path.slice(1), url);
   else url = new URL(path, url);
 
-  for (let k in query) url.searchParams.append(query[k]);
+  for (let k in query) url.searchParams.append(k, query[k]);
 
   return url.href;
 }
 
 function frontend_url(path = null, query = {}) {
-  return urljoin(import.meta.env.VITE_FRONTEND_URL, path, query);
+  return urljoin(import.meta.env.APP_URL, path, query);
 }
 
 function color() {

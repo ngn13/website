@@ -6,7 +6,7 @@ api.elf: $(GOSRCS)
 	go build -o $@
 
 run:
-	API_DEBUG=true API_FRONTEND_URL=http://localhost:5173/ API_PASSWORD=test ./api.elf
+	API_DEBUG=true API_APP_URL=http://localhost:5173/ API_PASSWORD=test ./api.elf
 
 format:
 	gofmt -s -w .

@@ -2,7 +2,6 @@
   "navbar": {
     "home": "home",
     "services": "services",
-    "news": "news",
     "donate": "donate"
   },
   "home": {
@@ -10,7 +9,7 @@
     "welcome": {
       "title": "about",
       "desc": "Welcome to my website, I'm ngn",
-      "whoami": "I'm a privacy, security and freedom addvocate high-schooler from Turkey",
+      "whoami": "I'm a security, privacy and freedom advocate high-schooler from Turkey",
       "interest": "I'm interested in system security and software development",
       "support": "I love and support Free/Libre and Open Source Software (FLOSS)"
     },
@@ -35,7 +34,7 @@
       "security": "All use SSL encrypted connection and they are all privacy-respecting",
       "privacy": "Accessible from clearnet, TOR and I2P, no region or network blocks",
       "bullshit": "No CDNs, no cloudflare, no CAPTCHA, no analytics, no bullshit",
-      "link": "Check them out!"
+      "link": "See all the services!"
     },
     "projects": {
       "title": "projects",
@@ -54,11 +53,11 @@
     }
   },
   "donate": {
-    "title": "donate money!",
-    "info": "I spend a lot of time working on different projects and maintaining different services.",
-    "price": "I mostly pay for hosting and electricity. Which when added up costs around 550₺ per month, that is Turkish Lira, equals to ~$15 at time of writing (ik the economy is great).",
-    "details": "So even a small donation would be highly appreciated and it would help me keep everything up and running.",
-    "thanks": "Also huge thanks to all of you who has donated so far, as I said, I highly appreciate it. Thank you!",
+    "title": "Donate Money!",
+    "info": "I spend a lot of time and money on different projects and maintaining different services.",
+    "price": "I mostly pay for hosting and electricity. Which when added up costs around 550₺ per month (~$15 at the time of writing).",
+    "details": "So even a small donation would be useful. And it would help me keep everything up and running.",
+    "thanks": "Also huge thanks to all of you who have donated so far!",
     "table": {
       "platform": "Platform",
       "address": "Adress/Link"
@@ -66,7 +65,7 @@
   },
   "error": {
     "title": "Something went wrong!",
-    "report": "report this issue"
+    "report": "Report this issue"
   },
   "footer": {
     "source": "Source",

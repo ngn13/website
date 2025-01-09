@@ -6,7 +6,6 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/ngn13/website/api/config"
-	"github.com/russross/blackfriday/v2"
 )
 
 func IP(c *fiber.Ctx) string {
@@ -18,15 +17,6 @@ func IP(c *fiber.Ctx) string {
 	}
 
 	return c.IP()
-}
-
-func Markdown(c *fiber.Ctx, raw []byte) error {
-	exts := blackfriday.FencedCode
-	exts |= blackfriday.NoEmptyLineBeforeBlock
-	exts |= blackfriday.HardLineBreak
-
-	c.Set("Content-Type", "text/html; charset=utf-8")
-	return c.Send(blackfriday.Run(raw, blackfriday.WithExtensions(exts)))
 }
 
 func JSON(c *fiber.Ctx, code int, data fiber.Map) error {

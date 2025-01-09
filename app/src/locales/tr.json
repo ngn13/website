@@ -1,19 +1,21 @@
 {
   "navbar": {
     "home": "anasayfa",
-    "news": "haberler",
     "services": "servisler",
-    "language": "dil"
+    "donate": "bağış"
   },
   "home": {
+    "title": "Merhaba Dünya!",
     "welcome": {
-      "title": "Websiteme hoşgeldiniz, ben ngn",
+      "title": "hakkımda",
+      "desc": "Websiteme hoşgeldiniz, ben ngn",
       "whoami": "Türkiye'den, güvenlik, gizlik ve özgürlük savunucusu bir liseliyim",
       "interest": "Sistem güvenliği ve yazılım geliştirmek ile ilgileniyorum",
       "support": "Özgür/Libre ve Açık Kaynaklı Yazılımı (FLOSS) seviyorum ve destekliyorum"
     },
     "work": {
-      "title": "Zamanım çoğunlukla şunlar ile geçiyor...",
+      "title": "iş",
+      "desc": "Şuan bir işim yok, o yüzden zamanımın çoğunu şunlarla geçiriyorum:",
       "build": "salak şeyler inşa etmek",
       "fix": "salak şeyleri düzeltmek",
       "ctf": "CTF challenge'ları çözmek",
@@ -21,24 +23,56 @@
       "wiki": "wikimi genişletmek"
     },
     "links": {
-      "title": "Eğer benim ile iletişime geçmek istiyorsanız, işte bazı faydalı linkler",
-      "prefer": "tercihim"
+      "title": "iletişim",
+      "desc": "Eğer benim ile iletişime geçmek istiyorsanız, işte bazı faydalı linkler",
+      "prefer": "Email'i fazlasıyla tercih ediyorum, PGP anahtarım ile şifreli email'ler gönderebilirsiniz"
     },
-    "info": {
-      "title": "Salak şeyler inşa etmenin yanı sıra, herkes için kullanıma açık özgür ve ücretsiz servisler host ediyorum",
+    "services": {
+      "title": "servisler",
+      "desc": "Salak şeyler inşa etmenin yanı sıra, herkes için kullanıma açık özgür ve ücretsiz servisler host ediyorum",
       "speed": "Tüm servisler 600 Mbit/s ağ arayüzü üzerinden erişilebilir",
       "security": "Hepsi SSL şifreli bağlantı kullanıyor ve hepsi gizliğinize saygı gösteriyor",
       "privacy": "Accessible from clearnet, TOR and I2P, no region or network blocks",
       "privacy": "Açık ağdan, TOR ve I2P'den erişilebilirler, bölge ya da ağ blokları yok",
       "bullshit": "CDN yok, cloudflare yok, CAPTCHA yok, analitikler yok, boktan saçmalıklar yok",
-      "link": "tüm servisleri incele"
+      "link": "Tüm servisleri incele!"
+    },
+    "projects": {
+      "title": "projeler",
+      "desc": "Çoğunlukla özgür yazılım projeleri üzerinde çalışıyorum, işte ilginç bulabileceğiniz bazı projelerim"
     }
+  },
+  "services": {
+    "title": "Servis Durumu",
+    "search": "Bir servisi ara",
+    "feed": "Yenilikler ve güncellemeler",
+    "last": "Son kontrol zamanı {time}",
+    "status": {
+      "up": "Çalışıyor",
+      "down": "Kapalı",
+      "slow": "Yavaş"
+    }
+  },
+  "donate": {
+    "title": "Para Bağışla!",
+    "info": "Farklı projeler ve farklı servisleri yönetmek için oldukça zaman ve para harcıyorum.",
+    "price": "Çoğunlukla hosting ve elektrik için ödeme yapıyorum. Bunlar eklendiği zaman aylık 550₺ civarı bir miktar oluyor (yazdığım sırada ~15$).",
+    "details": "Bu sebepten küçük bir bağış bile oldukça faydalı olacaktır. Ve herşeyi açık ve çalışmakta tutmama yardımcı olacaktır.",
+    "thanks": "Ayrıca şuana kadar bağışta bulunan herkese çok teşekkür ederim!",
+    "table": {
+      "platform": "Platform",
+      "address": "Adres/Bağlantı"
+    }
+  },
+  "error": {
+    "title": "Birşeyler yanlış gitti!",
+    "report": "Bu sorunu raporlayın"
   },
   "footer": {
     "source": "Kaynak",
     "license": "Lisans",
     "privacy": "Gizlilik",
-    "powered": "Svelte, Go, SQLite ve yemek param tarafından destekleniyor",
+    "powered": "Svelte, Go, SQLite ve bağışlar tarafından destekleniyor",
     "number": "{since} tarihinden beri {number}. ziyaretçisiniz",
     "congrat": "tebrikler!!",
     "version": "Kullan API versiyonu {api_version}, arayüz versiyonu {frontend_version}"

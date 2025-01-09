@@ -38,10 +38,10 @@ func (c *Type) Load() (err error) {
 	// default options
 	c.Options = []Option{
 		{Name: "debug", Value: "false", Type: OPTION_TYPE_BOOL, Required: true}, // should display debug messgaes?
-		{Name: "index", Value: "true", Type: OPTION_TYPE_BOOL, Required: false}, // should display the index page (view/index.md)?
 
-		{Name: "api_url", Value: "http://localhost:7001/", Type: OPTION_TYPE_URL, Required: true},      // API URL for the website
-		{Name: "frontend_url", Value: "http://localhost:5173/", Type: OPTION_TYPE_URL, Required: true}, // frontend application URL for the website
+		{Name: "url", Value: "http://localhost:7001/", Type: OPTION_TYPE_URL, Required: true},     // API URL for the website
+		{Name: "app_url", Value: "http://localhost:7002/", Type: OPTION_TYPE_URL, Required: true}, // frontend application URL for the website
+		{Name: "doc_url", Value: "http://localhost:7003/", Type: OPTION_TYPE_URL, Required: true}, // documentation URL for the website
 
 		{Name: "password", Value: "", Type: OPTION_TYPE_STR, Required: true},            // admin password
 		{Name: "host", Value: "0.0.0.0:7001", Type: OPTION_TYPE_STR, Required: true},    // host the server should listen on

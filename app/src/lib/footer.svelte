@@ -1,5 +1,5 @@
 <script>
-  import { color, date_from_ts } from "$lib/util.js";
+  import { urljoin, color, date_from_ts, language } from "$lib/util.js";
   import { get_metrics } from "$lib/api.js";
   import Link from "$lib/link.svelte";
 
@@ -17,15 +17,21 @@
   <div class="info">
     <div class="links">
       <span>
-        <Link href="/" bold={true}>{$_("footer.source")}</Link>
+        <Link link={import.meta.env.APP_SOURCE_URL} bold={true}>{$_("footer.source")}</Link>
       </span>
       <span>/</span>
       <span>
-        <Link href="/" bold={true}>{$_("footer.license")}</Link>
+        <Link
+          link={urljoin(import.meta.env.APP_DOC_URL, "license", { lang: $language })}
+          bold={true}>{$_("footer.license")}</Link
+        >
       </span>
       <span>/</span>
       <span>
-        <Link href="/" bold={true}>{$_("footer.privacy")}</Link>
+        <Link
+          link={urljoin(import.meta.env.APP_DOC_URL, "privacy", { lang: $language })}
+          bold={true}>{$_("footer.privacy")}</Link
+        >
       </span>
     </div>
     <span>

@@ -1,7 +1,7 @@
 import { urljoin } from "$lib/util.js";
 
 const version = "v1";
-const url = urljoin(import.meta.env.VITE_API_URL, version);
+const url = urljoin(import.meta.env.APP_API_URL, version);
 
 function api_url(path = null, query = {}) {
   return urljoin(url, path, query);

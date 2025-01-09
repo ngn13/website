@@ -54,7 +54,7 @@
   </Card>
   <Card title={$_("home.services.title")}>
     <span>
-      {$_("home.services.desc")}
+      {$_("home.services.desc")}:
     </span>
     <ul>
       <li>
@@ -81,7 +81,9 @@
       {$_("home.projects.desc")}:
     </span>
     <ul>
-      {#each projects as project}
+      {#each projects.filter((p) => {
+        return p.desc[$language] !== "" && p.desc[$language] !== null && p.desc[$language] !== undefined;
+      }) as project}
         <li>
           <Link active={true} link={project.url}>{project.name}</Link>:
           {project.desc[$language]}

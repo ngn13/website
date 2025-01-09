@@ -6,12 +6,9 @@
   import { _ } from "svelte-i18n";
 
   export let service = {};
-  let style = "";
-
-  if (service.check_res == 0) style = "opacity: 70%";
 </script>
 
-<main {style}>
+<main>
   <div class="info">
     <div class="title">
       <h1>{service.name}</h1>
@@ -44,7 +41,7 @@
         {$_("services.status.up")}
       </span>
     {:else if service.check_res == 2}
-      <span style="background: var(--white-2)">
+      <span style="background: var(--{color()}); filter: brightness(50%);">
         {$_("services.status.slow")}
       </span>
     {/if}
@@ -70,6 +67,7 @@
     align-items: center;
     justify-content: space-between;
     color: var(--white-1);
+    flex: 1;
   }
 
   main .info .title h1 {

@@ -2,20 +2,30 @@
   import { language, set_lang } from "$lib/util.js";
   import languages from "$lib/lang.js";
 
-  let icon = "",
+  let icon = null,
     indx = 0,
     len = languages.length;
 
-  function next() {
-    if (indx >= languages.length) indx = 0;
+  function next_indx() {
+    if (indx + 1 >= len) return 0;
+    return indx + 1;
+  }
 
-    icon = languages[indx].icon;
-    set_lang(languages[indx++].code);
+  function next_lang(inc) {
+    let new_indx = next_indx();
+    if (inc) indx = new_indx;
+    return languages[new_indx];
+  }
+
+  function next() {
+    set_lang(next_lang(true).code);
+    icon = next_lang(false).icon;
   }
 
   for (indx = 0; indx < len; indx++) {
     if (languages[indx].code == $language) {
-      icon = languages[indx++].icon;
+      set_lang(languages[indx].code);
+      icon = next_lang(false).icon;
       break;
     }
   }

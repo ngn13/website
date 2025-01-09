@@ -38,7 +38,9 @@
     </div>
   </div>
   <div class="services">
-    {#each services as service}
+    {#each services.filter((s) => {
+      return s.desc[$language] !== "" && s.desc[$language] !== null && s.desc[$language] !== undefined;
+    }) as service}
       <Service {service} />
     {/each}
   </div>
