@@ -22,6 +22,7 @@
   "type": "module",
   "dependencies": {
     "@types/dompurify": "^3.2.0",
+    "dompurify": "^3.2.3",
     "marked": "^15.0.6",
     "svelte-i18n": "^4.0.1"
   }

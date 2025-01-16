@@ -40,12 +40,12 @@
     <span>
       {$_("footer.number", {
         values: {
-          number: data.number,
+          total: data.total,
           since: date_from_ts(data.since),
         },
       })}
       {#if data.number % 1000 == 0}
-        <span style="color: var(--{color()})">({$_("footer.congrat")})</span>
+        <span style="color: var(--{color()})">({$_("footer.wow")})</span>
       {/if}
     </span>
     <span>

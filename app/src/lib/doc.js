@@ -16,7 +16,7 @@ async function doc_http_get(fetch, url) {
 }
 
 async function doc_get_list(fetch) {
-  return (await doc_http_get(fetch, doc_urljoin("/list")))["list"];
+  return await doc_http_get(fetch, doc_urljoin("/list"));
 }
 
 async function doc_get(fetch, name) {

@@ -44,7 +44,7 @@ func (db *Type) MetricsSet(key string, value uint64) error {
 		return err
 	} else if effected < 1 {
 		_, err = db.sql.Exec(
-			`INSERT INTO "+TABLE_METRICS+"(
+			"INSERT INTO "+TABLE_METRICS+`(
 			  key, value
 		  ) values(?, ?)`,
 			key, value,

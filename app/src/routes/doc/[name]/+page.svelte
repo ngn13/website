@@ -2,36 +2,48 @@
   import Header from "$lib/header.svelte";
   import Head from "$lib/head.svelte";
 
-  import { color } from "$lib/util.js";
+  import { language, color } from "$lib/util.js";
+  import { goto } from "$app/navigation";
+  import DOMPurify from "dompurify";
+  import { onMount } from "svelte";
   import { marked } from "marked";
   import { _ } from "svelte-i18n";
 
   let { data } = $props();
   marked.use({ breaks: true });
+
+  onMount(async () => {
+    if (data.error !== null) return await goto("/");
+
+    for (let key in data.doc)
+      data.doc[key]["content"] = DOMPurify.sanitize(data.doc[key]["content"]);
+  });
 </script>
 
 <Head title="documentation" desc="website and API documentation" />
 <Header picture="reader" title={$_("doc.title")} />
 
 <main>
-  <div class="markdown-body" style="--link-color: var(--{color()})">
-    {@html marked.parse(data.content)}
-  </div>
-  <div class="docs">
-    {#each data.docs as doc}
-      {#if doc.title == data.title}
-        <a href="/doc/{doc.name}" style="border-color: var(--{color()})">
-          <h1>{doc.title}</h1>
-          <h3>{doc.desc}</h3>
-        </a>
-      {:else}
-        <a href="/doc/{doc.name}" style="border-color: var(--white-3)">
-          <h1>{doc.title}</h1>
-          <h3>{doc.desc}</h3>
-        </a>
-      {/if}
-    {/each}
-  </div>
+  {#if data.doc !== undefined}
+    <div class="markdown-body" style="--link-color: var(--{color()})">
+      {@html marked.parse(data.doc[$language].content)}
+    </div>
+    <div class="docs">
+      {#each data.docs[$language] as doc}
+        {#if doc.title == data.doc[$language].title}
+          <a href="/doc/{doc.name}" style="border-color: var(--{color()})">
+            <h1>{doc.title}</h1>
+            <h3>{doc.desc}</h3>
+          </a>
+        {:else}
+          <a href="/doc/{doc.name}" style="border-color: var(--white-3)">
+            <h1>{doc.title}</h1>
+            <h3>{doc.desc}</h3>
+          </a>
+        {/if}
+      {/each}
+    </div>
+  {/if}
 </main>
 
 <style>

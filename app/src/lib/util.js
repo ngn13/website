@@ -23,20 +23,23 @@ function browser_lang() {
 
 function set_lang(lang) {
   language.set(default_language);
+  locale.set(default_language);
 
   if (lang === null || lang === undefined) {
-    if (browser) set_lang(browser_lang());
+    if (browser && null !== (lang = localStorage.getItem("language"))) set_lang(lang);
+    else if (browser) set_lang(browser_lang());
     return;
   }
 
   lang = lang.slice(0, 2);
 
   for (let i = 0; i < languages.length; i++) {
-    if (lang === languages[i].code) {
-      language.set(lang);
-      locale.set(lang);
-      return;
-    }
+    if (lang !== languages[i].code) continue;
+
+    language.set(lang);
+    locale.set(lang);
+
+    if (browser) localStorage.setItem("language", lang);
   }
 }
 

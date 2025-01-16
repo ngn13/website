@@ -76,8 +76,8 @@
     "license": "License",
     "privacy": "Privacy",
     "powered": "Powered by Svelte, Go, SQLite and donations",
-    "number": "You are the visitor number {number} since {since}",
-    "congrat": "congrats!!",
+    "number": "Visited {total} times since {since}",
+    "wow": "wow!!",
     "version": "Using API version {api_version}, frontend version {frontend_version}"
   }
 }

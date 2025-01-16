@@ -58,31 +58,7 @@ void util_send(ctorm_res_t *res, uint16_t code, cJSON *json) {
   RES_JSON(json);
 }
 
-bool util_dir_contains(char *dir, const char *file) {
-  if (NULL == dir || NULL == file) {
-    errno = EINVAL;
-    return false;
-  }
-
-  struct dirent *dirent = NULL;
-  DIR           *dirfd  = NULL;
-
-  if (NULL == (dirfd = opendir(dir)))
-    return false; // errno set by opendir
-
-  while ((dirent = readdir(dirfd)) != NULL) {
-    if (util_compare_name(dirent->d_name, ".") || util_compare_name(dirent->d_name, ".."))
-      continue;
-
-    if (util_compare_name(dirent->d_name, file))
-      break;
-  }
-
-  closedir(dirfd);
-  return NULL != dirent;
-}
-
-util_file_t *util_file_load(char *path) {
+util_file_t *util_file_load(int dirfd, char *path) {
   if (NULL == path) {
     errno = EINVAL;
     return NULL;
@@ -95,7 +71,7 @@ util_file_t *util_file_load(char *path) {
   if (NULL == (file = malloc(sizeof(util_file_t))))
     goto end; // errno set by malloc
 
-  if ((fd = open(path, O_RDONLY)) < 0)
+  if ((fd = openat(dirfd, path, O_RDONLY)) < 0)
     goto end; // errno set by open
 
   if (fstat(fd, &buf) < 0)

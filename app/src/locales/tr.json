@@ -77,8 +77,8 @@
     "license": "Lisans",
     "privacy": "Gizlilik",
     "powered": "Svelte, Go, SQLite ve bağışlar tarafından destekleniyor",
-    "number": "{since} tarihinden beri {number}. ziyaretçisiniz",
-    "congrat": "tebrikler!!",
+    "number": "{since} tarihinden beri {total} kez ziyaret edildi",
+    "wow": "vay be!!",
     "version": "Kullan API versiyonu {api_version}, arayüz versiyonu {frontend_version}"
   }
 }

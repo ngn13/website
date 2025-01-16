@@ -31,7 +31,7 @@ export async function load({ fetch }) {
     };
   } catch (err) {
     return {
-      error: err,
+      error: err.toString(),
     };
   }
 }

@@ -8,30 +8,25 @@ import (
 	"github.com/ngn13/website/api/util"
 )
 
-type visitor_cache_entry struct {
-	Addr   string // SHA1 hash of visitor's IP
-	Number uint64 // number of the visitor
-}
-
-const VISITOR_CACHE_MAX = 30            // store 30 visitor data at most
-var visitor_cache []visitor_cache_entry // in memory cache for the visitor
+const VISITOR_CACHE_MAX = 30 // store 30 visitor data at most
+var visitor_cache []string   // in memory cache for the visitor addresses
 
 func GET_Metrics(c *fiber.Ctx) error {
 	var (
 		err    error
 		result map[string]uint64 = map[string]uint64{
-			"number": 0, // visitor number of the current visitor
-			"total":  0, // total number of visitors
-			"since":  0, // metric collection start date (UNIX timestamp)
+			"total": 0, // total number of visitors
+			"since": 0, // metric collection start date (UNIX timestamp)
 		}
 	)
 
 	db := c.Locals("database").(*database.Type)
 	new_addr := util.GetSHA1(util.IP(c))
+	is_in_cache := false
 
-	for i := range visitor_cache {
-		if new_addr == visitor_cache[i].Addr {
-			result["number"] = visitor_cache[i].Number
+	for _, cache := range visitor_cache {
+		if new_addr == cache {
+			is_in_cache = true
 			break
 		}
 	}
@@ -40,19 +35,14 @@ func GET_Metrics(c *fiber.Ctx) error {
 		return util.ErrInternal(c, err)
 	}
 
-	if result["number"] == 0 {
-		result["total"]++
-		result["number"] = result["total"]
-
+	if !is_in_cache {
 		if len(visitor_cache) > VISITOR_CACHE_MAX {
 			util.Debg("visitor cache is full, removing the oldest entry")
 			visitor_cache = visitor_cache[1:]
 		}
 
-		visitor_cache = append(visitor_cache, visitor_cache_entry{
-			Addr:   new_addr,
-			Number: result["number"],
-		})
+		visitor_cache = append(visitor_cache, new_addr)
+		result["total"]++
 
 		if err = db.MetricsSet("visitor_count", result["total"]); err != nil {
 			return util.ErrInternal(c, err)
