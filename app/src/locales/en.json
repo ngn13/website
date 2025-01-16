@@ -43,6 +43,7 @@
   },
   "services": {
     "title": "Service Status",
+    "none": "No services found",
     "search": "Search for a service",
     "feed": "News and updates",
     "last": "Last checked at {time}",
@@ -62,6 +63,9 @@
       "platform": "Platform",
       "address": "Adress/Link"
     }
+  },
+  "doc": {
+    "title": "Documentation"
   },
   "error": {
     "title": "Something went wrong!",

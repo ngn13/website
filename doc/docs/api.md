@@ -1,22 +1,11 @@
-<!-- This is the markdown file that will be served by the index route -->
-
-<style>
-* {
-    font-family: monospace;
-}
-</style>
-
-# [{{.api.Host}}]({{.api.String}})
-This is the API for my personal website, [{{.frontend.Host}}]({{.frontend.String}}).
-
-It stores information about the self-hosted services I provide and it also allows me
+The API stores information about the self-hosted services I provide and it also allows me
 to publish news and updates about these services using an Atom feed. It's written in
 Go and uses SQLite for storage. Licensed under GNU GPL version 3.
 
 **Source code and the license is available at**: [https://github.com/ngn13/website](https://github.com/ngn13/website)
 **You can report issues to**: [https://github.com/ngn13/website/issues](https://github.com/ngn13/website/issues)
 
-The rest of this document contains documentation for all the available API endpoints.
+The rest of this documentation contains information about all the available API endpoints.
 
 ## Version 1 Endpoints
 Each version 1 endpoint, can be accessed using the /v1 route.

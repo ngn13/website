@@ -1,5 +1,6 @@
 import { default_language, language, set_lang } from "$lib/util.js";
-import { get_services, get_projects } from "$lib/api.js";
+import { api_get_services, api_get_projects } from "$lib/api.js";
+import { doc_get_list } from "$lib/doc.js";
 import languages from "$lib/lang.js";
 
 import { init, register, waitLocale } from "svelte-i18n";
@@ -23,8 +24,9 @@ export async function load({ fetch }) {
 
   try {
     return {
-      services: await get_services(fetch),
-      projects: await get_projects(fetch),
+      services: await api_get_services(fetch),
+      projects: await api_get_projects(fetch),
+      docs: await doc_get_list(fetch),
       error: null,
     };
   } catch (err) {

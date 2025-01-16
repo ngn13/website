@@ -1,34 +1,46 @@
-#include <ctorm/log.h>
+#include <ctorm/ctorm.h>
+
 #include <stdlib.h>
 #include <string.h>
+
+#include <stdio.h>
 #include <errno.h>
+
 #include "config.h"
+#include "util.h"
 
 option_t options[] = {
-    {"host", "0.0.0.0:7003", true }, // host the server should listen on
-    {NULL,   NULL,           false},
+    {"host",     "0.0.0.0:7003", true }, // host the server should listen on
+    {"docs_dir", "./docs",       true }, // documentation directory
+    {"",         NULL,           false},
 };
 
-int32_t config_load(config_t *conf) {
+bool config_load(config_t *conf) {
   bzero(conf, sizeof(*conf));
 
-  char *value   = NULL;
+  char name_env[OPT_NAME_MAX + 5], name_copy[OPT_NAME_MAX], *value = NULL;
   conf->options = options;
 
-  for (option_t *opt = conf->options; opt->name != NULL; opt++) {
-    if ((value = getenv(opt->name)) != NULL)
+  for (option_t *opt = conf->options; opt->value != NULL; opt++, conf->count++) {
+    strcpy(name_copy, opt->name);
+    util_toupper(name_copy);
+    snprintf(name_env, sizeof(name_env), "DOC_%s", name_copy);
+
+    if ((value = getenv(name_env)) != NULL)
       opt->value = value;
 
-    if (opt->required && *opt->value == 0) {
-      error("please specify a value for the required config option %s", opt->name);
-      errno = EFAULT;
-      return -1;
-    }
+    if (*opt->value == 0)
+      opt->value = NULL;
 
-    conf->count++;
+    if (!opt->required || NULL != opt->value)
+      continue;
+
+    ctorm_fail("please specify a value for the required config option: %s (%s)", opt->name, name_env);
+    errno = EFAULT;
+    return false;
   }
 
-  return 0;
+  return true;
 }
 
 char *config_get(config_t *conf, const char *name) {

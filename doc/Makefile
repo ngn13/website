@@ -10,7 +10,7 @@ OBJS  = $(patsubst ./src/%.c,./$(DISTDIR)/%.o,$(CSRCS))
 
 # compiler flags
 CFLAGS  = -O3 -fstack-protector-strong -fcf-protection=full -fstack-clash-protection
-LIBS    = -lctorm -lcmark
+LIBS    = -lctorm -lcjson
 INCLUDE = -I./inc
 
 all: doc.elf

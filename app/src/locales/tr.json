@@ -44,6 +44,7 @@
   },
   "services": {
     "title": "Servis Durumu",
+    "none": "Servis bulunamadı",
     "search": "Bir servisi ara",
     "feed": "Yenilikler ve güncellemeler",
     "last": "Son kontrol zamanı {time}",
@@ -63,6 +64,9 @@
       "platform": "Platform",
       "address": "Adres/Bağlantı"
     }
+  },
+  "doc": {
+    "title": "Dökümantasyon"
   },
   "error": {
     "title": "Birşeyler yanlış gitti!",

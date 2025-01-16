@@ -4,8 +4,8 @@
   import Link from "$lib/link.svelte";
   import Head from "$lib/head.svelte";
 
+  import { api_urljoin } from "$lib/api.js";
   import { language } from "$lib/util.js";
-  import { api_url } from "$lib/api.js";
   import { _ } from "svelte-i18n";
 
   let { data } = $props();
@@ -25,6 +25,14 @@
       else if (s.desc[$language].toLowerCase().includes(value)) services.push(s);
     });
   }
+
+  function get_services() {
+    return services.filter((s) => {
+      return (
+        s.desc[$language] !== "" && s.desc[$language] !== null && s.desc[$language] !== undefined
+      );
+    });
+  }
 </script>
 
 <Head title="services" desc="my self-hosted services and projects" />
@@ -34,15 +42,17 @@
   <div class="title">
     <input oninput={change} type="text" placeholder={$_("services.search")} />
     <div>
-      <Link icon="nf-fa-feed" link={api_url("/news/" + $language)}>{$_("services.feed")}</Link>
+      <Link icon="nf-fa-feed" link={api_urljoin("/news/" + $language)}>{$_("services.feed")}</Link>
     </div>
   </div>
   <div class="services">
-    {#each services.filter((s) => {
-      return s.desc[$language] !== "" && s.desc[$language] !== null && s.desc[$language] !== undefined;
-    }) as service}
-      <Service {service} />
-    {/each}
+    {#if get_services().length == 0}
+      <h3 class="none">{$_("services.none")}</h3>
+    {:else}
+      {#each get_services() as service}
+        <Service {service} />
+      {/each}
+    {/if}
   </div>
 </main>
 
@@ -59,12 +69,16 @@
     align-items: center;
   }
 
+  main .none {
+    color: var(--white-3);
+  }
+
   main .services {
+    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: stretch;
-    margin-top: 20px;
     gap: 28px;
   }
 

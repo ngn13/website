@@ -6,12 +6,13 @@ COPY *.go     ./
 COPY *.mod    ./
 COPY *.sum    ./
 COPY Makefile ./
+COPY config   ./config
+COPY database ./database
+COPY routes   ./routes
+COPY sql      ./sql
+COPY status   ./status
 COPY util     ./util
 COPY views    ./views
-COPY routes   ./routes
-COPY config   ./config
-COPY status   ./status
-COPY database ./database
 
 EXPOSE 7001
 RUN make

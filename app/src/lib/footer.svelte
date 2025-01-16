@@ -1,6 +1,6 @@
 <script>
-  import { urljoin, color, date_from_ts, language } from "$lib/util.js";
-  import { get_metrics } from "$lib/api.js";
+  import { urljoin, color, date_from_ts } from "$lib/util.js";
+  import { api_get_metrics } from "$lib/api.js";
   import Link from "$lib/link.svelte";
 
   import { onMount } from "svelte";
@@ -9,7 +9,7 @@
   let data = {};
 
   onMount(async () => {
-    data = await get_metrics(fetch);
+    data = await api_get_metrics(fetch);
   });
 </script>
 
@@ -21,16 +21,14 @@
       </span>
       <span>/</span>
       <span>
-        <Link
-          link={urljoin(import.meta.env.APP_DOC_URL, "license", { lang: $language })}
-          bold={true}>{$_("footer.license")}</Link
+        <Link link={urljoin(import.meta.env.APP_URL, "doc/license")} bold={true}
+          >{$_("footer.license")}</Link
         >
       </span>
       <span>/</span>
       <span>
-        <Link
-          link={urljoin(import.meta.env.APP_DOC_URL, "privacy", { lang: $language })}
-          bold={true}>{$_("footer.privacy")}</Link
+        <Link link={urljoin(import.meta.env.APP_URL, "doc/privacy")} bold={true}
+          >{$_("footer.privacy")}</Link
         >
       </span>
     </div>

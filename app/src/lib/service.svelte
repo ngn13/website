@@ -73,11 +73,13 @@
   main .info .title h1 {
     font-size: var(--size-5);
     margin-bottom: 8px;
+    font-weight: 900;
   }
 
   main .info .title p {
     font-size: var(--size-4);
     color: var(--white-2);
+    font-weight: 100;
   }
 
   main .info .links {

@@ -34,6 +34,7 @@
     display: flex;
     flex-direction: column;
     justify-content: end;
+    align-items: flex-start;
     gap: 10px;
 
     padding: 50px;

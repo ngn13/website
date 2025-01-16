@@ -66,7 +66,7 @@ func GET_Metrics(c *fiber.Ctx) error {
 	if result["since"] == 0 {
 		result["since"] = uint64(time.Now().Truncate(24 * time.Hour).Unix())
 
-		if err = db.MetricsSet("since", result["since"]); err != nil {
+		if err = db.MetricsSet("start_date", result["since"]); err != nil {
 			return util.ErrInternal(c, err)
 		}
 	}

@@ -61,11 +61,6 @@
 }
 
 .markdown-body a {
-  animation-name: colorAnimation;
-  animation-iteration-count: infinite;
-  animation-duration: 10s;
-  background-color: transparent;
-  color: #58a6ff;
   text-decoration: none;
 }
 
@@ -725,7 +720,7 @@
   margin: 0;
   font-size: 85%;
   white-space: break-spaces;
-  background: var(--dark-two);
+  background: var(--black-3);
   border-radius: 6px;
 }
 
@@ -770,7 +765,7 @@
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
-  background-color: var(--dark-two);
+  background-color: var(--black-3);
   border-radius: 6px;
 }
 

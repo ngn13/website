@@ -1,6 +1,6 @@
 <script>
   import { frontend_url } from "$lib/util.js";
-  import { api_url } from "$lib/api.js";
+  import { api_urljoin } from "$lib/api.js";
 
   export let desc, title;
 </script>
@@ -13,5 +13,10 @@
   <meta content={frontend_url()} property="og:url" />
   <meta content="#000000" data-react-helmet="true" name="theme-color" />
 
-  <link rel="alternate" type="application/atom+xml" href={api_url("/news/en")} title="Atom Feed" />
+  <link
+    rel="alternate"
+    type="application/atom+xml"
+    href={api_urljoin("/news/en")}
+    title="Atom Feed"
+  />
 </svelte:head>

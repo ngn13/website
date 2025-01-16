@@ -8,9 +8,7 @@
 
 <header>
   <div>
-    <h1 class="title" style="color: var(--{color()})">
-      {title.toLowerCase()}
-    </h1>
+    <h1 class="title" style="color: var(--{color()})">{title.toLowerCase()}</h1>
     <h1 class="cursor" style="color: var(--{color()})">_</h1>
   </div>
   <img src="/profile/{picture}.png" alt="" />

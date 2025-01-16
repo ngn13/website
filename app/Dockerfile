@@ -16,8 +16,7 @@ COPY --from=build /app/build ./build
 COPY --from=build /app/package.json ./package.json
 COPY --from=build /app/package-lock.json ./package-lock.json
 
-EXPOSE 4173
-
+EXPOSE 7001
 RUN bun install
 
 CMD ["bun", "build/index.js"]

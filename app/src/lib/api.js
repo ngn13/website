@@ -1,13 +1,13 @@
 import { urljoin } from "$lib/util.js";
 
-const version = "v1";
-const url = urljoin(import.meta.env.APP_API_URL, version);
+const api_version = "v1";
+const api_url = urljoin(import.meta.env.APP_API_URL, api_version);
 
-function api_url(path = null, query = {}) {
-  return urljoin(url, path, query);
+function api_urljoin(path = null, query = {}) {
+  return urljoin(api_url, path, query);
 }
 
-function check_err(json) {
+function api_check_err(json) {
   if (!("error" in json)) throw new Error('API response is missing the "error" key');
 
   if (json["error"] != "") throw new Error(`API returned an error: ${json["error"]}`);
@@ -15,23 +15,23 @@ function check_err(json) {
   if (!("result" in json)) throw new Error('API response is missing the "result" key');
 }
 
-async function GET(fetch, url) {
+async function api_http_get(fetch, url) {
   const res = await fetch(url);
   const json = await res.json();
-  check_err(json);
+  api_check_err(json);
   return json["result"];
 }
 
-async function get_metrics(fetch) {
-  return GET(fetch, api_url("/metrics"));
+async function api_get_metrics(fetch) {
+  return await api_http_get(fetch, api_urljoin("/metrics"));
 }
 
-async function get_services(fetch) {
-  return GET(fetch, api_url("/services"));
+async function api_get_services(fetch) {
+  return await api_http_get(fetch, api_urljoin("/services"));
 }
 
-async function get_projects(fetch) {
-  return GET(fetch, api_url("/projects"));
+async function api_get_projects(fetch) {
+  return await api_http_get(fetch, api_urljoin("/projects"));
 }
 
-export { version, api_url, get_metrics, get_services, get_projects };
+export { api_version, api_urljoin, api_get_metrics, api_get_services, api_get_projects };
