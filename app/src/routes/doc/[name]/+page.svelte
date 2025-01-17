@@ -62,7 +62,7 @@
     display: flex;
     flex-direction: column;
     align-items: end;
-    gap: 5px;
+    gap: 6px;
   }
 
   main .docs a {
@@ -78,7 +78,7 @@
   }
 
   main .docs a:hover {
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow-2);
   }
 
   main .docs a h1 {

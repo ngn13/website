@@ -18,13 +18,13 @@
 
 <style>
   nav {
+    box-shadow: var(--box-shadow-1);
     background: var(--black-1);
     padding: 20px 30px 20px 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    box-shadow: var(--def-shadow);
   }
 
   div {

@@ -4,4 +4,7 @@ all:
 format:
 	npm run format
 
+run:
+	npm run dev
+
 .PHONY: format
