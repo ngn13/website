@@ -15,7 +15,7 @@
       {error}
     {/if}
   </code>
-  <Link link={import.meta.env.APP_REPORT_URL}>
+  <Link link={import.meta.env.WEBSITE_REPORT_URL}>
     {$_("error.report")}
   </Link>
   <img src="/profile/sad.png" alt="" />

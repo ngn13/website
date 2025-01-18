@@ -1,7 +1,7 @@
 import { urljoin } from "$lib/util.js";
 
 function doc_urljoin(path = null, query = {}) {
-  return urljoin(import.meta.env.APP_DOC_URL, path, query);
+  return urljoin(import.meta.env.WEBSITE_DOC_URL, path, query);
 }
 
 function doc_check_err(json) {

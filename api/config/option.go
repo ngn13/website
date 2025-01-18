@@ -25,7 +25,7 @@ type Option struct {
 }
 
 func (o *Option) Env() string {
-	return strings.ToUpper(fmt.Sprintf("API_%s", o.Name))
+	return strings.ToUpper(fmt.Sprintf("WEBSITE_%s", o.Name))
 }
 
 func (o *Option) Load() (err error) {

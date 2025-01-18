@@ -1,25 +1,27 @@
 <script>
   import Navbar from "$lib/navbar.svelte";
   import Footer from "$lib/footer.svelte";
-  import Error from "$lib/error.svelte";
 
-  let { data, children } = $props();
+  import { locale_select } from "$lib/locale.js";
+  import { onMount } from "svelte";
+
+  let { children } = $props();
+
+  onMount(() => {
+    locale_select();
+  });
 </script>
 
 <main>
-  {#if data.error === null}
-    <Navbar />
-    <div class="content">
-      {@render children()}
-    </div>
-    <Footer />
-  {:else}
-    <Error error={data.error} />>
-  {/if}
+  <Navbar />
+  <div class="content">
+    {@render children()}
+  </div>
+  <Footer />
 </main>
 
 <style>
-  @import "../../static/global.css";
+  @import "/global.css";
 
   main {
     display: flex;

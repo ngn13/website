@@ -1,2 +1,7 @@
+data.db
 *.yaml
+*.yml
 *.env
+
+# don't ignore example deployment stuff
+!deploy/*

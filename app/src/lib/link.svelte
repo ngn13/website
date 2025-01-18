@@ -21,11 +21,11 @@
   <Icon {icon} />
 {/if}
 {#if highlight}
-  <a {style} href={link}>
+  <a data-sveltekit-preload-data {style} href={link}>
     <slot></slot>
   </a>
 {:else}
-  <a {style} class="no-highlight" href={link}>
+  <a data-sveltekit-preload-data {style} class="no-highlight" href={link}>
     <slot></slot>
   </a>
 {/if}

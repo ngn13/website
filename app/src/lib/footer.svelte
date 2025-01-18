@@ -17,17 +17,17 @@
   <div class="info">
     <div class="links">
       <span>
-        <Link link={import.meta.env.APP_SOURCE_URL} bold={true}>{$_("footer.source")}</Link>
+        <Link link={import.meta.env.WEBSITE_SOURCE_URL} bold={true}>{$_("footer.source")}</Link>
       </span>
       <span>/</span>
       <span>
-        <Link link={urljoin(import.meta.env.APP_URL, "doc/license")} bold={true}
+        <Link link={urljoin(import.meta.env.WEBSITE_APP_URL, "doc/license")} bold={true}
           >{$_("footer.license")}</Link
         >
       </span>
       <span>/</span>
       <span>
-        <Link link={urljoin(import.meta.env.APP_URL, "doc/privacy")} bold={true}
+        <Link link={urljoin(import.meta.env.WEBSITE_APP_URL, "doc/privacy")} bold={true}
           >{$_("footer.privacy")}</Link
         >
       </span>

@@ -1,38 +1,24 @@
 <script>
-  import { language, set_lang } from "$lib/util.js";
-  import languages from "$lib/lang.js";
+  import { locale_list, locale_select, locale_index } from "$lib/locale.js";
 
-  let icon = null,
-    indx = 0,
-    len = languages.length;
+  let len = locale_list.length;
 
-  function next_indx() {
-    if (indx + 1 >= len) return 0;
-    return indx + 1;
-  }
+  function get_next(indx) {
+    let new_indx = 0;
 
-  function next_lang(inc) {
-    let new_indx = next_indx();
-    if (inc) indx = new_indx;
-    return languages[new_indx];
+    if (indx + 1 >= len) indx = 0;
+    else new_indx = indx + 1;
+
+    return locale_list[new_indx];
   }
 
   function next() {
-    set_lang(next_lang(true).code);
-    icon = next_lang(false).icon;
-  }
-
-  for (indx = 0; indx < len; indx++) {
-    if (languages[indx].code == $language) {
-      set_lang(languages[indx].code);
-      icon = next_lang(false).icon;
-      break;
-    }
+    locale_select(get_next($locale_index).code);
   }
 </script>
 
 <button on:click={next}>
-  {icon}
+  {get_next($locale_index).icon}
 </button>
 
 <style>

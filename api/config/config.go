@@ -39,12 +39,11 @@ func (c *Type) Load() (err error) {
 	c.Options = []Option{
 		{Name: "debug", Value: "false", Type: OPTION_TYPE_BOOL, Required: true}, // should display debug messgaes?
 
-		{Name: "url", Value: "http://localhost:7001/", Type: OPTION_TYPE_URL, Required: true},     // API URL for the website
-		{Name: "app_url", Value: "http://localhost:7002/", Type: OPTION_TYPE_URL, Required: true}, // frontend application URL for the website
-		{Name: "doc_url", Value: "http://localhost:7003/", Type: OPTION_TYPE_URL, Required: true}, // documentation URL for the website
+		{Name: "app_url", Value: "http://localhost:7001/", Type: OPTION_TYPE_URL, Required: true}, // frontend application URL for the website
+		{Name: "api_url", Value: "http://localhost:7002/", Type: OPTION_TYPE_URL, Required: true}, // API URL for the website
 
 		{Name: "password", Value: "", Type: OPTION_TYPE_STR, Required: true},            // admin password
-		{Name: "host", Value: "0.0.0.0:7001", Type: OPTION_TYPE_STR, Required: true},    // host the server should listen on
+		{Name: "host", Value: "0.0.0.0:7002", Type: OPTION_TYPE_STR, Required: true},    // host the server should listen on
 		{Name: "ip_header", Value: "X-Real-IP", Type: OPTION_TYPE_STR, Required: false}, // header that should be checked for obtaining the client IP
 		{Name: "interval", Value: "1h", Type: OPTION_TYPE_STR, Required: false},         // service status check interval
 		{Name: "timeout", Value: "15s", Type: OPTION_TYPE_STR, Required: false},         // timeout for the service status check

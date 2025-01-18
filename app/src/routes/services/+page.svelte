@@ -1,12 +1,12 @@
 <script>
   import Service from "$lib/service.svelte";
   import Header from "$lib/header.svelte";
+  import Error from "$lib/error.svelte";
   import Link from "$lib/link.svelte";
   import Head from "$lib/head.svelte";
 
   import { api_urljoin } from "$lib/api.js";
-  import { language } from "$lib/util.js";
-  import { _ } from "svelte-i18n";
+  import { locale, _ } from "svelte-i18n";
 
   let { data } = $props();
   let services = $state(data.services);
@@ -22,15 +22,13 @@
 
     data.services.forEach((s) => {
       if (s.name.toLowerCase().includes(value)) services.push(s);
-      else if (s.desc[$language].toLowerCase().includes(value)) services.push(s);
+      else if (s.desc[$locale].toLowerCase().includes(value)) services.push(s);
     });
   }
 
   function get_services() {
     return services.filter((s) => {
-      return (
-        s.desc[$language] !== "" && s.desc[$language] !== null && s.desc[$language] !== undefined
-      );
+      return s.desc[$locale] !== "" && s.desc[$locale] !== null && s.desc[$locale] !== undefined;
     });
   }
 </script>
@@ -38,23 +36,27 @@
 <Head title="services" desc="my self-hosted services and projects" />
 <Header picture="cool" title={$_("services.title")} />
 
-<main>
-  <div class="title">
-    <input oninput={change} type="text" placeholder={$_("services.search")} />
-    <div>
-      <Link icon="nf-fa-feed" link={api_urljoin("/news/" + $language)}>{$_("services.feed")}</Link>
+{#if data.error !== undefined}
+  <Error error={data.error} />
+{:else}
+  <main>
+    <div class="title">
+      <input oninput={change} type="text" placeholder={$_("services.search")} />
+      <div>
+        <Link icon="nf-fa-feed" link={api_urljoin("/news/" + $locale)}>{$_("services.feed")}</Link>
+      </div>
     </div>
-  </div>
-  <div class="services">
-    {#if get_services().length == 0}
-      <h3 class="none">{$_("services.none")}</h3>
-    {:else}
-      {#each get_services() as service}
-        <Service {service} />
-      {/each}
-    {/if}
-  </div>
-</main>
+    <div class="services">
+      {#if get_services().length == 0}
+        <h3 class="none">{$_("services.none")}</h3>
+      {:else}
+        {#each get_services() as service}
+          <Service {service} />
+        {/each}
+      {/if}
+    </div>
+  </main>
+{/if}
 
 <style>
   main {

@@ -7,7 +7,11 @@ COPY docs     ./docs
 COPY inc      ./inc
 COPY src      ./src
 
-EXPOSE 7003
+RUN useradd runner -r -u 1001 -d /doc
+RUN chown -R runner:runner /doc
+
+USER runner
 RUN make
 
+EXPOSE 7003
 ENTRYPOINT ["/doc/doc.elf"]

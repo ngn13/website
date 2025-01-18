@@ -1,7 +1,7 @@
 import { urljoin } from "$lib/util.js";
 
 const api_version = "v1";
-const api_url = urljoin(import.meta.env.APP_API_URL, api_version);
+const api_url = urljoin(import.meta.env.WEBSITE_API_URL, api_version);
 
 function api_urljoin(path = null, query = {}) {
   return urljoin(api_url, path, query);

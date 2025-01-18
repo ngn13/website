@@ -18,13 +18,13 @@ option_t options[] = {
 bool config_load(config_t *conf) {
   bzero(conf, sizeof(*conf));
 
-  char name_env[OPT_NAME_MAX + 5], name_copy[OPT_NAME_MAX], *value = NULL;
+  char name_env[OPT_NAME_MAX + 10], name_copy[OPT_NAME_MAX], *value = NULL;
   conf->options = options;
 
   for (option_t *opt = conf->options; opt->value != NULL; opt++, conf->count++) {
     strcpy(name_copy, opt->name);
     util_toupper(name_copy);
-    snprintf(name_env, sizeof(name_env), "DOC_%s", name_copy);
+    snprintf(name_env, sizeof(name_env), "WEBSITE_%s", name_copy);
 
     if ((value = getenv(name_env)) != NULL)
       opt->value = value;
