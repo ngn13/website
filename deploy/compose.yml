@@ -5,11 +5,11 @@ services:
     build:
       context: ./app
       args:
-        WEBSITE_SOURCE_URL: http://github.com/ngn13/website
-        WEBSITE_REPORT_URL: http://github.com/ngn13/website/issues
-        WEBSITE_APP_URL: http://localhost:7001
-        WEBSITE_API_URL: http://localhost:7002
-        WEBSITE_DOC_URL: http://doc:7003
+        WEBSITE_SOURCE_URL: "http://github.com/ngn13/website"
+        WEBSITE_REPORT_URL: "http://github.com/ngn13/website/issues"
+        WEBSITE_APP_URL: "http://localhost:7001"
+        WEBSITE_API_URL: "http://localhost:7002"
+        WEBSITE_DOC_URL: "http://doc:7003"
     security_opt:
       - "no-new-privileges:true"
     cap_drop:
@@ -36,15 +36,26 @@ services:
       - ./data.db:/api/data.db:rw
     restart: unless-stopped
     environment:
-      WEBSITE_PASSWORD: change_me
+      WEBSITE_DEBUG: "false"
+      WEBSITE_APP_URL: "http://localhost:7001/"
+      WEBSITE_PASSWORD: "change_me"
+      WEBSITE_HOST: "0.0.0.0:7002"
+      WEBSITE_IP_HEADER: "X-Real-IP"
+      WEBSITE_INTERVAL: "1h"
+      WEBSITE_TIMEOUT: "15s"
+      WEBSITE_LIMIT: "5s"
 
   doc:
     container_name: "website_doc"
     image: website_doc
+    read_only: true
     build:
       context: ./doc
     security_opt:
-      - ano-new-privileges:true
+      - "no-new-privileges:true"
     cap_drop:
       - ALL
     restart: unless-stopped
+    environment:
+      WEBSITE_HOST: "0.0.0.0:7003"
+      WEBSITE_DOCS_DIR: "./docs"

@@ -2,9 +2,10 @@ import { api_get_services } from "$lib/api.js";
 
 export async function load({ fetch }) {
   try {
-    let services = await api_get_services(fetch)
+    let services = await api_get_services(fetch);
     return {
       services: null === services ? [] : services,
+      error: "",
     };
   } catch (err) {
     return {

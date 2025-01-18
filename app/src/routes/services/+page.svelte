@@ -36,7 +36,7 @@
 <Head title="services" desc="my self-hosted services and projects" />
 <Header picture="cool" title={$_("services.title")} />
 
-{#if data.error !== undefined}
+{#if data.error.length !== 0}
   <Error error={data.error} />
 {:else}
   <main>

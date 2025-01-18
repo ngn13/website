@@ -5,6 +5,7 @@ export async function load({ fetch, params }) {
     return {
       docs: await doc_get_list(fetch),
       doc: await doc_get(fetch, params.name),
+      error: "",
     };
   } catch (err) {
     return { error: err.toString() };

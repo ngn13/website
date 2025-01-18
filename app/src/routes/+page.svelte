@@ -14,7 +14,7 @@
 <Head title="home" desc="home page of my personal website" />
 <Header picture="tired" title={$_("home.title")} />
 
-{#if data.error !== undefined}
+{#if data.error.length !== 0}
   <Error error={data.error} />
 {:else}
   <main>

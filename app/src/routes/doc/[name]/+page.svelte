@@ -4,6 +4,7 @@
   import Head from "$lib/head.svelte";
 
   import { locale, _ } from "svelte-i18n";
+  import { goto } from "$app/navigation";
   import { color } from "$lib/util.js";
   import DOMPurify from "dompurify";
   import { onMount } from "svelte";
@@ -15,14 +16,18 @@
   onMount(async () => {
     for (let key in data.doc)
       data.doc[key]["content"] = DOMPurify.sanitize(data.doc[key]["content"]);
+
+    if (undefined !== data.error && data.error.includes("not found")) goto("/");
   });
 </script>
 
 <Head title="documentation" desc="website and API documentation" />
 <Header picture="reader" title={$_("doc.title")} />
 
-{#if data.error !== undefined}
-  <Error error={data.error} />
+{#if data.error.length !== 0}
+  {#if !data.error.includes("not found")}
+    <Error error={data.error} />
+  {/if}
 {:else}
   <main>
     {#if data.doc !== undefined}

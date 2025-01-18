@@ -9,6 +9,6 @@ func GET_Index(c *fiber.Ctx) error {
 	conf := c.Locals("config").(*config.Type)
 	app := conf.GetURL("app_url")
 
-  // redirect to the API documentation
+	// redirect to the API documentation
 	return c.Redirect(app.JoinPath("/doc/api").String())
 }

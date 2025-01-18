@@ -1,6 +1,6 @@
-Kişisel olarak ben bir gizlik savunucusu olduğumdan, bir yandan sunucumu güvende tutarken bir yandan da gizliliğinize önem göstermek
-için elimden geleni yapıyorum. Aynı zamanda bu tarz şeyler hakkında şeffaf ve açık olmanın önemli olduğunu düşünüyorum, o yüzden
-verilerinizi nasıl işlediğimi ya da depoladığımı anlamanız için bu dökümanı yazmaya karar verdim.
+Kişisel olarak ben de bir gizlik savunucusu olduğumdan, bir yandan sunucumu güvende tutarken bir yandan da gizliliğinize önem
+göstermek için elimden geleni yapıyorum. Aynı zamanda bu tarz şeyler hakkında şeffaf ve açık olmanın önemli olduğunu düşünüyorum,
+o yüzden verilerinizi nasıl işlediğimi ya da depoladığımı anlamanız için bu dökümanı yazmaya karar verdim.
 
 ## DNS & SSL
 Şuan cloudflare'in isim sunucularını kullanıyorum, ancak cloudflare alan adıma sahip değil (alan adımı cloudflare'den almadım)
