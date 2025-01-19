@@ -1,88 +1,98 @@
 <script>
-  import Header from "../../lib/header.svelte";
-  import Card from "../../lib/card.svelte";
+  import Header from "$lib/header.svelte";
+  import Head from "$lib/head.svelte";
+  import Icon from "$lib/icon.svelte";
+
+  import { color } from "$lib/util.js";
+  import { _ } from "svelte-i18n";
 </script>
 
-<svelte:head>
-  <title>[ngn.tf] | donate</title>
-  <meta content="[ngn] | donate" property="og:title" />
-  <meta content="Give me all of your life savings" property="og:description" />
-  <meta content="https://ngn.tf" property="og:url" />
-  <meta content="#000000" data-react-helmet="true" name="theme-color" />
-</svelte:head>
-
-<Header>
-  <c>bash</c>
-  donate.sh
-</Header>
+<Head title="donate" desc="give me all of your life savings" />
+<Header picture="money" title={$_("donate.title")} />
 
 <main>
-  <Card title="bash donate.sh">
-    I work on free/libre and open source software and offer free services. General hosting
-    and stuff costs around 550₺ (~$17) per month, so feel free to donate in order to help me keep
-    everything up and running!
-    <table>
-      <thead>
-        <tr>
-          <th>Platform</th>
-          <th>Address/Link</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Monero (XMR)</td>
-          <td>
-            <code>
+  <span> </span>
+  <span>
+    {$_("donate.info")}
+    {$_("donate.price")}
+  </span>
+  <br />
+  <br />
+  <span>
+    {$_("donate.details")}
+  </span>
+  <table>
+    <thead>
+      <tr>
+        <th style="color: var(--{color()})">{$_("donate.table.platform")}</th>
+        <th style="color: var(--{color()})">{$_("donate.table.address")}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <Icon icon="nf-fa-monero" />
+          Monero (XMR)
+        </td>
+        <td>
+          <code>
             46q7G7u7cmASvJm7AmrhmNg6ctS77mYMmDAy1QxpDn5w57xV3GUY5za4ZPZHAjqaXdfS5YRWm4AVj5UArLDA1retRkJp47F
-            </code>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    Also huge thanks to all of you who has donated so far, even if it's a small amount, I highly
-    appreciate it. Thank you!
-  </Card>
+          </code>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <span>
+    {$_("donate.thanks")}
+  </span>
 </main>
 
 <style>
-main{
-  display: flex;
-  flex-direction: column;
-  gap: 35px;
-  padding: 50px;
-}
+  main {
+    padding: 50px;
+  }
 
-table {
-  border-collapse: collapse;
-  border: none;
-  color: white;
-  font-size: 20px;
-  width: 100%;
-  margin: 30px 0 30px 0;
-  box-shadow: var(--box-shadow);
-}
+  main span {
+    font-size: var(--size-4);
+    color: var(--white-1);
+  }
 
+  table {
+    box-shadow: var(--box-shadow);
+    background: var(--black-3);
+    border-collapse: collapse;
+    font-size: var(--size-3);
+    margin: 30px 0 30px 0;
+    width: 100%;
+  }
 
-tr,th,td{
-  color: white;
-  background: var(--dark-two);
-}
+  tr,
+  th,
+  td {
+    color: white;
+    background: var(--dark-two);
+    text-align: left;
+  }
 
-td,th{
-  border: solid 1px var(--dark-fife);
-  padding: 16px;
-}
+  td,
+  th {
+    font-size: var(--size-4);
+    border: solid 1px var(--black-4);
+    padding: 16px;
+  }
 
-th {
-  animation-name: colorAnimation;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  background: var(--dark-two);
-}
+  th {
+    font-weight: 1000;
+  }
 
-code {
-  word-wrap: break-word;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
+  td {
+    color: var(--white-2);
+    font-weight: 400;
+  }
+
+  code {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
 </style>

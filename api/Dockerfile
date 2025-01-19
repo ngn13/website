@@ -1,17 +1,26 @@
 FROM golang:1.23.4
 
-WORKDIR /app
+WORKDIR /api
 
-COPY *.go     ./
+RUN useradd runner -r -u 1001 -d /api
+RUN chown -R runner:runner /api
+USER runner
+
 COPY *.mod    ./
 COPY *.sum    ./
+
+RUN go mod download
+
+COPY *.go     ./
 COPY Makefile ./
-COPY routes   ./routes
 COPY config   ./config
 COPY database ./database
+COPY routes   ./routes
+COPY sql      ./sql
+COPY status   ./status
 COPY util     ./util
+COPY views    ./views
 
-EXPOSE 7001
 RUN make
 
-ENTRYPOINT ["/app/server"]
+ENTRYPOINT ["/api/api.elf"]

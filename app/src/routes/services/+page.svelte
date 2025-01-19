@@ -1,100 +1,92 @@
 <script>
-  import Header from "../../lib/header.svelte";
-  import Service from "../../lib/service.svelte";
-  import Card from "../../lib/card.svelte";
+  import Service from "$lib/service.svelte";
+  import Header from "$lib/header.svelte";
+  import Error from "$lib/error.svelte";
+  import Link from "$lib/link.svelte";
+  import Head from "$lib/head.svelte";
 
-  export let data 
+  import { api_urljoin } from "$lib/api.js";
+  import { locale, _ } from "svelte-i18n";
+
+  let { data } = $props();
+  let services = $state(data.services);
+
+  function change(input) {
+    let value = input.target.value.toLowerCase();
+    services = [];
+
+    if (value === "") {
+      services = data.services;
+      return;
+    }
+
+    data.services.forEach((s) => {
+      if (s.name.toLowerCase().includes(value)) services.push(s);
+      else if (s.desc[$locale].toLowerCase().includes(value)) services.push(s);
+    });
+  }
+
+  function get_services() {
+    return services.filter((s) => {
+      return s.desc[$locale] !== "" && s.desc[$locale] !== null && s.desc[$locale] !== undefined;
+    });
+  }
 </script>
 
-<svelte:head>
-  <title>[ngn.tf] | services</title> 
-  <meta content="[ngn] | services" property="og:title" />
-  <meta content="Stuff that I host" property="og:description" />
-  <meta content="https://ngn.tf" property="og:url" />
-  <meta content="#000000" data-react-helmet="true" name="theme-color" />
-</svelte:head>
-<Header><c>ls</c> services</Header>
-<main>
-  <Card title="cat services/*/info.txt">
-  <div class="flexcol">
-    {#each data.services as services_list}
-      <div class="flexrow">
-        {#each services_list as service}
-          <Service url="{service.url}" desc="{service.desc}">{service.name}</Service>
-        {/each} 
+<Head title="services" desc="my self-hosted services and projects" />
+<Header picture="cool" title={$_("services.title")} />
+
+{#if data.error.length !== 0}
+  <Error error={data.error} />
+{:else}
+  <main>
+    <div class="title">
+      <input oninput={change} type="text" placeholder={$_("services.search")} />
+      <div>
+        <Link icon="nf-fa-feed" link={api_urljoin("/news/" + $locale)}>{$_("services.feed")}</Link>
       </div>
-    {/each}
-  </div>
-  </Card>
-
-  <Card title="cat services/details.txt">
-    Here some details for all the services I offer:
-    <ul>
-      <li>
-        <c><i class="nf nf-cod-account"></i> Registration:</c> All the services are offered for free, and all of them 
-        are accessiable to public. And registrations are open for the all services that support account registrations.
-      </li>
-      <li>
-        <c><i class="nf nf-fa-eye_slash"></i> Privacy:</c> To protect user privacy, all the web proxy logs are cleared regularly. 
-        I also do not use any kind of CDN, and provide SSL encrypted connection for all the services. You can also connect all the 
-        services over TOR, as I do not block any traffic from TOR.
-      </li>
-      <li>
-        <c><i class="nf nf-oct-graph"></i> Uptime:</c> Some services get restarted regularly, also sometimes I have 
-        issues with the hosting, so I cannot provide or guarantee %100 uptime for any of the services. I also cannot guarantee 
-        the that there won't be any data loss. I do take any regular backups, but your data may be lost in case of something 
-        like a SSD failure. 
-      </li>
-      <li>
-        <c><i class="nf nf-md-speedometer"></i> Speed:</c> All the services are located in Turkey, and avaliable 
-        over an 400 Mbit/s interface. If you are close to Turkey you should have a fairly good experience. 
-        If you are not, then you should probably use another provider for the service.
-      </li>
-    </ul>
-  </Card>
-
-</main>
+    </div>
+    <div class="services">
+      {#if get_services().length == 0}
+        <h3 class="none">{$_("services.none")}</h3>
+      {:else}
+        {#each get_services() as service}
+          <Service {service} />
+        {/each}
+      {/if}
+    </div>
+  </main>
+{/if}
 
 <style>
-main {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  padding: 50px;
-  gap: 28px;
-}
-
-.flexcol {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  gap: 13px;
-}
-
-.flexrow {
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: center;
-  width: 100%;
-  gap: 13px;
-}
-
-ul {
-  list-style: inside;
-  margin-bottom: 20px;
-}
-
-li {
-  padding-top: 30px;
-  line-height: 35px;
-}
-
-@media only screen and (max-width: 1316px) {
-  .flexrow {
-    flex-direction: column;
+  main {
+    padding: 50px;
+    text-align: right;
   }
-}
+
+  main .title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  main .none {
+    color: var(--white-3);
+  }
+
+  main .services {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 28px;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    main .services {
+      flex-direction: column;
+    }
+  }
 </style>

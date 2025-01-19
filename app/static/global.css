@@ -1,23 +1,38 @@
+@import "./animations.css";
 @import "./font.css";
 
 :root {
-  --white: white;
-  --dark-one: black;
-  --dark-two: #050505;
-  --dark-three: #121212;
-  --dark-four: #101010;
-  --dark-fife: #3a3b3c;
-  --dark-six: #C0C0C0;
-  --radius: 8px;
-  /*
-  old shadow animation
-  --def-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  */
-  --text-shadow: 0px 10px 20px rgba(90, 90, 90, 0.8);
-  --box-shadow: rgba(20, 20, 20, 0.19) 0px 10px 20px, rgba(30, 30, 30, 0.23) 0px 6px 6px;
-  --border-color: #2f2f2f;
+  --yellow: #d3b910;
+  --cyan: #0dd2e8;
+  --green: #06e00a;
+  --pinkish: #d506e0;
+  --red: #e8180d;
+  --blue: #2036f9;
+
+  --white-1: #ffffff;
+  --white-2: #bfbfbf;
+  --white-3: #5f5f5f;
+  --white-4: #0f0f0f;
+
+  --black-1: #000000;
+  --black-2: #050505;
+  --black-3: #111111;
+  --black-4: #3a3b3c;
+
+  --size-1: 8px;
+  --size-2: 16px;
+  --size-3: 18px;
+  --size-4: 20px;
+  --size-5: 24px;
+  --size-6: 30px;
+
+  --box-shadow-1: rgba(20, 20, 20, 0.19) 0px 10px 20px, rgba(30, 30, 30, 0.23) 0px 6px 6px;
+  --box-shadow-2: rgba(0, 0, 0, 0.35) 0px 30px 60px -12px inset,
+    rgba(20, 20, 20, 0.3) 0px 18px 36px -18px inset;
+
+  --text-shadow: 3px 2px 8px rgba(50, 50, 50, 0.8);
+  --background: linear-gradient(rgba(11, 11, 11, 0.808), rgba(1, 1, 1, 0.96)), url("/banner.png");
+  --profile-size: 220px;
 }
 
 * {
@@ -25,8 +40,12 @@
   margin: 0;
 }
 
+html {
+  box-sizing: border-box;
+}
+
 body {
-  background: var(--dark-one);
+  background: var(--black-1);
   font-family: "Ubuntu", sans-serif;
   overflow-x: hidden;
   height: 100vh;
@@ -35,7 +54,6 @@ body {
 
 ::selection {
   background: rgba(100, 100, 100, 0.5);
-  text-decoration: underline;
 }
 
 ::-webkit-scrollbar {
@@ -45,261 +63,45 @@ body {
 
 ::-webkit-scrollbar-track {
   border-radius: 10px;
-  background: #181818;
+  background: var(--black-1);
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: #282828;
+  background: var(--black-2);
 }
 
-@keyframes colorAnimation {
-  100%,
-  0% {
-    color: rgb(255, 0, 0);
-  }
-  8% {
-    color: rgb(255, 127, 0);
-  }
-  16% {
-    color: rgb(255, 255, 0);
-  }
-  25% {
-    color: rgb(127, 255, 0);
-  }
-  33% {
-    color: rgb(0, 255, 0);
-  }
-  41% {
-    color: rgb(0, 255, 127);
-  }
-  50% {
-    color: rgb(0, 255, 255);
-  }
-  58% {
-    color: rgb(0, 127, 255);
-  }
-  66% {
-    color: rgb(0, 0, 255);
-  }
-  75% {
-    color: rgb(127, 0, 255);
-  }
-  83% {
-    color: rgb(255, 0, 255);
-  }
-  91% {
-    color: rgb(255, 0, 127);
-  }
+a {
+  font-weight: 900;
+  color: var(--white-1);
+  text-decoration: none;
+  cursor: pointer;
 }
 
-@keyframes borderAnimation {
-  100%,
-  0% {
-    border-bottom-color: rgb(255, 0, 0);
-  }
-  8% {
-    border-bottom-color: rgb(255, 127, 0);
-  }
-  16% {
-    border-bottom-color: rgb(255, 255, 0);
-  }
-  25% {
-    border-bottom-color: rgb(127, 255, 0);
-  }
-  33% {
-    border-bottom-color: rgb(0, 255, 0);
-  }
-  41% {
-    border-bottom-color: rgb(0, 255, 127);
-  }
-  50% {
-    border-bottom-color: rgb(0, 255, 255);
-  }
-  58% {
-    border-bottom-color: rgb(0, 127, 255);
-  }
-  66% {
-    border-bottom-color: rgb(0, 0, 255);
-  }
-  75% {
-    border-bottom-color: rgb(127, 0, 255);
-  }
-  83% {
-    border-bottom-color: rgb(255, 0, 255);
-  }
-  91% {
-    border-bottom-color: rgb(255, 0, 127);
-  }
+a:hover {
+  text-decoration: underline;
+  text-shadow: var(--text-shadow);
 }
 
-@keyframes fullBorderAnimation {
-  100%,
-  0% {
-    border-color: rgb(255, 0, 0);
-  }
-  8% {
-    border-color: rgb(255, 127, 0);
-  }
-  16% {
-    border-color: rgb(255, 255, 0);
-  }
-  25% {
-    border-color: rgb(127, 255, 0);
-  }
-  33% {
-    border-color: rgb(0, 255, 0);
-  }
-  41% {
-    border-color: rgb(0, 255, 127);
-  }
-  50% {
-    border-color: rgb(0, 255, 255);
-  }
-  58% {
-    border-color: rgb(0, 127, 255);
-  }
-  66% {
-    border-color: rgb(0, 0, 255);
-  }
-  75% {
-    border-color: rgb(127, 0, 255);
-  }
-  83% {
-    border-color: rgb(255, 0, 255);
-  }
-  91% {
-    border-color: rgb(255, 0, 127);
-  }
+i .nf {
+  font-weight: 900;
 }
 
-@keyframes gayShadowAnimation {
-  100%,
-  0% {
-    box-shadow: rgba(255, 0, 0, 0.07) 0px 1px 2px,
-      rgba(255, 0, 0, 0.07) 0px 2px 4px, rgba(255, 0, 0, 0.07) 0px 4px 8px,
-      rgba(255, 0, 0, 0.07) 0px 8px 16px, rgba(255, 0, 0, 0.07) 0px 16px 32px,
-      rgba(255, 0, 0, 0.07) 0px 32px 64px;
-  }
-  8% {
-    box-shadow: rgba(255, 127, 0, 0.07) 0px 1px 2px,
-      rgba(255, 127, 0, 0.07) 0px 2px 4px, rgba(255, 127, 0, 0.07) 0px 4px 8px,
-      rgba(255, 127, 0, 0.07) 0px 8px 16px,
-      rgba(255, 127, 0, 0.07) 0px 16px 32px,
-      rgba(255, 127, 0, 0.07) 0px 32px 64px;
-  }
-  16% {
-    box-shadow: rgba(255, 255, 0, 0.07) 0px 1px 2px,
-      rgba(255, 255, 0, 0.07) 0px 2px 4px, rgba(255, 255, 0, 0.07) 0px 4px 8px,
-      rgba(255, 255, 0, 0.07) 0px 8px 16px,
-      rgba(255, 255, 0, 0.07) 0px 16px 32px,
-      rgba(255, 255, 0, 0.07) 0px 32px 64px;
-  }
-  25% {
-    box-shadow: rgba(127, 255, 0, 0.07) 0px 1px 2px,
-      rgba(127, 255, 0, 0.07) 0px 2px 4px, rgba(127, 255, 0, 0.07) 0px 4px 8px,
-      rgba(127, 255, 0, 0.07) 0px 8px 16px,
-      rgba(127, 255, 0, 0.07) 0px 16px 32px,
-      rgba(127, 255, 0, 0.07) 0px 32px 64px;
-  }
-  33% {
-    box-shadow: rgba(0, 255, 0, 0.07) 0px 1px 2px,
-      rgba(0, 255, 0, 0.07) 0px 2px 4px, rgba(0, 255, 0, 0.07) 0px 4px 8px,
-      rgba(0, 255, 0, 0.07) 0px 8px 16px, rgba(0, 255, 0, 0.07) 0px 16px 32px,
-      rgba(0, 255, 0, 0.07) 0px 32px 64px;
-  }
-  41% {
-    box-shadow: rgba(0, 255, 127, 0.07) 0px 1px 2px,
-      rgba(0, 255, 127, 0.07) 0px 2px 4px, rgba(0, 255, 127, 0.07) 0px 4px 8px,
-      rgba(0, 255, 127, 0.07) 0px 8px 16px,
-      rgba(0, 255, 127, 0.07) 0px 16px 32px,
-      rgba(0, 255, 127, 0.07) 0px 32px 64px;
-  }
-  50% {
-    box-shadow: rgba(0, 255, 255, 0.07) 0px 1px 2px,
-      rgba(0, 255, 255, 0.07) 0px 2px 4px, rgba(0, 255, 255, 0.07) 0px 4px 8px,
-      rgba(0, 255, 255, 0.07) 0px 8px 16px,
-      rgba(0, 255, 255, 0.07) 0px 16px 32px,
-      rgba(0, 255, 255, 0.07) 0px 32px 64px;
-  }
-  58% {
-    box-shadow: rgba(0, 127, 255, 0.07) 0px 1px 2px,
-      rgba(0, 127, 255, 0.07) 0px 2px 4px, rgba(0, 127, 255, 0.07) 0px 4px 8px,
-      rgba(0, 127, 255, 0.07) 0px 8px 16px,
-      rgba(0, 127, 255, 0.07) 0px 16px 32px,
-      rgba(0, 127, 255, 0.07) 0px 32px 64px;
-  }
-  66% {
-    box-shadow: rgba(0, 0, 255, 0.07) 0px 1px 2px,
-      rgba(0, 0, 255, 0.07) 0px 2px 4px, rgba(0, 0, 255, 0.07) 0px 4px 8px,
-      rgba(0, 0, 255, 0.07) 0px 8px 16px, rgba(0, 0, 255, 0.07) 0px 16px 32px,
-      rgba(0, 0, 255, 0.07) 0px 32px 64px;
-  }
-  75% {
-    box-shadow: rgba(127, 0, 255, 0.07) 0px 1px 2px,
-      rgba(127, 0, 255, 0.07) 0px 2px 4px, rgba(127, 0, 255, 0.07) 0px 4px 8px,
-      rgba(127, 0, 255, 0.07) 0px 8px 16px,
-      rgba(127, 0, 255, 0.07) 0px 16px 32px,
-      rgba(127, 0, 255, 0.07) 0px 32px 64px;
-  }
-  83% {
-    box-shadow: rgba(255, 0, 255, 0.07) 0px 1px 2px,
-      rgba(255, 0, 255, 0.07) 0px 2px 4px, rgba(255, 0, 255, 0.07) 0px 4px 8px,
-      rgba(255, 0, 255, 0.07) 0px 8px 16px,
-      rgba(255, 0, 255, 0.07) 0px 16px 32px,
-      rgba(255, 0, 255, 0.07) 0px 32px 64px;
-  }
-  91% {
-    box-shadow: rgba(255, 0, 127, 0.07) 0px 1px 2px,
-      rgba(255, 0, 127, 0.07) 0px 2px 4px, rgba(255, 0, 127, 0.07) 0px 4px 8px,
-      rgba(255, 0, 127, 0.07) 0px 8px 16px,
-      rgba(255, 0, 127, 0.07) 0px 16px 32px,
-      rgba(255, 0, 127, 0.07) 0px 32px 64px;
-  }
+ul {
+  list-style: inside;
+  margin: 12px 0 12px 0;
 }
 
-@keyframes underlineAnimation {
-  100%,
-  0% {
-    text-decoration-color: rgb(255, 0, 0);
-  }
-  8% {
-    text-decoration-color: rgb(255, 127, 0);
-  }
-  16% {
-    text-decoration-color: rgb(255, 255, 0);
-  }
-  25% {
-    text-decoration-color: rgb(127, 255, 0);
-  }
-  33% {
-    text-decoration-color: rgb(0, 255, 0);
-  }
-  41% {
-    text-decoration-color: rgb(0, 255, 127);
-  }
-  50% {
-    text-decoration-color: rgb(0, 255, 255);
-  }
-  58% {
-    text-decoration-color: rgb(0, 127, 255);
-  }
-  66% {
-    text-decoration-color: rgb(0, 0, 255);
-  }
-  75% {
-    text-decoration-color: rgb(127, 0, 255);
-  }
-  83% {
-    text-decoration-color: rgb(255, 0, 255);
-  }
-  91% {
-    text-decoration-color: rgb(255, 0, 127);
-  }
+li + li {
+  margin-top: 10px;
 }
 
-.c, c {
-  animation-name: colorAnimation;
-  animation-iteration-count: infinite;
-  animation-duration: 10s;
+input {
+  background: var(--black-3);
+  border: none;
+  outline: none;
+  font-size: var(--size-4);
+  padding: 10px;
+  border: solid 1px var(--black-4);
+  color: var(--white-1);
 }

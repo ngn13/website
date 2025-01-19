@@ -1,183 +1,206 @@
 package routes
 
 import (
-	"database/sql"
-	"net/http"
-	"strings"
+	"fmt"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/mattn/go-sqlite3"
 	"github.com/ngn13/website/api/config"
 	"github.com/ngn13/website/api/database"
+	"github.com/ngn13/website/api/status"
 	"github.com/ngn13/website/api/util"
 )
 
-var Token string = util.CreateToken()
+func admin_log(c *fiber.Ctx, m string) error {
+	return c.Locals("database").(*database.Type).AdminLogAdd(&database.AdminLog{
+		Action: m,                 // action that the admin peformed
+		Time:   time.Now().Unix(), // current time
+	})
+}
 
 func AuthMiddleware(c *fiber.Ctx) error {
-	if c.Path() == "/admin/login" {
-		return c.Next()
-	}
+	conf := c.Locals("config").(*config.Type)
 
-	if c.Get("Authorization") != Token {
+	if c.Get("Authorization") != conf.GetStr("password") {
 		return util.ErrAuth(c)
 	}
 
 	return c.Next()
 }
 
-func GET_Login(c *fiber.Ctx) error {
-	if c.Query("pass") != config.Get("password") {
-		return util.ErrAuth(c)
-	}
-
-	util.Info("new login from %s", util.GetIP(c))
-
-	return c.Status(http.StatusOK).JSON(fiber.Map{
-		"error": "",
-		"token": Token,
-	})
-}
-
-func GET_Logout(c *fiber.Ctx) error {
-	Token = util.CreateToken()
-
-	util.Info("logout from %s", util.GetIP(c))
-
-	return c.Status(http.StatusOK).JSON(fiber.Map{
-		"error": "",
-	})
-}
-
-func DEL_RemoveService(c *fiber.Ctx) error {
+func GET_AdminLogs(c *fiber.Ctx) error {
 	var (
-		db      *sql.DB
-		service database.Service
-		name    string
-		found   bool
-		err     error
+		list []database.AdminLog
+		log  database.AdminLog
 	)
 
-	db = *(c.Locals("database").(**sql.DB))
-	name = c.Query("name")
+	db := c.Locals("database").(*database.Type)
 
-	if name == "" {
-		util.ErrBadData(c)
+	for db.AdminLogNext(&log) {
+		list = append(list, log)
 	}
 
-	if found, err = service.Get(db, name); err != nil {
-		util.Fail("error while searching for a service (\"%s\"): %s", name, err.Error())
-		return util.ErrServer(c)
+	return util.JSON(c, 200, fiber.Map{
+		"result": list,
+	})
+}
+
+func DEL_DelService(c *fiber.Ctx) error {
+	var (
+		name string
+		err  error
+	)
+
+	db := c.Locals("database").(*database.Type)
+
+	if name = c.Query("name"); name == "" {
+		util.ErrBadReq(c)
 	}
 
-	if !found {
-		return util.ErrEntryNotExists(c)
+	if err = admin_log(c, fmt.Sprintf("Removed service \"%s\"", name)); err != nil {
+		return util.ErrInternal(c, err)
 	}
 
-	if err = service.Remove(db); err != nil {
-		util.Fail("error while removing a service (\"%s\"): %s", service.Name, err.Error())
-		return util.ErrServer(c)
+	if err = db.ServiceRemove(name); err != nil {
+		return util.ErrInternal(c, err)
 	}
 
-	return util.NoError(c)
+	return util.JSON(c, 200, nil)
 }
 
 func PUT_AddService(c *fiber.Ctx) error {
 	var (
 		service database.Service
-		db      *sql.DB
-		found   bool
 		err     error
 	)
 
-	db = *(c.Locals("database").(**sql.DB))
+	db := c.Locals("database").(*database.Type)
 
 	if c.BodyParser(&service) != nil {
 		return util.ErrBadJSON(c)
 	}
 
-	if service.Name == "" || service.Desc == "" || service.Url == "" {
-		return util.ErrBadData(c)
+	if !service.IsValid() {
+		return util.ErrBadReq(c)
 	}
 
-	if found, err = service.Get(db, service.Name); err != nil {
-		util.Fail("error while searching for a service (\"%s\"): %s", service.Name, err.Error())
-		return util.ErrServer(c)
+	if err = admin_log(c, fmt.Sprintf("Added service \"%s\"", service.Name)); err != nil {
+		return util.ErrInternal(c, err)
 	}
 
-	if found {
-		return util.ErrEntryExists(c)
+	if err = db.ServiceUpdate(&service); err != nil {
+		return util.ErrInternal(c, err)
 	}
 
-	if err = service.Save(db); err != nil {
-		util.Fail("error while saving a new service (\"%s\"): %s", service.Name, err.Error())
-		return util.ErrServer(c)
-	}
+	// force a status check so we can get the status of the new service
+	c.Locals("status").(*status.Type).Check()
 
-	return util.NoError(c)
+	return util.JSON(c, 200, nil)
 }
 
-func DEL_RemovePost(c *fiber.Ctx) error {
-	var (
-		db    *sql.DB
-		id    string
-		found bool
-		err   error
-		post  database.Post
-	)
-
-	db = *(c.Locals("database").(**sql.DB))
-
-	if id = c.Query("id"); id == "" {
-		return util.ErrBadData(c)
-	}
-
-	if found, err = post.Get(db, id); err != nil {
-		util.Fail("error while searching for a post (\"%s\"): %s", id, err.Error())
-		return util.ErrServer(c)
-	}
-
-	if !found {
-		return util.ErrEntryNotExists(c)
-	}
-
-	if err = post.Remove(db); err != nil {
-		util.Fail("error while removing a post (\"%s\"): %s", post.ID, err.Error())
-		return util.ErrServer(c)
-	}
-
-	return util.NoError(c)
+func GET_CheckService(c *fiber.Ctx) error {
+	c.Locals("status").(*status.Type).Check()
+	return util.JSON(c, 200, nil)
 }
 
-func PUT_AddPost(c *fiber.Ctx) error {
+func PUT_AddProject(c *fiber.Ctx) error {
 	var (
-		db   *sql.DB
-		post database.Post
-		err  error
+		project database.Project
+		err     error
 	)
 
-	db = *(c.Locals("database").(**sql.DB))
-	post.Public = 1
+	db := c.Locals("database").(*database.Type)
 
-	if c.BodyParser(&post) != nil {
+	if c.BodyParser(&project) != nil {
 		return util.ErrBadJSON(c)
 	}
 
-	if post.Title == "" || post.Author == "" || post.Content == "" {
-		return util.ErrBadData(c)
+	if !project.IsValid() {
+		return util.ErrBadReq(c)
 	}
 
-	post.Date = time.Now().Format("02/01/06")
-
-	if err = post.Save(db); err != nil && strings.Contains(err.Error(), sqlite3.ErrConstraintUnique.Error()) {
-		return util.ErrEntryExists(c)
+	if err = admin_log(c, fmt.Sprintf("Added project \"%s\"", project.Name)); err != nil {
+		return util.ErrInternal(c, err)
 	}
 
-	if err != nil {
-		util.Fail("error while saving a new post (\"%s\"): %s", post.ID, err.Error())
-		return util.ErrServer(c)
+	if err = db.ProjectAdd(&project); err != nil {
+		return util.ErrInternal(c, err)
 	}
 
-	return util.NoError(c)
+	return util.JSON(c, 200, nil)
+}
+
+func DEL_DelProject(c *fiber.Ctx) error {
+	var (
+		name string
+		err  error
+	)
+
+	db := c.Locals("database").(*database.Type)
+
+	if name = c.Query("name"); name == "" {
+		util.ErrBadReq(c)
+	}
+
+	if err = admin_log(c, fmt.Sprintf("Removed project \"%s\"", name)); err != nil {
+		return util.ErrInternal(c, err)
+	}
+
+	if err = db.ProjectRemove(name); err != nil {
+		return util.ErrInternal(c, err)
+	}
+
+	return util.JSON(c, 200, nil)
+}
+
+func DEL_DelNews(c *fiber.Ctx) error {
+	var (
+		id  string
+		err error
+	)
+
+	db := c.Locals("database").(*database.Type)
+
+	if id = c.Query("id"); id == "" {
+		util.ErrBadReq(c)
+	}
+
+	if err = admin_log(c, fmt.Sprintf("Removed news \"%s\"", id)); err != nil {
+		return util.ErrInternal(c, err)
+	}
+
+	if err = db.NewsRemove(id); err != nil {
+		return util.ErrInternal(c, err)
+	}
+
+	return util.JSON(c, 200, nil)
+}
+
+func PUT_AddNews(c *fiber.Ctx) error {
+	var (
+		news database.News
+		err  error
+	)
+
+	db := c.Locals("database").(*database.Type)
+
+	if c.BodyParser(&news) != nil {
+		return util.ErrBadJSON(c)
+	}
+
+	news.Time = uint64(time.Now().Unix())
+
+	if !news.IsValid() {
+		return util.ErrBadReq(c)
+	}
+
+	if err = admin_log(c, fmt.Sprintf("Added news \"%s\"", news.ID)); err != nil {
+		return util.ErrInternal(c, err)
+	}
+
+	if err = db.NewsAdd(&news); err != nil {
+		return util.ErrInternal(c, err)
+	}
+
+	return util.JSON(c, 200, nil)
 }

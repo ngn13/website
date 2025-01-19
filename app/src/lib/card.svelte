@@ -1,52 +1,50 @@
 <script>
-  export let title
-
-  let current = ""
-  let i = 0
-
-  while (title.length > i) {
-    let c = title[i] 
-    setTimeout(()=>{
-      current += c
-    }, 100*(i+1))
-    i += 1
-  }
+  export let title;
 </script>
 
-<div class="main">
-  <div class="title">
-    root@ngn.tf:~# {current}
-  </div> 
-  <div class="content">
+<main>
+  <h1 class="title">{title}</h1>
+  <div>
     <slot></slot>
   </div>
-</div>
+</main>
 
 <style>
-.main {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background: var(--dark-three);
-  box-shadow: var(--box-shadow);
-  border-radius: var(--radius);
-  border: solid 1px var(--border-color);
-}
+  main {
+    flex: 1;
+    flex-basis: 30%;
 
-.title {
-  background: var(--dark-two);
-  padding: 25px;
-  border-radius: 7px 7px 0px 0px;
-  font-size: 20px; 
-  font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
-  color: white;
-}
+    display: flex;
+    flex-direction: column;
+  }
 
-.content {
-  background: var(--dark-three);
-  padding: 30px;
-  color: white;
-  border-radius: 5px;
-  font-size: 25px;
-}
+  main .title {
+    font-family:
+      Consolas,
+      Monaco,
+      Lucida Console,
+      Liberation Mono,
+      DejaVu Sans Mono,
+      Bitstream Vera Sans Mono,
+      Courier New,
+      monospace;
+    color: var(--white-1);
+  }
+
+  main .title::before {
+    content: "#";
+    margin: 0 10px 0 0;
+    color: var(--white-3);
+  }
+
+  main div {
+    border-left: solid 1px var(--black-4);
+    padding: 25px 25px 10px 25px;
+    font-size: var(--size-4);
+    color: var(--white-1);
+    word-wrap: break-word;
+    align-items: center;
+    margin-left: 7px;
+    flex: 1;
+  }
 </style>

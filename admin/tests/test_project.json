@@ -1,0 +1,9 @@
+{
+  "name": "test",
+  "desc": {
+    "en": "A non-existent project used to test the API",
+    "tr": "API'ı test etmek için kullanılan varolmayan bir proje"
+  },
+  "url": "https://github.com/ngn13/test",
+  "license": "GPL-3.0"
+}
