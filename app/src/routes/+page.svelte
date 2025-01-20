@@ -86,7 +86,7 @@
       <span>
         {$_("home.projects.desc")}:
       </span>
-      {#if data.error === undefined}
+      {#if data.error.length === 0}
         <ul>
           {#each data.projects.filter((p) => {
             return p.desc[$locale] !== "" && p.desc[$locale] !== null && p.desc[$locale] !== undefined;

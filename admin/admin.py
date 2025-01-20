@@ -336,9 +336,9 @@ class AdminScript:
     # news command
     def add_news(self, data: Dict[str, Any] = None) -> None:
         if data is None:
-            news: Dict[str, str] = {}
-            news["title"] = {}
-            news["content"] = {}
+            data: Dict[str, str] = {}
+            data["title"] = {}
+            data["content"] = {}
 
             data["id"] = self.log.input("News ID")
 
