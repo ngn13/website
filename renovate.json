@@ -1,0 +1,5 @@
+{
+  "extends": ["config:recommended"],
+  "timezone": "Europe/Istanbul",
+  "prHourlyLimit": 20
+}
