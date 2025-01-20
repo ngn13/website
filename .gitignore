@@ -5,3 +5,7 @@ data.db
 
 # don't ignore example deployment stuff
 !deploy/*
+!.github/*
+!.gitea/*
+!.github/*/*
+!.gitea/*/*

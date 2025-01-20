@@ -1,0 +1,33 @@
+name: Build the docker image for the frontend application
+
+on:
+  push:
+    branches: ["custom"]
+
+env:
+  REGISTRY: git.ngn.tf
+  IMAGE: ${{gitea.repository}}/app
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: "https://github.com/actions/checkout@v4"
+
+      - name: Login to container repo
+        uses: "https://github.com/docker/login-action@v1"
+        with:
+          registry: ${{env.REGISTRY}}
+          username: ${{gitea.actor}}
+          password: ${{secrets.PACKAGES_TOKEN}}
+
+      - name: Build image
+        run: |
+          docker build --build-arg WEBSITE_REPORT_URL=https://git.ngn.tf/ngn/website/issues/new \
+                       --build-arg WEBSITE_SOURCE_URL=https://git.ngn.tf/ngn/website            \
+                       --build-arg WEBSITE_APP_URL=https://ngn.tf                               \
+                       --build-arg WEBSITE_API_URL=https://api.ngn.tf                           \
+                       --build-arg WEBSITE_DOC_URL=http://doc:7003                              \
+                       --tag ${{env.REGISTRY}}/${{env.IMAGE}}:latest .
+          docker push ${{env.REGISTRY}}/${{env.IMAGE}}:latest

@@ -1,0 +1,28 @@
+name: Build the docker image for the API
+
+on:
+  push:
+    branches: ["custom"]
+
+env:
+  REGISTRY: git.ngn.tf
+  IMAGE: ${{gitea.repository}}/api
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: "https://github.com/actions/checkout@v4"
+
+      - name: Login to container repo
+        uses: "https://github.com/docker/login-action@v1"
+        with:
+          registry: ${{env.REGISTRY}}
+          username: ${{gitea.actor}}
+          password: ${{secrets.PACKAGES_TOKEN}}
+
+      - name: Build image
+        run: |
+          docker build --tag ${{env.REGISTRY}}/${{env.IMAGE}}:latest .
+          docker push ${{env.REGISTRY}}/${{env.IMAGE}}:latest
