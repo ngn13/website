@@ -1,7 +1,4 @@
 # website | my personal website
-![Version](https://img.shields.io/github/package-json/v/ngn13/ngn13.fun?filename=app%2Fpackage.json&color=blue)
-![Website Status](https://img.shields.io/website?up_color=green&down_color=red&url=https%3A%2F%2Fngn.tf&label=Website%20Status)
-![API Status](https://img.shields.io/website?up_color=green&down_color=red&url=https%3A%2F%2Fapi.ngn.tf&label=API%20Status)
 
 This repo contains all the source code for my personal website, [ngn.tf](https://ngn.tf)
 All code is licensed under AGPL version 3 (see [LICENSE.txt](LICENSE.txt))
