@@ -24,6 +24,7 @@ jobs:
 
       - name: Build image
         run: |
+          cd app
           docker build --build-arg WEBSITE_REPORT_URL=https://git.ngn.tf/ngn/website/issues/new \
                        --build-arg WEBSITE_SOURCE_URL=https://git.ngn.tf/ngn/website            \
                        --build-arg WEBSITE_APP_URL=https://ngn.tf                               \

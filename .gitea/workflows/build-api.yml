@@ -24,5 +24,6 @@ jobs:
 
       - name: Build image
         run: |
+          cd api
           docker build --tag ${{env.REGISTRY}}/${{env.IMAGE}}:latest .
           docker push ${{env.REGISTRY}}/${{env.IMAGE}}:latest
