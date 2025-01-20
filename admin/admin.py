@@ -218,6 +218,7 @@ class AdminScript:
             "logs": self.get_logs,
         }
         self.api_url_env = "API_URL"
+        self.password_env = "API_PASSWORD"
 
     def __format_time(self, ts: int) -> str:
         return datetime.fromtimestamp(ts, UTC).strftime("%H:%M:%S %d/%m/%Y")
@@ -264,7 +265,10 @@ class AdminScript:
             return False
 
         try:
-            password = self.log.password("Please enter the admin password")
+            password = getenv(self.password_env)
+            if password is None:
+                password = self.log.password("Please enter the admin password")
+
             self.api = AdminAPI(url, password)
 
             if len(argv) == 2:

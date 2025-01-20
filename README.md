@@ -68,6 +68,7 @@ on my local git server until I deleted it when I was done with 6.0. This website
 
 - **v4.0 (2023 november - 2024 october)**: In this version the frontend was still similar to 3.0, the big changes are in
 the API. I rewrote the API with Fiber. This version was the first version hosted on `ngn.tf` which is my new domain name.
+Here is a [picture of the index](assets/4.0_index.png) and the [blog page](assets/4.0_blog.png).
 
 - **v5.0 (2024 october - 2025 january)**: This version just had simple frontend UI changes compared to 4.0, at this
 point I was thinking about doing a massive rework (which I did with 6.0), however I was working on some other shit at
@@ -81,6 +82,6 @@ and Turkish, which was something I wanted to do for the longest time ever.
 
 Damn it has been 4 years since I wrote that shit HTML page huh? Time flies...
 
-## Screenshots (from v4.0)
-![](assets/4.0_index.png)
-![](assets/4.0_blog.png)
+## Screenshots (from v6.0)
+![](assets/6.0_index.png)
+![](assets/6.0_services.png)
