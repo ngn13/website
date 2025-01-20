@@ -2,7 +2,7 @@ name: Build the docker image for the doc server
 
 on:
   push:
-    branches: ["custom"]
+    branches: ["main"]
 
 env:
   REGISTRY: git.ngn.tf
