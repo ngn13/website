@@ -1,5 +1,9 @@
 # website | my personal website
 
+![](https://git.ngn.tf/ngn/libremdb/actions/workflows/build-app.yml/badge.svg)
+![](https://git.ngn.tf/ngn/libremdb/actions/workflows/build-api.yml/badge.svg)
+![](https://git.ngn.tf/ngn/libremdb/actions/workflows/build-doc.yml/badge.svg)
+
 This repo contains all the source code for my personal website, [ngn.tf](https://ngn.tf)
 All code is licensed under AGPL version 3 (see [LICENSE.txt](LICENSE.txt))
 
