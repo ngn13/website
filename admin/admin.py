@@ -405,4 +405,4 @@ class AdminScript:
 
 if __name__ == "__main__":
     script = AdminScript()
-    exit(script.run() if 1 else 0)
+    exit(0 if script.run() else 1)
