@@ -1,5 +1,5 @@
 # build the application with node
-FROM node:23.6.0 AS build
+FROM node:23.7.0 AS build
 
 ARG WEBSITE_REPORT_URL
 ARG WEBSITE_SOURCE_URL
