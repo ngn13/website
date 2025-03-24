@@ -3,6 +3,7 @@ name: Build the docker image for the frontend application
 on:
   push:
     branches: ["main"]
+    paths: ["app/**"]
 
 env:
   REGISTRY: git.ngn.tf

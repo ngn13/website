@@ -3,6 +3,7 @@ name: Build the docker image for the API
 on:
   push:
     branches: ["main"]
+    paths: ["api/**"]
 
 env:
   REGISTRY: git.ngn.tf
