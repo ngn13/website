@@ -1,14 +1,22 @@
 <script>
+  import { api_version } from "$lib/api.js";
   import Header from "$lib/header.svelte";
   import Error from "$lib/error.svelte";
   import Head from "$lib/head.svelte";
   import Card from "$lib/card.svelte";
   import Link from "$lib/link.svelte";
 
+  import { browser } from "$app/environment";
   import { _, locale } from "svelte-i18n";
   import { color } from "$lib/util.js";
 
   let { data } = $props();
+
+  if (browser) {
+    window._version = {};
+    window._version.app = pkg.version;
+    window._version.api = api_version;
+  }
 </script>
 
 <Head title="home" desc="home page of my personal website" />
