@@ -5,7 +5,7 @@
     "donate": "donate"
   },
   "home": {
-    "title": "Hello world!",
+    "title": "hello world!",
     "welcome": {
       "title": "about",
       "desc": "Welcome to my website, I'm ngn",
@@ -29,9 +29,9 @@
     },
     "services": {
       "title": "services",
-      "desc": "A part from working on stupid shit, I host free (as in freedom, and price) services available for all",
-      "speed": "All of these services are available over a 600 Mbit/s interface",
-      "security": "All use SSL encrypted connection and they are all privacy-respecting",
+      "desc": "A part from working on stupid shit, I host free (as in freedom and price) services available for all",
+      "speed": "All of these services are available over an 1 Gbit interface",
+      "security": "All use SSL encrypted connection and they respect your privacy and freedom",
       "privacy": "Accessible from clearnet, TOR and I2P, no region or network blocks",
       "bullshit": "No CDNs, no cloudflare, no CAPTCHA, no analytics, no bullshit",
       "link": "See all the services!"
@@ -42,7 +42,7 @@
     }
   },
   "services": {
-    "title": "Service Status",
+    "title": "service status",
     "none": "No services found",
     "search": "Search for a service",
     "feed": "News and updates",
@@ -54,7 +54,7 @@
     }
   },
   "donate": {
-    "title": "Donate Money!",
+    "title": "donate!",
     "info": "I spend a lot of time and money on different projects and maintaining different services.",
     "price": "I mostly pay for hosting and electricity. Which when added up costs around 550₺ per month (~$15 at the time of writing).",
     "details": "So even a small donation would be useful. And it would help me keep everything up and running.",
@@ -64,20 +64,15 @@
       "address": "Adress/Link"
     }
   },
-  "doc": {
-    "title": "Documentation"
-  },
   "error": {
-    "title": "Something went wrong!",
+    "title": "something went wrong!",
     "report": "Report this issue"
   },
   "footer": {
     "source": "Source",
     "license": "License",
     "privacy": "Privacy",
-    "powered": "Powered by Svelte, Go, SQLite and donations",
     "number": "Visited {total} times since {since}",
-    "wow": "wow!!",
-    "version": "Using API version {api_version}, frontend version {frontend_version}"
+    "wow": "wow!!"
   }
 }

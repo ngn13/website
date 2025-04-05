@@ -13,7 +13,11 @@ int main() {
 
   if (!config_load(&conf))
     return EXIT_FAILURE;
-  host = config_get(&conf, "host");
+
+  if (NULL == (host = config_get(&conf, "host"))) {
+    ctorm_fail("failed to get the host configuration");
+    return EXIT_FAILURE;
+  }
 
   ctorm_config_new(&app_config);
   app_config.disable_logging = true;
@@ -22,7 +26,6 @@ int main() {
   // middlewares
   MIDDLEWARE_ALL(app, "/*", route_cors);
   MIDDLEWARE_ALL(app, "/*/*", route_cors);
-  MIDDLEWARE_ALL(app, "/*/*/*", route_cors);
 
   // routes
   GET(app, "/list", route_list);

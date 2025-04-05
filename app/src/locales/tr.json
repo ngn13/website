@@ -5,7 +5,7 @@
     "donate": "bağış"
   },
   "home": {
-    "title": "Merhaba Dünya!",
+    "title": "merhaba dünya!",
     "welcome": {
       "title": "hakkımda",
       "desc": "Websiteme hoşgeldiniz, ben ngn",
@@ -30,11 +30,10 @@
     "services": {
       "title": "servisler",
       "desc": "Salak şeyler inşa etmenin yanı sıra, herkes için kullanıma açık özgür ve ücretsiz servisler host ediyorum",
-      "speed": "Tüm servisler 600 Mbit/s ağ arayüzü üzerinden erişilebilir",
-      "security": "Hepsi SSL şifreli bağlantı kullanıyor ve hepsi gizliğinize önem veriyor",
-      "privacy": "Accessible from clearnet, TOR and I2P, no region or network blocks",
+      "speed": "Tüm servisler 1 Gbit ağ arayüzü üzerinden erişilebilir",
+      "security": "Hepsi SSL şifreli bağlantı kullanıyor ve hepsi gizliliğinize ve özgürlüğünüze saygı gösteriyor",
       "privacy": "Açık ağdan, TOR ve I2P'den erişilebilirler, bölge ya da ağ blokları yok",
-      "bullshit": "CDN yok, cloudflare yok, CAPTCHA yok, analitikler yok, boktan saçmalıklar yok",
+      "bullshit": "CDN yok, cloudflare yok, CAPTCHA yok, analitikler ve diğer saçmalıklar yok",
       "link": "Tüm servisleri incele!"
     },
     "projects": {
@@ -43,7 +42,7 @@
     }
   },
   "services": {
-    "title": "Servis Durumu",
+    "title": "servis durumu",
     "none": "Servis bulunamadı",
     "search": "Bir servisi ara",
     "feed": "Yenilikler ve güncellemeler",
@@ -55,7 +54,7 @@
     }
   },
   "donate": {
-    "title": "Para Bağışla!",
+    "title": "bağış yap!",
     "info": "Farklı projeler ve farklı servisleri yönetmek için oldukça zaman ve para harcıyorum.",
     "price": "Çoğunlukla hosting ve elektrik için ödeme yapıyorum. Bunlar eklendiği zaman aylık 550₺ civarı bir miktar oluyor (yazdığım sırada ~15$).",
     "details": "Bu sebepten küçük bir bağış bile oldukça faydalı olacaktır. Ve herşeyi açık ve çalışmakta tutmama yardımcı olacaktır.",
@@ -65,20 +64,15 @@
       "address": "Adres/Bağlantı"
     }
   },
-  "doc": {
-    "title": "Dökümantasyon"
-  },
   "error": {
-    "title": "Birşeyler yanlış gitti!",
+    "title": "birşeyler yanlış gitti!",
     "report": "Bu sorunu raporlayın"
   },
   "footer": {
     "source": "Kaynak",
     "license": "Lisans",
     "privacy": "Gizlilik",
-    "powered": "Svelte, Go, SQLite ve bağışlar tarafından destekleniyor",
     "number": "{since} tarihinden beri {total} kez ziyaret edildi",
-    "wow": "vay be!!",
-    "version": "Kullan API versiyonu {api_version}, arayüz versiyonu {frontend_version}"
+    "wow": "vay be!!"
   }
 }

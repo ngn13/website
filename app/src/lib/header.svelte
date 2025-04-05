@@ -1,14 +1,35 @@
 <script>
+  import { browser } from "$app/environment";
   import { color } from "$lib/util.js";
   import { _ } from "svelte-i18n";
 
   export let picture = "";
   export let title = "";
+
+  let title_cur = "";
+
+  function animate(title) {
+    if (!browser) return;
+
+    let id = window.setTimeout(function () {}, 0);
+
+    while (id--) clearTimeout(id);
+
+    title_cur = "";
+
+    for (let i = 0; i < title.length; i++) {
+      setTimeout(() => {
+        title_cur += title[i];
+      }, i * 70);
+    }
+  }
+
+  $: animate(title);
 </script>
 
 <header>
   <div>
-    <h1 class="title" style="color: var(--{color()})">{title.toLowerCase()}</h1>
+    <h1 class="title" style="color: var(--{color()})">{title_cur}</h1>
     <h1 class="cursor" style="color: var(--{color()})">_</h1>
   </div>
   <img src="/profile/{picture}.png" alt="" />
@@ -50,9 +71,6 @@
   header div .title {
     text-shadow: var(--text-shadow);
     overflow: hidden;
-    width: 0;
-    animation: typing 1s steps(20, end) forwards;
-    animation-delay: 0.3s;
   }
 
   header div .cursor {

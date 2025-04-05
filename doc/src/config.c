@@ -10,6 +10,7 @@
 #include "util.h"
 
 option_t options[] = {
+    // name      value           requied
     {"host",     "0.0.0.0:7003", true }, // host the server should listen on
     {"docs_dir", "./docs",       true }, // documentation directory
     {"",         NULL,           false},
