@@ -7,9 +7,11 @@
 
   import { api_urljoin } from "$lib/api.js";
   import { locale, _ } from "svelte-i18n";
+  import { onMount } from "svelte";
 
   let { data } = $props();
   let services = $state(data.services);
+  let show_input = $state(false);
 
   function change(input) {
     let value = input.target.value.toLowerCase();
@@ -31,6 +33,10 @@
       return s.desc[$locale] !== "" && s.desc[$locale] !== null && s.desc[$locale] !== undefined;
     });
   }
+
+  onMount(() => {
+    show_input = true;
+  });
 </script>
 
 <Head title="services" desc="my self-hosted services and projects" />
@@ -41,7 +47,9 @@
 {:else}
   <main>
     <div class="title">
-      <input oninput={change} type="text" placeholder={$_("services.search")} />
+      {#if show_input}
+        <input oninput={change} type="text" placeholder={$_("services.search")} />
+      {/if}
       <div>
         <Link icon="nf-fa-feed" link={api_urljoin("/news/" + $locale)}>{$_("services.feed")}</Link>
       </div>

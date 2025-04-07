@@ -1,9 +1,14 @@
-import { urljoin, env_url } from "$lib/util.js";
+import { browser } from "$app/environment";
+import { urljoin } from "$lib/util.js";
 
 const api_version = "v1";
 
 function api_urljoin(path = null, query = {}) {
-  let api_url = urljoin(env_url("API"), api_version);
+  let api_url = "";
+
+  if (browser) api_url = urljoin(import.meta.env.WEBSITE_API_PATH, api_version);
+  else api_url = urljoin(import.meta.env.WEBSITE_API_URL, api_version);
+
   return urljoin(api_url, path, query);
 }
 

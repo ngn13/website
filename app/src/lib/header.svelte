@@ -1,12 +1,14 @@
 <script>
   import { browser } from "$app/environment";
   import { color } from "$lib/util.js";
+  import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
 
   export let picture = "";
   export let title = "";
 
-  let title_cur = "";
+  let title_cur = title;
+  let show_animation = false;
 
   function animate(title) {
     if (!browser) return;
@@ -24,13 +26,21 @@
     }
   }
 
+  onMount(() => {
+    show_animation = true;
+  });
+
   $: animate(title);
 </script>
 
 <header>
   <div>
-    <h1 class="title" style="color: var(--{color()})">{title_cur}</h1>
-    <h1 class="cursor" style="color: var(--{color()})">_</h1>
+    {#if show_animation}
+      <h1 class="title" style="color: var(--{color()})">{title_cur}</h1>
+      <h1 class="cursor" style="color: var(--{color()})">_</h1>
+    {:else}
+      <h1 class="title" style="color: var(--{color()})">{title}</h1>
+    {/if}
   </div>
   <img src="/profile/{picture}.png" alt="" />
 </header>

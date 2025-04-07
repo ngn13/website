@@ -73,6 +73,7 @@
     "license": "License",
     "privacy": "Privacy",
     "number": "Visited {total} times since {since}",
-    "wow": "wow!!"
+    "wow": "wow!!",
+    "js": "Enable javascript to display all the elements"
   }
 }

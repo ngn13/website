@@ -1,7 +1,5 @@
 <script>
   import { api_urljoin } from "$lib/api.js";
-  import { app_url } from "$lib/util.js";
-
   export let desc, title;
 </script>
 
@@ -16,7 +14,6 @@
 
   <meta property="og:title" content="[ngn.tf] | {title}" />
   <meta property="og:description" content={desc} />
-  <meta property="og:url" content={app_url()} />
 
   <link
     rel="alternate"

@@ -1,14 +1,16 @@
 <script>
-  import { app_url, color, date_from_ts } from "$lib/util.js";
+  import { color, date_from_ts } from "$lib/util.js";
   import { api_get_metrics } from "$lib/api.js";
   import Link from "$lib/link.svelte";
 
   import { onMount } from "svelte";
   import { _ } from "svelte-i18n";
 
-  let data = {};
+  let show_counter = false,
+    data = {};
 
   onMount(async () => {
+    show_counter = true;
     data = await api_get_metrics(fetch);
   });
 </script>
@@ -20,24 +22,28 @@
     </span>
     <span>/</span>
     <span>
-      <Link link={app_url("/doc/license")} bold={true}>{$_("footer.license")}</Link>
+      <Link link="/doc/license" bold={true}>{$_("footer.license")}</Link>
     </span>
     <span>/</span>
     <span>
-      <Link link={app_url("/doc/privacy")} bold={true}>{$_("footer.privacy")}</Link>
+      <Link link="/doc/privacy" bold={true}>{$_("footer.privacy")}</Link>
     </span>
   </div>
-  <span class="counter">
-    {$_("footer.number", {
-      values: {
-        total: data.total,
-        since: date_from_ts(data.since),
-      },
-    })}
-    {#if data.number % 1000 == 0}
-      <span style="color: var(--{color()})">({$_("footer.wow")})</span>
-    {/if}
-  </span>
+  {#if show_counter}
+    <span class="counter">
+      {$_("footer.number", {
+        values: {
+          total: data.total,
+          since: date_from_ts(data.since),
+        },
+      })}
+      {#if data.number % 1000 == 0}
+        <span style="color: var(--{color()})">({$_("footer.wow")})</span>
+      {/if}
+    </span>
+  {:else}
+    <span class="counter">{$_("footer.js")}</span>
+  {/if}
 </footer>
 
 <style>

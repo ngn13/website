@@ -1,7 +1,9 @@
 <script>
   import { locale_list, locale_select, locale_index } from "$lib/locale.js";
+  import { onMount } from "svelte";
 
   let len = locale_list.length;
+  let show = false;
 
   function get_next(indx) {
     let new_indx = 0;
@@ -15,11 +17,17 @@
   function next() {
     locale_select(get_next($locale_index).code);
   }
+
+  onMount(() => {
+    show = true;
+  });
 </script>
 
-<button on:click={next}>
-  {get_next($locale_index).icon}
-</button>
+{#if show}
+  <button on:click={next}>
+    {get_next($locale_index).icon}
+  </button>
+{/if}
 
 <style>
   button {

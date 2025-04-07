@@ -5,18 +5,11 @@ services:
     build:
       context: ./app
       args:
-        # app URLs
-        WEBSITE_APP_URL_CLEAR: "http://localhost:7001"
-        WEBSITE_APP_URL_ONION: ""
-        WEBSITE_APP_URL_I2P: ""
-        # API URLs
-        WEBSITE_API_URL_CLEAR: "http://localhost:7002"
-        WEBSITE_API_URL_ONION: ""
-        WEBSITE_API_URL_I2P: ""
-        # other
         WEBSITE_SOURCE_URL: "http://github.com/ngn13/website"
         WEBSITE_REPORT_URL: "http://github.com/ngn13/website/issues"
         WEBSITE_DOC_URL: "http://doc:7003"
+        WEBSITE_API_URL: "http://api:7002"
+        WEBSITE_API_PATH: "http://localhost:7002"
     security_opt:
       - "no-new-privileges:true"
     cap_drop:
@@ -44,7 +37,7 @@ services:
       - ./data.db:/api/data.db:rw
     environment:
       WEBSITE_DEBUG: "false"
-      WEBSITE_APP_URL_CLEAR: "http://localhost:7001/"
+      WEBSITE_APP_URL: "http://localhost:7001"
       WEBSITE_PASSWORD: "change_me"
       WEBSITE_HOST: "0.0.0.0:7002"
       WEBSITE_IP_HEADER: "X-Real-IP"

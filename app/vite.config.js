@@ -24,15 +24,9 @@ const default_env = {
   source_url: "https://git.ngn.tf/ngn/website",
   report_url: "https://git.ngn.tf/ngn/website/issues",
   doc_url: "http://localhost:7003",
-  app_url: {
-    clear: "http://localhost:7001",
-    onion: "",
-    i2p: "",
-  },
-  api_url: {
-    clear: "http://localhost:7002",
-    onion: "",
-    i2p: "",
+  api: {
+    url: "http://localhost:7002",
+    path: "http://localhost:7002",
   },
 };
 

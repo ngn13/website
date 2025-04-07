@@ -1,6 +1,4 @@
 import { locale_from_browser } from "$lib/locale.js";
-import { browser } from "$app/environment";
-import { page } from "$app/state";
 
 const colors = [
   "yellow",
@@ -25,34 +23,14 @@ function click() {
   audio.play();
 }
 
-function urljoin(url, path = null, query = {}) {
+function urljoin(url, path = null) {
   if (undefined === url || null === url) return;
 
-  let url_len = url.length;
+  if (url[url.length - 1] != "/") url += "/";
 
-  if (url[url_len - 1] != "/") url += "/";
-
-  if (null === path || "" === path) url = new URL(url);
-  else if (path[0] === "/") url = new URL(path.slice(1), url);
-  else url = new URL(path, url);
-
-  for (let k in query) url.searchParams.append(k, query[k]);
-
-  return url.href;
-}
-
-function env_url(prefix) {
-  let host = "";
-
-  if (browser) host = window.location.hostname;
-
-  if (host.endsWith(".onion")) return import.meta.env["WEBSITE_" + prefix + "_URL_ONION"];
-  else if (host.endsWith(".i2p")) return import.meta.env["WEBSITE_" + prefix + "_URL_I2P"];
-  else return import.meta.env["WEBSITE_" + prefix + "_URL_CLEAR"];
-}
-
-function app_url(path = null, query = {}) {
-  return urljoin(env_url("APP"), path, query);
+  if (null === path || "" === path) return url;
+  if (path[0] === "/") return url + path.slice(1);
+  return url + path;
 }
 
 function time_from_ts(ts) {
@@ -80,4 +58,4 @@ function date_from_ts(ts) {
   }).format(new Date(ts * 1000));
 }
 
-export { color, click, urljoin, env_url, app_url, time_from_ts, date_from_ts };
+export { color, click, urljoin, time_from_ts, date_from_ts };

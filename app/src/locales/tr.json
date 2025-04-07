@@ -73,6 +73,7 @@
     "license": "Lisans",
     "privacy": "Gizlilik",
     "number": "{since} tarihinden beri {total} kez ziyaret edildi",
-    "wow": "vay be!!"
+    "wow": "vay be!!",
+    "js": "Tüm elementleri görüntelemek için javascript'i açın"
   }
 }
