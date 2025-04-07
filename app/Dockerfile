@@ -31,7 +31,7 @@ ENV WEBSITE_DOC_URL=$WEBSITE_DOC_URL
 WORKDIR /app
 COPY .  /app
 
-RUN apk add make sed wget
+RUN apt install -y make sed wget
 RUN npm install
 RUN make
 
