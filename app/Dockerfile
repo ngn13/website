@@ -31,7 +31,9 @@ ENV WEBSITE_DOC_URL=$WEBSITE_DOC_URL
 WORKDIR /app
 COPY .  /app
 
-RUN npm install && npm run build
+RUN apk add make sed wget
+RUN npm install
+RUN make
 
 # run it with bun (a lot faster)
 FROM oven/bun:latest AS main
