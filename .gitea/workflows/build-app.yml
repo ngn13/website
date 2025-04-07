@@ -26,10 +26,14 @@ jobs:
       - name: Build image
         run: |
           cd app
-          docker build --build-arg WEBSITE_REPORT_URL=https://git.ngn.tf/ngn/website/issues/new \
-                       --build-arg WEBSITE_SOURCE_URL=https://git.ngn.tf/ngn/website            \
-                       --build-arg WEBSITE_APP_URL=https://ngn.tf                               \
-                       --build-arg WEBSITE_API_URL=https://api.ngn.tf                           \
-                       --build-arg WEBSITE_DOC_URL=http://doc:7003                              \
+          docker build --build-arg WEBSITE_REPORT_URL=https://git.ngn.tf/ngn/website/issues/new                                    \
+                       --build-arg WEBSITE_SOURCE_URL=https://git.ngn.tf/ngn/website                                               \
+                       --build-arg WEBSITE_APP_URL_CLEAR=https://ngn.tf                                                            \
+                       --build-arg WEBSITE_APP_URL_ONION=http://ngntfwmwovvku6eqi7dzzgzv2wzlvq2cqtqha7ccgzub2xnivsuxnuyd.onion     \
+                       --build-arg WEBSITE_APP_URL_I2P=http://ngn.i2p                                                              \
+                       --build-arg WEBSITE_API_URL_CLEAR=https://api.ngn.tf                                                        \
+                       --build-arg WEBSITE_API_URL_ONION=http://api.ngntfwmwovvku6eqi7dzzgzv2wzlvq2cqtqha7ccgzub2xnivsuxnuyd.onion \
+                       --build-arg WEBSITE_API_URL_I2P=https://api.ngn.i2p                                                         \
+                       --build-arg WEBSITE_DOC_URL=http://doc:7003                                                                 \
                        --tag ${{env.REGISTRY}}/${{env.IMAGE}}:latest .
           docker push ${{env.REGISTRY}}/${{env.IMAGE}}:latest
