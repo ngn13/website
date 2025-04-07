@@ -29,7 +29,7 @@ jobs:
           docker build --build-arg WEBSITE_REPORT_URL=https://git.ngn.tf/ngn/website/issues/new \
                        --build-arg WEBSITE_SOURCE_URL=https://git.ngn.tf/ngn/website            \
                        --build-arg WEBSITE_DOC_URL=http://doc:7003                              \
-                       --build-arg WEBSITE_API_URL=https://api:7002                             \
+                       --build-arg WEBSITE_API_URL=http://api:7002                              \
                        --build-arg WEBSITE_API_PATH=/api                                        \
                        --tag ${{env.REGISTRY}}/${{env.IMAGE}}:latest .
           docker push ${{env.REGISTRY}}/${{env.IMAGE}}:latest
