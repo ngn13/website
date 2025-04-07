@@ -1,4 +1,4 @@
-import { urljoin } from "$lib/util.js";
+import { urljoin, env_url } from "$lib/util.js";
 
 function doc_urljoin(path = null, query = {}) {
   return urljoin(import.meta.env.WEBSITE_DOC_URL, path, query);

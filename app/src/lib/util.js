@@ -1,4 +1,6 @@
 import { locale_from_browser } from "$lib/locale.js";
+import { browser } from "$app/environment";
+import { page } from "$app/state";
 
 const colors = [
   "yellow",
@@ -19,7 +21,7 @@ function color() {
 }
 
 function click() {
-  let audio = new Audio("/click.wav");
+  let audio = new Audio("/assets/click.wav");
   audio.play();
 }
 
@@ -39,8 +41,18 @@ function urljoin(url, path = null, query = {}) {
   return url.href;
 }
 
+function env_url(prefix) {
+  let host = "";
+
+  if (browser) host = window.location.hostname;
+
+  if (host.endsWith(".onion")) return import.meta.env["WEBSITE_" + prefix + "_URL_ONION"];
+  else if (host.endsWith(".i2p")) return import.meta.env["WEBSITE_" + prefix + "_URL_I2P"];
+  else return import.meta.env["WEBSITE_" + prefix + "_URL_CLEAR"];
+}
+
 function app_url(path = null, query = {}) {
-  return urljoin(import.meta.env.WEBSITE_APP_URL, path, query);
+  return urljoin(env_url("APP"), path, query);
 }
 
 function time_from_ts(ts) {
@@ -68,4 +80,4 @@ function date_from_ts(ts) {
   }).format(new Date(ts * 1000));
 }
 
-export { color, click, urljoin, app_url, time_from_ts, date_from_ts };
+export { color, click, urljoin, env_url, app_url, time_from_ts, date_from_ts };

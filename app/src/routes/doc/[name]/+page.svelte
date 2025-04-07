@@ -37,7 +37,7 @@
 {/if}
 
 <style>
-  @import "/markdown.css";
+  @import "/css/markdown.css";
 
   main {
     padding: 50px;

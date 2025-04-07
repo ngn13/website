@@ -21,7 +21,7 @@
 </main>
 
 <style>
-  @import "/global.css";
+  @import "/css/global.css";
 
   main {
     display: flex;

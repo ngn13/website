@@ -1,9 +1,9 @@
-import { urljoin } from "$lib/util.js";
+import { urljoin, env_url } from "$lib/util.js";
 
 const api_version = "v1";
-const api_url = urljoin(import.meta.env.WEBSITE_API_URL, api_version);
 
 function api_urljoin(path = null, query = {}) {
+  let api_url = urljoin(env_url("API"), api_version);
   return urljoin(api_url, path, query);
 }
 

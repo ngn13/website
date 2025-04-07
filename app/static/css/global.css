@@ -31,7 +31,8 @@
     rgba(20, 20, 20, 0.3) 0px 18px 36px -18px inset;
 
   --text-shadow: 3px 2px 8px rgba(50, 50, 50, 0.8);
-  --background: linear-gradient(rgba(11, 11, 11, 0.808), rgba(1, 1, 1, 0.96)), url("/banner.png");
+  --background: linear-gradient(rgba(11, 11, 11, 0.808), rgba(1, 1, 1, 0.96)),
+    url("/assets/banner.png");
   --profile-size: 220px;
 }
 
