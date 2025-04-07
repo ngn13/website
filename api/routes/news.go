@@ -40,7 +40,7 @@ func GET_News(c *fiber.Ctx) error {
 
 	db := c.Locals("database").(*database.Type)
 	conf := c.Locals("config").(*config.Type)
-	app := conf.GetURL("app_url")
+	app := conf.GetURL("app_url_clear")
 	lang := c.Params("lang")
 
 	if lang == "" || len(lang) != 2 {
