@@ -1,4 +1,12 @@
+/*
+
+ * animations.css: stuff like the cursor animation
+ * webfont.css: webfont dumped from https://www.nerdfonts.com/assets/css/webfont.css
+ * font.css: the main font (Ubuntu)
+
+*/
 @import "./animations.css";
+@import "./nerdfonts.css";
 @import "./font.css";
 
 :root {
