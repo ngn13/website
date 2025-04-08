@@ -1,9 +1,9 @@
-My website's API, [api.ngn.tf](https://api.ngn.tf), stores information about my
-self-hosted services, it also allows me to publish news and updates about these
-services using an Atom feed and it keeps track of visitor metrics. The API itself is
-written in Go and uses SQLite for storage.
+My website's API, stores information about my self-hosted services, it also allows me
+to publish news and updates about these services using an Atom feed and it keeps track
+of visitor metrics.
 
-This documentation contains information about all the available API endpoints.
+This documentation contains information about all the available API endpoints. All the
+endpoints can be accessed using the `/api` route.
 
 ## Version 1 Endpoints
 Each version 1 endpoint, can be accessed using the `/v1` route.

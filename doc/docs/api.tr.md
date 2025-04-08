@@ -1,9 +1,9 @@
-Websitemin API, [api.ngn.tf](https://api.ngn.tf), self-host edilen servisler hakkında bilgileri
-tutuyor, bu servisler hakkında haberleri ve güncellemeleri bir Atom feed'i aracılığı ile
-paylaşmama izin veriyor ve ziyartçi metriklerini takip ediyor. API'ın kendisi Go ile yazıldı ve
-veritabanı olarak SQLite kullanıyor.
+Websitemin API, self-host edilen servisler hakkında bilgileri tutuyor, bu servisler hakkında
+haberleri ve güncellemeleri bir Atom feed'i aracılığı ile paylaşmama izin veriyor ve ziyartçi
+metriklerini takip ediyor.
 
-Bu dökümentasyon tüm erişeme açık API endpoint'leri hakkında bilgiler içeriyor.
+Bu dökümentasyon tüm erişime açık API endpoint'leri hakkında bilgiler içeriyor. Tüm endpoint'lere
+`/api` yolu ile erişilebilir.
 
 ## Versyion 1 Endpoint'leri
 Tüm versiyon 1 endpoint'leri `/v1` yolu ile erişilebilir.
