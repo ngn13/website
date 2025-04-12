@@ -66,29 +66,24 @@ func (s *Type) loop() {
 
 func (s *Type) Setup(conf *config.Type, db *database.Type) error {
 	var (
-		dur        time.Duration
-		iv, to, lm string
-		err        error
+		dur time.Duration
+		err error
 	)
 
-	iv = conf.GetStr("interval")
-	to = conf.GetStr("timeout")
-	lm = conf.GetStr("limit")
-
-	if iv == "" || to == "" || lm == "" {
+	if conf.Interval == "" || conf.Timeout == "" || conf.Limit == "" {
 		s.disabled = true
 		return nil
 	}
 
-	if dur, err = util.GetDuration(iv); err != nil {
+	if dur, err = util.GetDuration(conf.Interval); err != nil {
 		return err
 	}
 
-	if s.timeout, err = util.GetDuration(iv); err != nil {
+	if s.timeout, err = util.GetDuration(conf.Timeout); err != nil {
 		return err
 	}
 
-	if s.limit, err = util.GetDuration(iv); err != nil {
+	if s.limit, err = util.GetDuration(conf.Limit); err != nil {
 		return err
 	}
 

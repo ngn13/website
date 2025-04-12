@@ -3,107 +3,47 @@ package config
 import (
 	"fmt"
 	"net/url"
-	"os"
+
+	"github.com/ngn13/ortam"
 )
 
 type Type struct {
-	Options []Option
-	Count   int
+	Debug    bool     // should display debug messgaes?
+	AppUrl   *url.URL // frontend application URL for the website
+	Password string   // admin password
+	Host     string   // host the server should listen on
+	IPHeader string   // header that should be checked for obtaining the client IP
+	Interval string   // service status check interval
+	Timeout  string   // timeout for the service status check
+	Limit    string   // if the service responds slower than this limit, it will be marked as "slow"
 }
 
-func (c *Type) Find(name string, typ uint8) (*Option, error) {
-	for i := 0; i < c.Count; i++ {
-		if c.Options[i].Name != name {
-			continue
-		}
-
-		if c.Options[i].Type != typ {
-			return nil, fmt.Errorf("bad option type")
-		}
-
-		return &c.Options[i], nil
+func Load() (*Type, error) {
+	var conf = Type{
+		Debug:    false,
+		Password: "",
+		Host:     "0.0.0.0:7002",
+		IPHeader: "X-Real-IP",
+		Interval: "1h",
+		Timeout:  "15s",
+		Limit:    "5s",
 	}
 
-	return nil, fmt.Errorf("option not found")
-}
-
-func (c *Type) Load() (err error) {
-	var (
-		env_val  string
-		env_name string
-		opt      *Option
-		exists   bool
-	)
-
-	// default options
-	c.Options = []Option{
-		{Name: "debug", Value: "false", Type: OPTION_TYPE_BOOL, Required: true},                   // should display debug messgaes?
-		{Name: "app_url", Value: "http://localhost:7001/", Type: OPTION_TYPE_URL, Required: true}, // frontend application URL for the website
-		{Name: "password", Value: "", Type: OPTION_TYPE_STR, Required: true},                      // admin password
-		{Name: "host", Value: "0.0.0.0:7002", Type: OPTION_TYPE_STR, Required: true},              // host the server should listen on
-		{Name: "ip_header", Value: "X-Real-IP", Type: OPTION_TYPE_STR, Required: false},           // header that should be checked for obtaining the client IP
-		{Name: "interval", Value: "1h", Type: OPTION_TYPE_STR, Required: false},                   // service status check interval
-		{Name: "timeout", Value: "15s", Type: OPTION_TYPE_STR, Required: false},                   // timeout for the service status check
-		{Name: "limit", Value: "5s", Type: OPTION_TYPE_STR, Required: false},                      // if the service responds slower than this limit, it will be marked as "slow"
-	}
-	c.Count = len(c.Options)
-
-	for i := 0; i < c.Count; i++ {
-		opt = &c.Options[i]
-
-		env_name = opt.Env()
-
-		if env_val, exists = os.LookupEnv(env_name); exists {
-			opt.Value = env_val
-		}
-
-		if opt.Value == "" && opt.Required {
-			return fmt.Errorf("please specify a value for the config option \"%s\" (\"%s\")", opt.Name, env_name)
-		}
-
-		if err = opt.Load(); err != nil {
-			return fmt.Errorf("failed to load option \"%s\" (\"%s\"): %s", opt.Name, env_name, err.Error())
-		}
+	if err := ortam.Load(&conf, "WEBSITE"); err != nil {
+		return nil, err
 	}
 
-	return nil
-}
-
-func (c *Type) GetStr(name string) string {
-	var (
-		opt *Option
-		err error
-	)
-
-	if opt, err = c.Find(name, OPTION_TYPE_STR); err != nil {
-		return ""
+	if conf.AppUrl == nil {
+		conf.AppUrl, _ = url.Parse("http://localhost:7001/")
 	}
 
-	return opt.TypeValue.Str
-}
-
-func (c *Type) GetBool(name string) bool {
-	var (
-		opt *Option
-		err error
-	)
-
-	if opt, err = c.Find(name, OPTION_TYPE_BOOL); err != nil {
-		return false
+	if conf.Password == "" {
+		return nil, fmt.Errorf("password is not specified")
 	}
 
-	return opt.TypeValue.Bool
-}
-
-func (c *Type) GetURL(name string) *url.URL {
-	var (
-		opt *Option
-		err error
-	)
-
-	if opt, err = c.Find(name, OPTION_TYPE_URL); err != nil {
-		return nil
+	if conf.Host == "" {
+		return nil, fmt.Errorf("host address is not specified")
 	}
 
-	return opt.TypeValue.URL
+	return &conf, nil
 }

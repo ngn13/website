@@ -10,10 +10,9 @@ import (
 
 func IP(c *fiber.Ctx) string {
 	conf := c.Locals("config").(*config.Type)
-	ip_header := conf.GetStr("ip_header")
 
-	if ip_header != "" && c.Get(ip_header) != "" {
-		return strings.Clone(c.Get(ip_header))
+	if conf.IPHeader != "" && c.Get(conf.IPHeader) != "" {
+		return strings.Clone(c.Get(conf.IPHeader))
 	}
 
 	return c.IP()

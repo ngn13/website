@@ -36,18 +36,18 @@ func main() {
 		app  *fiber.App
 		stat status.Type
 
-		conf config.Type
+		conf *config.Type
 		db   database.Type
 
 		err error
 	)
 
-	if err = conf.Load(); err != nil {
+	if conf, err = config.Load(); err != nil {
 		util.Fail("failed to load the configuration: %s", err.Error())
 		return
 	}
 
-	if !conf.GetBool("debug") {
+	if !conf.Debug {
 		util.Debg = func(m string, v ...any) {}
 	}
 
@@ -56,7 +56,7 @@ func main() {
 		return
 	}
 
-	if err = stat.Setup(&conf, &db); err != nil {
+	if err = stat.Setup(conf, &db); err != nil {
 		util.Fail("failed to setup the status checker: %s", err.Error())
 		return
 	}
@@ -75,7 +75,7 @@ func main() {
 		c.Set("Access-Control-Allow-Methods", "PUT, DELETE, GET") // POST can be sent from HTML forms, so I prefer PUT for API endpoints
 
 		c.Locals("status", &stat)
-		c.Locals("config", &conf)
+		c.Locals("config", conf)
 		c.Locals("database", &db)
 
 		return c.Next()
@@ -121,9 +121,9 @@ func main() {
 	}
 
 	// start the app
-	util.Info("starting web server on %s", conf.GetStr("host"))
+	util.Info("starting web server on %s", conf.Host)
 
-	if err = app.Listen(conf.GetStr("host")); err != nil {
+	if err = app.Listen(conf.Host); err != nil {
 		util.Fail("failed to start the web server: %s", err.Error())
 	}
 

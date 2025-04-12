@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
-  <title>{{.app.Host}} news</title>
+  <title>{{.app_url.Host}} news</title>
   <updated>{{.updated}}</updated>
   <subtitle>News and updates about my projects and self-hosted services</subtitle>
-  <link href="{{.app.JoinPath "/news"}}"></link>
+  <link href="{{.app_url.JoinPath "/news"}}"></link>
   {{ range .entries }}
   <entry>
     <title>{{.Title}}</title>

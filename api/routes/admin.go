@@ -21,7 +21,7 @@ func admin_log(c *fiber.Ctx, m string) error {
 func AuthMiddleware(c *fiber.Ctx) error {
 	conf := c.Locals("config").(*config.Type)
 
-	if c.Get("Authorization") != conf.GetStr("password") {
+	if c.Get("Authorization") != conf.Password {
 		return util.ErrAuth(c)
 	}
 

@@ -40,7 +40,6 @@ func GET_News(c *fiber.Ctx) error {
 
 	db := c.Locals("database").(*database.Type)
 	conf := c.Locals("config").(*config.Type)
-	app := conf.GetURL("app_url")
 	lang := c.Params("lang")
 
 	if lang == "" || len(lang) != 2 {
@@ -63,10 +62,10 @@ func GET_News(c *fiber.Ctx) error {
 	})
 
 	if feed, err = util.Render("views/news.xml", fiber.Map{
+		"app_url": conf.AppUrl,
 		"updated": time.Now().Format(time.RFC3339),
 		"entries": entries,
 		"lang":    lang,
-		"app":     app,
 	}); err != nil {
 		return util.ErrInternal(c, err)
 	}
