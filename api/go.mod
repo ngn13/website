@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/gofiber/fiber/v2 v2.52.6
 	github.com/mattn/go-sqlite3 v1.14.28
-	github.com/ngn13/ortam v0.0.0-20250412195317-e76e62a7a305
+	github.com/ngn13/ortam v0.0.0-20250421004351-8dea81680817
 )
 
 require (
