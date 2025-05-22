@@ -3,7 +3,7 @@ FROM ghcr.io/ngn13/ctorm:1.8.1
 WORKDIR /doc
 
 COPY Makefile ./
-COPY docs     ./docs
+COPY pages    ./pages
 COPY inc      ./inc
 COPY src      ./src
 
