@@ -3,21 +3,21 @@
 #include <ctorm/ctorm.h>
 
 #include <dirent.h>
-#include <string.h>
 #include <stdio.h>
 
 #include "routes.h"
 #include "config.h"
+#include "util.h"
 #include "docs.h"
 
 void route_list(ctorm_req_t *req, ctorm_res_t *res) {
-  config_t *conf     = REQ_LOCAL("config");
-  char     *docs_dir = config_get(conf, "docs_dir"), *doc_data = NULL;
+  config_t *conf = REQ_LOCAL("config");
+  char     *dir = config_get(conf, "dir"), *doc_data = NULL;
   cJSON    *array = NULL, *json = NULL, *doc_json = NULL;
   docs_t    docs;
 
-  if (!docs_init(&docs, docs_dir)) {
-    ctorm_fail("docs_init failed: %s", ctorm_geterror());
+  if (!docs_init(&docs, dir)) {
+    ctorm_fail("docs_init failed: %s", ctorm_error());
     util_send(res, 500, NULL);
     goto end;
   }
@@ -31,7 +31,8 @@ void route_list(ctorm_req_t *req, ctorm_res_t *res) {
   while (NULL != (doc_data = docs_next(&docs, NULL, false))) {
     if (NULL == (array = cJSON_GetObjectItem(json, docs.lang)) &&
         NULL == (array = cJSON_AddArrayToObject(json, docs.lang))) {
-      ctorm_fail("failed to create an array object for the language %s", docs.lang);
+      ctorm_fail(
+          "failed to create an array object for the language %s", docs.lang);
       continue;
     }
 

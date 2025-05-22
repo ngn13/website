@@ -1,31 +1,30 @@
-#include <cjson/cJSON.h>
-#include <dirent.h>
 #include <linux/limits.h>
+#include <cjson/cJSON.h>
 #include <ctorm/ctorm.h>
 
-#include <string.h>
-#include <stdlib.h>
+#include <dirent.h>
 #include <stdio.h>
 
 #include "routes.h"
 #include "config.h"
+#include "util.h"
 #include "docs.h"
 
 void route_get(ctorm_req_t *req, ctorm_res_t *res) {
-  config_t *conf     = REQ_LOCAL("config");
-  char     *doc_name = REQ_PARAM("name");
-  char     *docs_dir = config_get(conf, "docs_dir"), *doc_data = NULL;
+  config_t *conf = REQ_LOCAL("config");
+  char     *name = REQ_PARAM("name");
+  char     *dir = config_get(conf, "dir"), *doc_data = NULL;
   cJSON    *json = NULL, *doc_json = NULL;
   docs_t    docs;
 
-  if (NULL == doc_name) {
+  if (NULL == name) {
     ctorm_fail("documentation name not specified (how did that even happend)");
     util_send(res, 500, NULL);
     goto end;
   }
 
-  if (!docs_init(&docs, docs_dir)) {
-    ctorm_fail("docs_init failed: %s", ctorm_geterror());
+  if (!docs_init(&docs, dir)) {
+    ctorm_fail("docs_init failed: %s", ctorm_error());
     util_send(res, 500, NULL);
     goto end;
   }
@@ -36,7 +35,7 @@ void route_get(ctorm_req_t *req, ctorm_res_t *res) {
     goto end;
   }
 
-  while (NULL != (doc_data = docs_next(&docs, doc_name, false))) {
+  while (NULL != (doc_data = docs_next(&docs, name, false))) {
     if (NULL == (doc_json = cJSON_Parse(doc_data))) {
       ctorm_fail("failed to parse JSON: %s (%s)", docs.name, docs.lang);
       continue;
@@ -53,7 +52,7 @@ void route_get(ctorm_req_t *req, ctorm_res_t *res) {
 
   docs_reset(&docs);
 
-  while (NULL != (doc_data = docs_next(&docs, doc_name, true))) {
+  while (NULL != (doc_data = docs_next(&docs, name, true))) {
     if (NULL == (doc_json = cJSON_GetObjectItem(json, docs.lang)))
       continue;
 

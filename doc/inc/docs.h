@@ -3,13 +3,13 @@
 #include <stdbool.h>
 #include <dirent.h>
 
-#include "util.h"
+#include "file.h"
 
 typedef struct {
-  DIR         *dir;
-  util_file_t *file;
-  char         name[NAME_MAX + 1];
-  char        *lang;
+  DIR    *dir;
+  file_t *file;
+  char    name[NAME_MAX + 1];
+  char   *lang;
 } docs_t;
 
 bool  docs_init(docs_t *docs, char *dir);

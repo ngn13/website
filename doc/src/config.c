@@ -11,22 +11,25 @@
 
 option_t options[] = {
     // name      value           requied
-    {"host",     "0.0.0.0:7003", true }, // host the server should listen on
-    {"docs_dir", "./docs",       true }, // documentation directory
-    {"",         NULL,           false},
+    {"host", "0.0.0.0:7003", true }, // host the server should listen on
+    {"dir",  "./pages",      true }, // documentation pages directory
+    {"",     NULL,           false},
 };
 
 bool config_load(config_t *conf) {
-  bzero(conf, sizeof(*conf));
+  memset(conf, 0, sizeof(*conf));
 
   char name_env[OPT_NAME_MAX + 10], name_copy[OPT_NAME_MAX], *value = NULL;
   conf->options = options;
 
-  for (option_t *opt = conf->options; opt->value != NULL; opt++, conf->count++) {
-    strcpy(name_copy, opt->name);
+  for (option_t *opt = conf->options; opt->value != NULL;
+      opt++, conf->count++) {
+    // convert option name to environment variable name
+    strncpy(name_copy, opt->name, OPT_NAME_MAX);
     util_toupper(name_copy);
     snprintf(name_env, sizeof(name_env), "WEBSITE_%s", name_copy);
 
+    // attempt to load the value from the environment
     if ((value = getenv(name_env)) != NULL)
       opt->value = value;
 
@@ -36,7 +39,9 @@ bool config_load(config_t *conf) {
     if (!opt->required || NULL != opt->value)
       continue;
 
-    ctorm_fail("please specify a value for the required config option: %s (%s)", opt->name, name_env);
+    ctorm_fail("please specify a value for the required config option: %s (%s)",
+        opt->name,
+        name_env);
     errno = EFAULT;
     return false;
   }

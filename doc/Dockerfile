@@ -1,4 +1,4 @@
-FROM ghcr.io/ngn13/ctorm:1.7
+FROM ghcr.io/ngn13/ctorm:1.8.1
 
 WORKDIR /doc
 

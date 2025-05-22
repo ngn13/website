@@ -26,10 +26,13 @@ $(DISTDIR)/%.o: src/%.c
 format:
 	clang-format -i -style=file $(CSRCS) $(HSRCS)
 
+lint:
+	clang-tidy --warnings-as-errors --config= $(CSRCS) $(HSRCS)
+
 clean:
 	rm -rf $(DISTDIR)
 
 run:
 	./doc.elf
 
-.PHONY: format clean run
+.PHONY: format lint clean run

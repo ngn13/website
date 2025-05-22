@@ -1,6 +1,6 @@
 #include <linux/limits.h>
+
 #include <dirent.h>
-#include <stdlib.h>
 #include <string.h>
 #include <stdint.h>
 
@@ -9,7 +9,7 @@
 
 #define DOCS_LANG_CODE_LEN 2
 
-bool __docs_parse_name(docs_t *docs, char *ext) {
+bool _docs_parse_name(docs_t *docs, char *ext) {
   // check the extension
   uint64_t ext_pos = util_endswith(docs->name, ext);
 
@@ -22,7 +22,8 @@ bool __docs_parse_name(docs_t *docs, char *ext) {
   // example.en\0json\0
   //        |
   //        `--- find this
-  for (docs->lang = docs->name; *docs->lang != 0 && *docs->lang != '.'; docs->lang++)
+  for (docs->lang = docs->name; *docs->lang != 0 && *docs->lang != '.';
+      docs->lang++)
     continue;
 
   if (*docs->lang != '.')
@@ -39,11 +40,11 @@ bool __docs_parse_name(docs_t *docs, char *ext) {
   return strlen(docs->lang) == DOCS_LANG_CODE_LEN && *docs->name != 0;
 }
 
-void __docs_clean(docs_t *docs) {
+void _docs_clean(docs_t *docs) {
   if (NULL == docs->file)
     return;
 
-  util_file_free(docs->file);
+  file_free(docs->file);
   docs->file = NULL;
 }
 
@@ -53,7 +54,7 @@ bool docs_init(docs_t *docs, char *dir) {
     return false;
   }
 
-  bzero(docs, sizeof(*docs));
+  memset(docs, 0, sizeof(*docs));
   return NULL != (docs->dir = opendir(dir));
 }
 
@@ -64,15 +65,15 @@ char *docs_next(docs_t *docs, char *name, bool content) {
   }
 
   struct dirent *ent = NULL;
-  __docs_clean(docs);
+  _docs_clean(docs);
 
   while (NULL != (ent = readdir(docs->dir))) {
     if (*ent->d_name == '.')
       continue;
 
-    strcpy(docs->name, ent->d_name);
+    strncpy(docs->name, ent->d_name, NAME_MAX);
 
-    if (!__docs_parse_name(docs, content ? ".md" : ".json"))
+    if (!_docs_parse_name(docs, content ? ".md" : ".json"))
       continue;
 
     if (NULL == name || strncmp(docs->name, name, NAME_MAX) == 0)
@@ -84,7 +85,7 @@ char *docs_next(docs_t *docs, char *name, bool content) {
     return NULL;
   }
 
-  if (NULL == (docs->file = util_file_load(dirfd(docs->dir), ent->d_name)))
+  if (NULL == (docs->file = file_load(dirfd(docs->dir), ent->d_name)))
     return NULL;
 
   return docs->file->content;
@@ -99,8 +100,8 @@ void docs_free(docs_t *docs) {
   if (NULL == docs)
     return;
 
-  __docs_clean(docs);
+  _docs_clean(docs);
   closedir(docs->dir);
 
-  bzero(docs, sizeof(*docs));
+  memset(docs, 0, sizeof(*docs));
 }
