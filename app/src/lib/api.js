@@ -13,11 +13,14 @@ function api_urljoin(path = null, query = {}) {
 }
 
 function api_check_err(json) {
-  if (!("error" in json)) throw new Error('API response is missing the "error" key');
+  if (!("error" in json))
+    throw new Error('API response is missing the "error" key');
 
-  if (json["error"] != "") throw new Error(`API returned an error: ${json["error"]}`);
+  if (json["error"] != "")
+    throw new Error(`API returned an error: ${json["error"]}`);
 
-  if (!("result" in json)) throw new Error('API response is missing the "result" key');
+  if (!("result" in json))
+    throw new Error('API response is missing the "result" key');
 }
 
 async function api_http_get(fetch, url) {
@@ -39,4 +42,10 @@ async function api_get_projects(fetch) {
   return await api_http_get(fetch, api_urljoin("/projects"));
 }
 
-export { api_version, api_urljoin, api_get_metrics, api_get_services, api_get_projects };
+export {
+  api_version,
+  api_urljoin,
+  api_get_metrics,
+  api_get_services,
+  api_get_projects,
+};

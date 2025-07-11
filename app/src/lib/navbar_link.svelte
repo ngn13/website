@@ -3,14 +3,13 @@
   import { page } from "$app/stores";
 
   export let link;
-
-  function is_active() {
-    return $page.url.pathname == link;
-  }
 </script>
 
 <a
-  style="text-decoration-color: var(--{color()}); {is_active() ? `color: var(--${color()})` : ''}"
+  style="
+    text-decoration-color: var(--{color()});
+    {$page.url.pathname === link ? `color: var(--${color()});` : ''}
+  "
   data-sveltekit-preload-data
   on:click={click}
   href={link}

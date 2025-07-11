@@ -59,7 +59,9 @@
           <Link icon="nf-md-email" link="mailto:ngn@ngn.tf">Email</Link>
         </li>
         <li>
-          <Link icon="nf-md-mastodon" link="https://defcon.social/@ngn">Mastodon</Link>
+          <Link icon="nf-md-mastodon" link="https://defcon.social/@ngn"
+            >Mastodon</Link
+          >
         </li>
       </ul>
       <span>
@@ -72,7 +74,8 @@
       </span>
       <ul>
         <li>
-          <i style="color: var(--{color()});" class="nf nf-md-speedometer_slow"></i>
+          <i style="color: var(--{color()});" class="nf nf-md-speedometer_slow"
+          ></i>
           {$_("home.services.speed")}
         </li>
         <li>
@@ -80,7 +83,8 @@
           {$_("home.services.security")}
         </li>
         <li>
-          <i style="color: var(--{color()});" class="nf nf-fa-network_wired"></i>
+          <i style="color: var(--{color()});" class="nf nf-fa-network_wired"
+          ></i>
           {$_("home.services.privacy")}
         </li>
         <li>

@@ -18,7 +18,9 @@
 <footer style="border-top: solid 2px var(--{color()});">
   <div class="links">
     <span>
-      <Link link={import.meta.env.WEBSITE_SOURCE_URL} bold={true}>{$_("footer.source")}</Link>
+      <Link link={import.meta.env.WEBSITE_SOURCE_URL} bold={true}
+        >{$_("footer.source")}</Link
+      >
     </span>
     <span>/</span>
     <span>

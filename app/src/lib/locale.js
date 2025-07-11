@@ -28,7 +28,8 @@ function locale_from_browser() {
 
 function locale_select(l = null) {
   if (l === null) {
-    if (browser && null !== (l = localStorage.getItem("locale"))) locale_select(l);
+    if (browser && null !== (l = localStorage.getItem("locale")))
+      locale_select(l);
     else locale_select(locale_from_browser());
     return;
   }

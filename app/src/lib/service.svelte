@@ -15,9 +15,13 @@
       <p>{service.desc[$locale]}</p>
     </div>
     <div class="links">
-      <Link highlight={false} link={service.clear}><Icon icon="nf-oct-link" /></Link>
+      <Link highlight={false} link={service.clear}
+        ><Icon icon="nf-oct-link" /></Link
+      >
       {#if service.onion != ""}
-        <Link highlight={false} link={service.onion}><Icon icon="nf-linux-tor" /></Link>
+        <Link highlight={false} link={service.onion}
+          ><Icon icon="nf-linux-tor" /></Link
+        >
       {/if}
       {#if service.i2p != ""}
         <Link highlight={false} link={service.i2p}

@@ -30,7 +30,11 @@
 
   function get_services() {
     return services.filter((s) => {
-      return s.desc[$locale] !== "" && s.desc[$locale] !== null && s.desc[$locale] !== undefined;
+      return (
+        s.desc[$locale] !== "" &&
+        s.desc[$locale] !== null &&
+        s.desc[$locale] !== undefined
+      );
     });
   }
 
@@ -48,10 +52,16 @@
   <main>
     <div class="title">
       {#if show_input}
-        <input oninput={change} type="text" placeholder={$_("services.search")} />
+        <input
+          oninput={change}
+          type="text"
+          placeholder={$_("services.search")}
+        />
       {/if}
       <div>
-        <Link icon="nf-fa-feed" link={api_urljoin("/news/" + $locale)}>{$_("services.feed")}</Link>
+        <Link icon="nf-fa-feed" link={api_urljoin("/news/" + $locale)}
+          >{$_("services.feed")}</Link
+        >
       </div>
     </div>
     <div class="services">

@@ -5,7 +5,8 @@ function doc_urljoin(path = null, query = {}) {
 }
 
 function doc_check_err(json) {
-  if ("error" in json) throw new Error(`Documentation server returned an error: ${json["error"]}`);
+  if ("error" in json)
+    throw new Error(`Documentation server returned an error: ${json["error"]}`);
 }
 
 async function doc_http_get(fetch, url) {

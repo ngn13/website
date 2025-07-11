@@ -11,4 +11,7 @@ run:
 format:
 	gofmt -s -w .
 
-.PHONY: test format
+clean:
+	rm -f *.elf
+
+.PHONY: test format clean
